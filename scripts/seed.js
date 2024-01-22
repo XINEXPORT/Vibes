@@ -66,14 +66,14 @@ const music1 = await Sound.create({
     type: 'Music', 
 })
 const music2 = await Sound.create({
-    sound: '',
+    sound: './public/audio/music/whirling-in-rags-8am.mp3',
     type: 'Music', 
 })
 const music3 = await Sound.create({
-    sound: '',
+    sound: './public/audio/music/gris-pt1.mp3',
     type: 'Music', 
 })
 const music4 = await Sound.create({
-    sound: '',
+    sound: './public/audio/music/house-of-woodcock.mp3',
     type: 'Music', 
 })
