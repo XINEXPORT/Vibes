@@ -22,8 +22,14 @@ const router = createBrowserRouter(
                 path="/settings"
                 element={<Settings/>}
             />
-        </Route>
-    )
-);
+} from 'react-router-dom'
+import Root from './Root.jsx'
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route
+            path = "/"
+            element = {<Root/>}
+        >
 
 export default router;
