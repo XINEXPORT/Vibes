@@ -20,11 +20,52 @@ let arr = [{
 
 for (let i=0; i < arr.length; i++){
     await User.create({
-        username: `user${i}`,
+        username: arr[i].username, 
         email: `test${i}@email.com`, 
         password:'test', 
     })
 }
+
+await FriendsList.create({
+    userId: 1,
+    friendId: 2
+});
+
+await FriendsList.create({
+    userId: 2,
+    friendId: 1
+});
+
+await FriendsList.create({
+    userId: 2,
+    friendId: 3
+});
+
+await FriendsList.create({
+    userId: 3,
+    friendId: 2
+});
+
+await FriendsList.create({
+    userId: 3,
+    friendId: 4
+});
+
+await FriendsList.create({
+    userId: 4,
+    friendId: 3
+});
+
+await FriendsList.create({
+    userId: 4,
+    friendId: 5
+});
+
+await FriendsList.create({
+    userId: 5,
+    friendId: 4
+});
+
 
 //SoundSeed
 //Bio Evnviromental Sounds
