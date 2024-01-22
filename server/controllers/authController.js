@@ -1,5 +1,6 @@
 import { User } from '../../database/model.js';
 
+
 async function checkStatus (req, res) {
     if (req.session.user) {
         let user = {...req.session.user};

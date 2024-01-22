@@ -6,8 +6,8 @@ import {
     logout,
     checkStatus,
     register
-} from './controllers/authControllers.js'
-import { getFriends } from './controllers/controller.js';
+} from './controllers/authController.js'
+import { getFriends, getUsers } from './controllers/controller.js';
 
 const app = express();
 const port = '8000';
@@ -22,6 +22,7 @@ ViteExpress.config({printCiteDevServerHost:true})
 
 //Endpoints:
 app.get('/api/friends/:username', getFriends);
+app.get('/api/user', getUsers);
 
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus)

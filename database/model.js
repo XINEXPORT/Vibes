@@ -187,8 +187,8 @@ FriendsList.init(
 );
 
 // Table Relations:
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId'});
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
+// User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId'});
+// User.belongsToMany(User, {through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
 
 User.belongsToMany(Soundscape, {through: MyFavoriteSoundscape, foreignKey: 'userId'});
 Soundscape.belongsToMany(User, {through: MyFavoriteSoundscape, foreignKey: 'soundscapeId', onDelete: 'CASCADE', hooks: true});
