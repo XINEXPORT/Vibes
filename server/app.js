@@ -26,5 +26,4 @@ app.post('/api/auth/login', login)
 app.post('/api/auth/logout', logout)
 app.post('/api/auth/register', register)
 
-
 ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
