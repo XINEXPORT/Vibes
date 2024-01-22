@@ -1,10 +1,17 @@
 
 import './App.css'
-import {RouterProvider} from 'react-router-dom'
-import router from './router.jsx'
+import { Outlet} from "react-router-dom"
+import AccountNav from './Pages/AccountNav.jsx'
+import LoginPage from './Login/LoginPage.jsx'
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+  <div>
+    <AccountNav/>
+    <LoginPage/>
+    <Outlet/>
+  </div>
+  )
 }
 
 export default App;

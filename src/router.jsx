@@ -12,7 +12,7 @@ const router = createBrowserRouter(
         <Route path="/" element={<App/>}>
             <Route
                 index
-                element={<AccountNav/>}
+                element={<Room/>}
             />
             <Route
                 path="/room/:username"

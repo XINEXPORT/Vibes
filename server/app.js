@@ -1,6 +1,7 @@
 import ViteExpress from 'vite-express';
 import morgan from 'morgan';
-import express from 'express';
+import session from 'express-session'
+import express from 'express'
 import {
     login,
     logout,
@@ -16,9 +17,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(session({secret: 'this is a secret', saveUniinitialized: true, resave:false}))
-ViteExpress.config({ printViteDevServerHost: true });
 
-ViteExpress.config({printCiteDevServerHost:true})
+ViteExpress.config({ printViteDevServerHost: true });
 
 //Endpoints:
 app.get('/api/friends/:username', getFriends);

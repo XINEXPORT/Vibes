@@ -4,25 +4,27 @@ import axios from 'axios';
 const MySettings = ({userId, email, password, setEmail, setPassword}) => {
     const [isEditing, setisEditing] = useState(false);
 
+    const handleEditClick=()=>{
+        setisEditing(true);
+    }
+
     const handleCancelClick=() => {
         setisEditing(false);
-}}
-
-const handleEditClick=()=>{
-    setisEditing(true);
-}
-
-// const handleSoundUpload = (e)=>{}
-// }
-
-retun (
+  
+} 
+    return (
     <div className = "my-settings">
     <div>{username}</div>
     <div>{email}</div>
     <div>{password}</div>
     </div>
-)
+    )
+    }
 
+    
+
+// const handleSoundUpload = (e)=>{}
+// }
 
 
 
