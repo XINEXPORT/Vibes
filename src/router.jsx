@@ -4,7 +4,6 @@ import {
     Route
 } from 'react-router-dom'
 import Root from './Root.jsx'
-import Home from './Home.jsx'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -12,11 +11,8 @@ const router = createBrowserRouter(
             path = "/"
             element = {<Root/>}
         >
-            <Route
-            index
-            element = {<Home/>}
-            />
-            </Route>
+
+        </Route>
     )
 )
 
