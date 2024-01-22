@@ -3,7 +3,7 @@ import url from "url";
 import util from 'util';
 import connectToDB from "./db.js";
 
-const db = await connectToDB(`postgresql:///dndcreator`);
+const db = await connectToDB(`postgresql:///vibes`);
 
 // Table initializations:
 class User extends Model {
@@ -187,8 +187,8 @@ FriendsList.init(
 );
 
 // Table Relations:
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId'});
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
+// User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId'});
+// User.belongsToMany(User, {through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
 
 User.belongsToMany(Soundscape, {through: MyFavoriteSoundscape, foreignKey: 'userId'});
 Soundscape.belongsToMany(User, {through: MyFavoriteSoundscape, foreignKey: 'soundscapeId', onDelete: 'CASCADE', hooks: true});
