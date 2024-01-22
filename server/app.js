@@ -1,12 +1,13 @@
 import ViteExpress from 'vite-express';
 import morgan from 'morgan';
 import express from 'express';
-import{
+import {
     login,
     logout,
     checkStatus,
     register
 } from './controllers/authControllers.js'
+import { getFriends } from './controllers/controller.js';
 
 const app = express();
 const port = '8000';
@@ -19,7 +20,9 @@ ViteExpress.config({ printViteDevServerHost: true });
 
 ViteExpress.config({printCiteDevServerHost:true})
 
-//Routes
+//Endpoints:
+app.get('/api/friends/:username', getFriends);
+
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus)
 app.post('/api/auth/login', login)
