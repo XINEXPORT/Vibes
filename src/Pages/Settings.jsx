@@ -1,8 +1,7 @@
 import './Settings.css'
 import {useState} from 'react'
-import { UseSelector } from 'react-redux'
 import {useLoaderData} from 'react-router-dom'
-import MySettings from './MySettings.sx'
+import MySettings from '../Pages/MySettings.jsx'
 import axios from 'axios'
 
 const Settings = ()=>{

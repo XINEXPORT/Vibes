@@ -1,5 +1,5 @@
 import { User } from '../../database/model.js';
-
+import session from 'react';
 
 async function checkStatus (req, res) {
     if (req.session.user) {
