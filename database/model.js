@@ -209,10 +209,12 @@ if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
 };
 
 export {
+    db,
     User,
     FriendsList,
     Soundscape,
     SoundscapeSound,
+    MySound,
     Sound,
     MyFavoriteSoundscape
 };

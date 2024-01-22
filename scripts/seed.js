@@ -20,6 +20,7 @@ let arr = [{
 
 for (let i=0; i < arr.length; i++){
     await User.create({
+        username: `user${i}`,
         email: `test${i}@email.com`, 
         password:'test', 
     })
