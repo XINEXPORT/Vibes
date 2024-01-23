@@ -6,12 +6,20 @@ import {
     login,
     logout,
     checkStatus,
-    register
+    register,
 } from './controllers/authController.js'
-import { getFriends, getUsers } from './controllers/controller.js';
+import { 
+    getFriends, 
+    getUsers,
+    upload,
+    addAudio
+ } from './controllers/controller.js';
 
 const app = express();
 const port = '8000';
+
+//Audio Files Folder
+app.use('../public/audio', express.static('.public/audio'));
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +31,7 @@ ViteExpress.config({ printViteDevServerHost: true });
 //Endpoints:
 app.get('/api/friends/:username', getFriends);
 app.get('/api/user', getUsers);
+app.post('/api/user/:id', upload, addAudio)
 
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus)
