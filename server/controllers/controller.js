@@ -7,17 +7,23 @@ import {
     MyFavoriteSoundscape,
     MySound
 } from '../../database/model.js';
-import multer from 'multer'
-import path from 'path'
+import multer from 'multer';
+import path from 'path';
 
 async function getFriends(req, res) {
     if (req.session.user) {
-        const myFriends = await FriendsList.findAll({
-            where: {userId: req.session.user.userId},
-            include: {model: User}
+        const id = req.session.user.userId;
+        const myFriends = await User.findAll({
+            where: {
+                userId: id
+            },
+            include: {
+                model: User,
+                as: 'friend'
+            }
         });
         res.status(200).json({
-            myFriends: myFriends
+            myFriends: myFriends[0].friend
         });
     } else {
         res.status(401).json({success: false});

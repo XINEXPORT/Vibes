@@ -1,10 +1,11 @@
+import axios from 'axios';
 import {
     createBrowserRouter,
     createRoutesFromElements,
     Route
 } from 'react-router-dom';
 import App from './App.jsx';
-import Room from './Pages/Room.jsx';
+import Room from './Pages/Room/Room.jsx';
 import Settings from './Pages/Settings.jsx';
 
 const router = createBrowserRouter(
@@ -12,13 +13,13 @@ const router = createBrowserRouter(
         <Route path="/" element={<App/>}>
             <Route
                 index
-                element={<Room/>}
+                element={<Room />}
             />
             <Route
-                path="/room/:username"
+                path="/room"
                 element={<Room/>}
-                loader={async({ params }) => {
-                    const { data } = await axios.get(`/api/friends/${params.username}`);
+                loader={async() => {
+                    const { data } = await axios.get(`/api/friends`);
                     return {
                         data: data
                     };
