@@ -1,7 +1,7 @@
-import {Op} from 'sequelize'
-import {db, User, Sound, Soundscape, SoundscapeSound, MySound, MyFavoriteSoundscape, FriendsList} from '../database/model.js'
+import {Op} from 'sequelize';
+import {db, User, Sound, Soundscape, SoundscapeSound, MySound, MyFavoriteSoundscape, FriendsList} from '../database/model.js';
 
-await db.sync ({force:true})
+await db.sync ({force: true});
 
 //Users Seed
 let arr = [{
@@ -16,15 +16,15 @@ let arr = [{
     username: 'asydnor',
 }, {
     username: 'choang'
-}]
+}];
 
 for (let i=0; i < arr.length; i++){
     await User.create({
         username: arr[i].username, 
         email: `test${i}@email.com`, 
         password:'test', 
-    })
-}
+    });
+};
 
 await FriendsList.create({
     userId: 1,
