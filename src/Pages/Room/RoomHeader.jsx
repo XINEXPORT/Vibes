@@ -6,6 +6,9 @@ import SoundEditor from '../Editor/SoundEditor.jsx'
 
 const RoomHeader = () =>{
     const {sounds} = useLoaderData();
+    console.log(sounds);
+    // const {sounds} = soundz;
+
 
     return(
         <div className = "Header">

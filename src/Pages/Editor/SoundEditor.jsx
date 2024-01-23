@@ -5,13 +5,13 @@ import axios from 'axios'
 import './SoundEditor.css'
 
 const SoundEditor = () =>{
-    const {sounds} = useLoaderData();
+    // const {sounds} = useLoaderData();
     const [activeIndex, setActiveIndex] = useState(null)
     console.log(activeIndex)
 
-    const SoundEditor = ({sound, type, users}) =>{
-        const [sound, setSound] = useState();
-    }
+    // const SoundEditor = ({sound, type, users}) =>{
+    //     const [sound, setSound] = useState();
+    // }
 
     return (
         <div className = "SoundEditor">
