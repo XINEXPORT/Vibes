@@ -7,7 +7,7 @@ function App() {
   return (
   <div>
     <AccountNav/>
-    {/* <LoginPage/> */}
+    <LoginPage/>
     <Outlet/>
   </div>
   )

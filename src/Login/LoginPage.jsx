@@ -1,13 +1,11 @@
 import {useSelector, useDispatch} from 'react-redux'
 import {useState} from 'react'
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import './LoginPage.css'
 
 const LoginPage = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const page = useSelector(state =>state.page)
+    const modal = useSelector(state =>state.modal)
 
     //LOGIN STATE
     const [logUsername, setLogUsername] = useState('');
@@ -25,7 +23,7 @@ const LoginPage = () => {
             });
             if(data.success){
                 dispatch({type: 'login', payload: data.user});
-                dispatch({type: 'page-off'});
+                dispatch({type: 'modal-off'});
             } else{
                 alert('invalid data');
             }
@@ -44,7 +42,7 @@ const LoginPage = () => {
                 console.log(data)
                 if(data.success){
                     dispatch({type: 'login', payload: data.user})
-                    dispatch({type: 'page-off'})
+                    dispatch({type: 'modal-off'})
                 }else{
                     alert('invalid data')
                 }
@@ -54,7 +52,7 @@ const LoginPage = () => {
         }
 
         return(
-            <div style={{display: page}} id="page">
+            <div style={{display: modal}} id="modal">
                 <main id="forms">
                 <section className = "login">
                     <h1 className = "title">Login</h1>
