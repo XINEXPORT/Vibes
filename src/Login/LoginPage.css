@@ -1,22 +1,51 @@
-#modal{
-    position: absolute;
-    top:0;
-    left:0;
-    min-width: 100vh;
-    min-height: 100vh;
-    background-color: rgba(150, 150, 150,0.8);
+#modal {
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    right: 0;
+    background-color: rgba(32, 32, 32, 0.85);
     justify-content: center;
     align-items: center;
     z-index: 3;
 }
 
-#forms{
+#forms {
     display:flex;
-    justify-content: center;    
+    flex-direction: column;
+    justify-content: space-evenly;    
     align-items: center;
-    background-color: white;
+    background-color: #AEC6CF;;
     border: 3px solid black;
     border-radius: 25px;
+    width: 20vw;
+    height: 65vh;
     gap: 50px;
     padding: 20px
+}
+
+#modal h1 {
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+#modal label {
+    font-size: 20px;
+}
+
+.login {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    gap: 5px;
+}
+
+.register {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    gap: 5px;
 }
