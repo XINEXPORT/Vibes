@@ -1,10 +1,16 @@
 import './AccountNav.css';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData } from "react-router";
 
 export default function AccountNav() {
-    let user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+    console.log(user)
+    if (!user) {
+        dispatch({type: 'model-on'});
+    };
+
     const data = useLoaderData();
     let myFriends = [];
     if (data) {
