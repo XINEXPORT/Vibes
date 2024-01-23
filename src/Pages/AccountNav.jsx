@@ -6,7 +6,6 @@ import { useLoaderData } from "react-router";
 export default function AccountNav() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
-    console.log(user);
     if (!user) {
         dispatch({type: 'modal-on'});
     };
