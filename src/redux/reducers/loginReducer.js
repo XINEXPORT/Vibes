@@ -5,10 +5,10 @@ const {data}= await axios.get('/api/auth/status');
 const initialState = {
     loggedIn: data.loggedIn,
     user: data.user,
-    modal:'none'
+    modal: 'none'
 };
 
-export default function reducer(state = initialState, action){
+export default function loginReducer(state = initialState, action){
     switch(action.type){
         case 'login':
             return {...state, user: action.payload, loggedIn: true};
