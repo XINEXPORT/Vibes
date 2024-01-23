@@ -8,7 +8,7 @@ export default function AccountNav() {
     const user = useSelector(state => state.user);
     console.log(user)
     if (!user) {
-        dispatch({type: 'model-on'});
+        dispatch({type: 'modal-on'});
     };
 
     const data = useLoaderData();
