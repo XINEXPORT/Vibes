@@ -15,19 +15,19 @@ const port = '8000';
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
-app.use(session({secret: 'this is a secret', saveUniinitialized: true, resave:false}))
+app.use(express.json());
+app.use(session({secret: 'this is a secret', saveUniinitialized: true, resave:false}));
 
 ViteExpress.config({ printViteDevServerHost: true });
 
 //Endpoints:
-app.get('/api/friends/:username', getFriends);
+app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
 
 //Auth Endpoints
-app.get('/api/auth/status', checkStatus)
-app.post('/api/auth/login', login)
-app.post('/api/auth/logout', logout)
-app.post('/api/auth/register', register)
+app.get('/api/auth/status', checkStatus);
+app.post('/api/auth/login', login);
+app.post('/api/auth/logout', logout);
+app.post('/api/auth/register', register);
 
 ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
