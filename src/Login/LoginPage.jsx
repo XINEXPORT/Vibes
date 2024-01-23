@@ -5,7 +5,7 @@ import './LoginPage.css'
 
 const LoginPage = () => {
     const dispatch = useDispatch()
-    const modal = useSelector(state =>state.modal)
+    const modal = useSelector(state => state.login.modal)
 
     //LOGIN STATE
     const [logUsername, setLogUsername] = useState('');
@@ -34,12 +34,11 @@ const LoginPage = () => {
 
         const registerUser = async()=>{
             if(regUsername && regPassword && regEmail){
-                const {data} = await axios.post ('/api/auth/register',{
+                const {data} = await axios.post ('/api/auth/register', {
                     username: regUsername,
                     email: regEmail,
                     password: regPassword
                 })
-                console.log(data)
                 if(data.success){
                     dispatch({type: 'login', payload: data.user})
                     dispatch({type: 'modal-off'})

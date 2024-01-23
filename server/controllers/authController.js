@@ -30,6 +30,7 @@ async function login (req, res) {
 };
 
 async function logout (req, res) {
+    console.log('?')
     req.session.destroy();
     res.json({success: true});
     return;
