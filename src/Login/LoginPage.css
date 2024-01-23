@@ -13,7 +13,7 @@
 #forms {
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;    
+    justify-content: space-evenly;
     align-items: center;
     background-color: #AEC6CF;;
     border: 3px solid black;
@@ -45,7 +45,7 @@
 .register {
     display:flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;
     align-items: center;
     gap: 5px;
 }

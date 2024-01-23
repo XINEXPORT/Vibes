@@ -38,11 +38,22 @@ const getUsers = async (req,res) => {
                 userId: req.session.user.userId
             }}
         )
-        res.json(users)
+        res.json(users);
     } else{
-        res.json({error: 'not logged in'})
-    }
-}
+        res.json({error: 'not logged in'});
+    };
+};
+
+// Fetch sound data
+const getSounds = async (req, res) => {
+    const sounds = await Sound.findAll();
+    console.log(sounds);
+    res.status(200).json({
+        success: true,
+        sounds: sounds
+    });
+};
+
 //Upload Audio
 const addAudio = async (req,res) => {
 
@@ -85,5 +96,6 @@ export {
     getFriends,
     getUsers,
     upload,
-    addAudio
+    addAudio,
+    getSounds
 };
