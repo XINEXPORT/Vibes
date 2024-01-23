@@ -8,7 +8,6 @@ import LoginPage from './Login/LoginPage.jsx'
 function App() {
   return (
   <div>
-    <RoomHeader/>
     <AccountNav/>
     <LoginPage/>
     <Outlet/>

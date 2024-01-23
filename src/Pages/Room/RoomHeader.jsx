@@ -1,12 +1,19 @@
-import Editor from '../Editor/Editor.jsx'
+import Editor from '../Editor/SoundEditor.jsx'
 import { useState } from 'react'
+import { useLoaderData } from 'react-router-dom'
 import './RoomHeader.css'
+import SoundEditor from '../Editor/SoundEditor.jsx'
 
 const RoomHeader = () =>{
+    const {sounds} = useLoaderData();
+    console.log(sounds);
+    // const {sounds} = soundz;
+
+
     return(
         <div className = "Header">
         <div>
-        <Editor/>
+        <SoundEditor/>
         </div>
         
         <div className = "fav-soundscape">
