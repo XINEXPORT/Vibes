@@ -5,8 +5,7 @@ import { useLoaderData } from "react-router";
 export default function AccountNav() {
     let user = useSelector(state => state.user);
     console.log(useLoaderData());
-    const data = useLoaderData()
-    console.log(data);
+    const {data} = useLoaderData()
  
     if(!data){
         const myFriends=[{username: "you have no friends"}]
