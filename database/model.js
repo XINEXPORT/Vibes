@@ -131,7 +131,7 @@ MySound.init(
             allowNull: false
         },
         sound: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false
         },
         type: {
