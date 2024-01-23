@@ -15,10 +15,10 @@ const router = createBrowserRouter(
                 element={<Room/>}
             />
             <Route
-                path="/room/:username"
+                path="/room"
                 element={<Room/>}
                 loader={async({ params }) => {
-                    const { data } = await axios.get(`/api/friends/${params.username}`);
+                    const { data } = await axios.get(`/api/friends`);
                     return {
                         data: data
                     };
