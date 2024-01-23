@@ -14,6 +14,7 @@ const LoginPage = () => {
     const [logPassword, setLogPassword] = useState('')
     //REGISTER STATE
     const [regUsername, setRegUsername] = useState('')
+    const [regEmail, setRegEmail] = useState('')
     const [regPassword, setRegPassword] = useState('')
 
     const loginUser = async()=>{
@@ -34,9 +35,10 @@ const LoginPage = () => {
         }
 
         const registerUser = async()=>{
-            if(regUsername && regPassword){
+            if(regUsername && regPassword && regEmail){
                 const {data} = await axios.post ('/api/auth/register',{
                     username: regUsername,
+                    email: regEmail,
                     password: regPassword
                 })
                 console.log(data)
@@ -47,7 +49,7 @@ const LoginPage = () => {
                     alert('invalid data')
                 }
             } else{
-                alert('both username and password required')
+                alert('both username, email, & password required')
             }
         }
 
@@ -74,10 +76,17 @@ const LoginPage = () => {
 
                 <section className = "register">
                 <h1 className = "title">Register</h1>
+                <label htmlFor = "reg-username">Username</label>
                 <input type="text"
                     name = "reg-username"
                     placeholder = "enter your username"
                     onChange = {(e)=> setRegUsername(e.target.value)}
+                ></input>
+                <label htmlFor = "reg-email">Email</label>
+                <input type="text"
+                    name = "reg-email"
+                    placeholder = "enter your email"
+                    onChange = {(e)=> setRegEmail(e.target.value)}
                 ></input>
                  <label htmlFor = "reg-password">Password </label>
                     <input type="password"
