@@ -1,0 +1,35 @@
+.accordion-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #AEC6CF;;
+    width: 80%;
+    cursor: pointer;
+}
+.accordion-tab:hover{
+    background-color: yellow;
+}
+.accordion-info{
+    transition: .5s;
+    border: 2px solid black;
+}
+.accordion-info.hide{
+    height: 0;
+    overflow: hidden;
+}
+.accordion-info.show{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+.sound-accordion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
