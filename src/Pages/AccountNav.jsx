@@ -4,25 +4,20 @@ import { useLoaderData } from "react-router";
 
 export default function AccountNav() {
     let user = useSelector(state => state.user);
-    console.log(useLoaderData());
     const data = useLoaderData()
-    console.log(data);
- 
-    if(!data){
-        const myFriends=[{username: "you have no friends"}]
-    } else{
-        const {myFriends} = data;
-
+    let myFriends = [];
+    if (data) {
+        myFriends = [... data.myFriends];
     }
-    const friendsList = myFriends.map((friend) => {
-        const { username } = friend;
-        return <p>{username}</p>
+
+    let friendsList = myFriends.map((friend) => {
+        return <h4>{friend.username}</h4>
     });
 
     return (
         <main className="account-nav">
             <div className="account">
-                <h2>{user.username}</h2>
+                <h2>{user ? user.username : 'Guest'}</h2>
                 <button className="settings-btn" onClick={() => {}}><BsFillGearFill/></button>
             </div>
             <div className="add-friend">
