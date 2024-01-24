@@ -7,23 +7,35 @@ import { CiPlay1 } from "react-icons/ci";
 
 
 const RoomHeader = () =>{
-    const {sounds} = useLoaderData();
+    const {sounds, favs} = useLoaderData();
+
+    const saveSoundscape = () => {
+        
+    }
+
+    const mySoundscapes = favs.map((soundscape) => {
+        const { name, soundscapeId } = soundscape;
+        return <option key={soundscapeId} value={soundscapeId}>{name}</option>
+    })
 
     return(
         <div className = "Header">
         <div>
-        <SoundEditor sounds = {sounds}/>
+        <SoundEditor sounds={sounds}/>
         </div>
-        
-        <div className = "fav-soundscape">
-        <label htmlFor ="favorite-soundscapes">My Favorite Soundscapes</label>
-        <select name = "soundscape" >
-            <option value = "test">Test</option>
-        </select>
+        <div className='select/save-div'>
+            <div className="fav-soundscape">
+                <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
+                <select name="soundscape" >
+                    {mySoundscapes}
+                </select>
+            </div>
+            <div className='save-soundscape-div'>
+                <button className='save-soundscape-btn' onClick={saveSoundscape()}>Save Soundscape</button>
+            </div>
         </div>
-
-        <div className = "play">
-        <button id = "play-btn"><CiPlay1 /></button>
+        <div className="play">
+            <button id="play-btn"><CiPlay1 /></button>
         </div>
 
         </div>
