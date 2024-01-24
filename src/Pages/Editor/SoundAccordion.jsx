@@ -1,19 +1,42 @@
 import './SoundAccordion.css'
+import { useState } from 'react';
 
 const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
 console.log(sounds);
-    return(
-        <div>
-            <section className={hidden ? 'hide sound-accordion' : 'show sound-accordion'}>
+
+    const [visible, setVisible] = useState(null)
+
+    // const toggleAccordion = (index) =>{
+    //     let newVisible = {...visible}
+
+    //     newVisible[index] = !newVisible[index]
+    //     setVisible (newVisible)
+    // }
+
+    console.log(visible)
+        // ({...prevnewVisible
+        //     [index]: !prevVisible[index],
+        // })
+    
+
+    return (
+        <div id="accordion" className = {hidden ? "hide" : "show"}>
+            <section className='sound-accordion'>
                 {sounds.map((sound, soundIndex) => (
-                    <section>
+                    <section key = {soundIndex}>
                     <div 
+                        id = {soundIndex}
                         key={soundIndex} 
-                        className="accordion-tab" 
-                        >
+                        className= "accordion-tab " 
+                        onClick={()=> {
+                            setVisible(soundIndex)}}
+                    >
                         {sound.type}
                     </div>
+    
+                    <div className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
+
                         return(
                             <span className = "sound-details">
                             <div onClick={() => {
@@ -26,13 +49,11 @@ console.log(sounds);
                             </span>
                         )
                     })}
-                       
+                       </div>
                     </section>
           ))} 
-       
-        <div >
-        </div>
          </section> 
+         <section style={{color:"white"}}>FX</section>
      </div>
     );
 }

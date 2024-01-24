@@ -1,8 +1,9 @@
 import {useState} from 'react'
+import './Room.css'
 
 const Room = ()=>{
     return(
-        <div>Main Room</div>
+        <div className="MainRoom">Main Room</div>
     )
 }
 

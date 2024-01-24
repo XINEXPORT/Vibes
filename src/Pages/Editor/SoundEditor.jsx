@@ -11,30 +11,27 @@ const SoundEditor = ({sounds}) =>{
 
     //setActive Index is what sound we're editing
     const [activeIndex, setActiveIndex] = useState(null)
-    const [selectedSounds, setSelectedSounds] = useState({1:null,2:null, 3:null, 4:null})
+    const [selectedSounds, setSelectedSounds] = useState({sound1:null,sound2:null, sound3:null, sound4:null})
+
 
     return (
-        <div>
+        <section id="editor">
+        <div className = "sound-btns">
         <button onClick = {()=>setActiveIndex(1)}>Sound1</button>
         <button onClick = {()=>setActiveIndex(2)}>Sound2</button>
         <button onClick = {()=>setActiveIndex(3)}>Sound3</button>
         <button onClick = {()=>setActiveIndex(4)}>Sound4</button>
-
-        <div>
+        </div>
         
-                <SoundAccordion hidden={activeIndex === null} sounds={sounds} activeIndex={activeIndex} selectedSounds={selectedSounds} setSelectedSounds={setSelectedSounds}/>
+                <SoundAccordion 
+                    hidden={activeIndex === null} 
+                    sounds={sounds} 
+                    activeIndex={activeIndex} 
+                    selectedSounds={selectedSounds} 
+                    setSelectedSounds={setSelectedSounds}
+                />
             
-        <div className = "SoundEditor">
-          
-            {/* {isSound1ModalOpen &&(
-                <div className="modal">
-                <SoundAccordion sounds = {sounds}/>
-                <button id="btn-close" onClick= {()=> setIsSound1ModalOpen(false)}>Close</button>
-                </div>
-            )} */}
-        </div>
-        </div>
-        </div>
+        </section>
     )
 }
 
