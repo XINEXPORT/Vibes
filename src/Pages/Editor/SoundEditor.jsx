@@ -37,7 +37,7 @@ const SoundEditor = ({sounds}) =>{
             {isSound1ModalOpen &&(
                 <div className="modal">
                 <SoundAccordion sounds = {sounds}/>
-                <button onClick= {()=> setIsSound1ModalOpen(false)}>Close</button>
+                <button className="btn-close" onClick= {()=> setIsSound1ModalOpen(false)}>Close</button>
                 </div>
             )}
         </div>

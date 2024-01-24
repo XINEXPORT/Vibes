@@ -22,7 +22,6 @@ const MySettings = ({userId, email, password, setEmail, setPassword}) => {
     }
 
     
-
 // const handleSoundUpload = (e)=>{}
 // }
 
