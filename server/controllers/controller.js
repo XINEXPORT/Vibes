@@ -93,10 +93,62 @@ const getSounds = async (req, res) => {
     });
 };
 
-// Fetch favorite sounds
-const getFavSounds = async (req, res) => {
-    let favSounds
-}
+// This is how soundscape data should come in to be saved as a favorite soundscape:
+// let selectedSounds = {
+//     name: 'my favorite soundscape',
+//     isPrivate: false,
+//     userId: 1,
+//     sounds: {
+//         sound1: {
+//             sound: {
+//                 soundId: 1,
+//                 sound: 'file-path',
+//                 name: 'name',
+//             },
+//             fx: {
+//                 volume: 100
+//             }
+//         },
+//         sound2: {
+//             sound: {},
+//             fx: {}
+//         },
+//         sound3: {
+//             sound: {},
+//             fx: {}
+//         },
+//         sound4: {
+//             sound: {},
+//             fx: {}
+//         },
+//     }
+// }
+
+// Post favorite sounds
+const postFavSounds = async(req, res) => {
+    const { name, isPrivate, userId, sounds: { sound1, sound2, sound3, sound4 } } = req.selectedSounds;
+    const newSoundscape = await Soundscape.create({
+        userId: userId,
+        name: name,
+        isPrivate: isPrivate
+    });
+    const soundSave = async(sound) => {
+        if (sound) {
+            await SoundscapeSound.create({
+                soundscapeId: newSoundscape.soundscapeId,
+                soundId: sound.sound.soundId,
+                volume: sound.fx.volume
+            });
+        } else {
+            return;
+        };
+    };
+    soundSave(sound1);
+    soundSave(sound2);
+    soundSave(sound3);
+    soundSave(sound4);
+    res.status(200).json({success: true});
+};
 
 //Upload Audio
 const addAudio = async (req,res) => {
@@ -142,5 +194,5 @@ export {
     upload,
     addAudio,
     getSounds,
-    getFavSounds
+    postFavSounds
 };
