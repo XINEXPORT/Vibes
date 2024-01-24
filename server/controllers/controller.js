@@ -58,7 +58,32 @@ const getSounds = async (req, res) => {
             }
         });
     };
-    const sounds = await Sound.findAll();
+    const sounds = [
+        {
+            type: "Ambient",
+            ambient: await Sound.findAll({
+                where: {
+                    type: "Ambient"
+                }
+            })
+        },
+        {
+            type: "Environment",
+            environment: await Sound.findAll({
+                where: {
+                    type: "Environment"
+                }
+            })
+        },
+        {
+            type: "Music",
+            music: await Sound.findAll({
+                where: {
+                    type: "Music"
+                }
+            })
+        }
+    ];
     console.log(favs)
     res.status(200).json({
         success: true,
