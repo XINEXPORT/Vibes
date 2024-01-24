@@ -1,4 +1,5 @@
 # Vibes Component Hierarchy
+- Login/Register Modal
 - MainRoom
     - RoomHeader
         - SoundEditor

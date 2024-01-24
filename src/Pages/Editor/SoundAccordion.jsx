@@ -1,22 +1,38 @@
 import './SoundAccordion.css'
-import { CiPlay1 } from "react-icons/ci";
 
-const SoundAccordion = ({ setActiveIndex, hidden, sounds}) =>{
-    console.log(sounds);
-
+const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
+console.log(sounds);
     return(
-        <div className = "modal">
-            <section className = "sound-accordion">
+        <div>
+            <section className={hidden ? 'hide sound-accordion' : 'show sound-accordion'}>
                 {sounds.map((sound, soundIndex) => (
-                    <div key={soundIndex} className="accordion-tab" onClick={() => setActiveIndex(soundIndex)}>
-                        {sound.sound}
-                       <div className="play-btn"> <CiPlay1 /></div>
-        </div>
-        ))}
+                    <section>
+                    <div 
+                        key={soundIndex} 
+                        className="accordion-tab" 
+                        >
+                        {sound.type}
+                    </div>
+                    {sound.sounds.map((soundObj)=>{
+                        return(
+                            <span className = "sound-details">
+                            <div onClick={() => {
+                                let newSoundList= {...selectedSounds, activeIndex:soundObj}
+                                setSelectedSounds(newSoundList);
+                            }}>
+                                {soundObj.name}
+                            </div>
+                            <audio src={soundObj.sound} controls></audio>
+                            </span>
+                        )
+                    })}
+                       
+                    </section>
+          ))} 
        
-        <div className={hidden ? 'hide accordion-info' : 'show accordion-info'}>
+        <div >
         </div>
-        </section>
+         </section> 
      </div>
     );
 }
