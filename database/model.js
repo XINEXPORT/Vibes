@@ -57,6 +57,9 @@ Sound.init(
             type: DataTypes.TEXT,
             allowNull: false
         },
+        name: {
+            type: DataTypes.STRING(25)
+        },
         type: {
             type: DataTypes.STRING(25)
         }
@@ -144,13 +147,13 @@ MySound.init(
     }
 );
 
-class MyFavoriteSoundscape extends Model {
+class UserSoundscape extends Model {
     [util.inspect.custom](){
         return this.toJSON();
     };
 };
 
-MyFavoriteSoundscape.init(
+UserSoundscape.init(
     {
         favoriteId: {
             type: DataTypes.INTEGER,
@@ -190,17 +193,17 @@ FriendsList.init(
 User.belongsToMany(User, {as: 'me', through: FriendsList, foreignKey: 'userId'});
 User.belongsToMany(User, {as: 'friend', through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
 
-User.belongsToMany(Soundscape, {through: MyFavoriteSoundscape, foreignKey: 'userId'});
-Soundscape.belongsToMany(User, {through: MyFavoriteSoundscape, foreignKey: 'soundscapeId', onDelete: 'CASCADE', hooks: true});
-
 User.hasMany(Soundscape, {foreignKey: 'userId'});
 Soundscape.belongsTo(User, {foreignKey: 'userId'});
 
-User.hasMany(Sound, {foreignKey: 'userId'});
-Sound.belongsTo(User, {foreignKey: 'userId'});
-
 Soundscape.belongsToMany(Sound, {through: SoundscapeSound, foreignKey: 'soundscapeId'});
 Sound.belongsToMany(Soundscape, {through: SoundscapeSound, foreignKey: 'soundId', onDelete: 'CASCADE', hooks: true});
+
+User.belongsToMany(Soundscape, {through: UserSoundscape, foreignKey: 'userId'});
+Soundscape.belongsToMany(User, {through: UserSoundscape, foreignKey: 'soundscapeId'});
+
+User.hasMany(Sound, {foreignKey: 'userId'});
+Sound.belongsTo(User, {foreignKey: 'userId'});
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
     console.log('Syncing database...');
@@ -216,5 +219,5 @@ export {
     SoundscapeSound,
     MySound,
     Sound,
-    MyFavoriteSoundscape
+    UserSoundscape
 };

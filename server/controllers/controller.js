@@ -4,8 +4,8 @@ import {
     Soundscape,
     SoundscapeSound,
     Sound,
-    MyFavoriteSoundscape,
-    MySound
+    MySound,
+    UserSoundscape
 } from '../../database/model.js';
 import multer from 'multer';
 import path from 'path';
@@ -37,7 +37,7 @@ const getUsers = async (req,res) => {
             {where:{
                 userId: req.session.user.userId
             }}
-        )
+        );
         res.json(users);
     } else{
         res.json({error: 'not logged in'});
@@ -46,13 +46,31 @@ const getUsers = async (req,res) => {
 
 // Fetch sound data
 const getSounds = async (req, res) => {
+    const user = req.session.user;
+    let favs;
+    if (user) {
+        favs = await Soundscape.findAll({
+            include: {
+                model: Sound
+            },
+            where: {
+                userId: user.userId
+            }
+        });
+    };
     const sounds = await Sound.findAll();
-    console.log(sounds);
+    console.log(favs)
     res.status(200).json({
         success: true,
-        sounds: sounds
+        sounds: sounds,
+        favs: favs
     });
 };
+
+// Fetch favorite sounds
+const getFavSounds = async (req, res) => {
+    let favSounds
+}
 
 //Upload Audio
 const addAudio = async (req,res) => {
@@ -97,5 +115,6 @@ export {
     getUsers,
     upload,
     addAudio,
-    getSounds
+    getSounds,
+    getFavSounds
 };

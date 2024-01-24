@@ -18,7 +18,8 @@ const router = createBrowserRouter(
                 loader={async()=>{
                     const {data} = await axios.get(`/api/sounds`);
                     return{
-                        sounds: data.sounds
+                        sounds: data.sounds,
+                        favs: data.favs
                     }
                 }}
             />

@@ -13,7 +13,8 @@ import {
     getUsers,
     upload,
     addAudio,
-    getSounds
+    getSounds,
+    getFavSounds
  } from './controllers/controller.js';
 
 const app = express();
@@ -32,8 +33,9 @@ ViteExpress.config({ printViteDevServerHost: true });
 //Endpoints:
 app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
-app.get('/api/sounds', getSounds)
-app.post('/api/user/:id', upload, addAudio)
+app.get('/api/sounds', getSounds);
+app.get('/api/favs', getFavSounds);
+app.post('/api/user/:id', upload, addAudio);
 
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus);
