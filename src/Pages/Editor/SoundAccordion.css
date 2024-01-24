@@ -1,6 +1,6 @@
 .modal{
-    height: 60vh;
-    width: 60vh;
+    height: 10vh;
+    width: 100vh;
 }
 .accordion-tab {
     display: flex;
@@ -35,5 +35,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+}
+.play-btn{
+    display: flex;
+    margin-left: 50px;
 }
