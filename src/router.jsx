@@ -17,11 +17,11 @@ const router = createBrowserRouter(
                 element={<RoomHeader />}
                 loader={async()=>{
                     const {data} = await axios.get(`/api/sounds`);
-                    console.log(data.sounds)
-                    return{
+                    console.log(data.favs)
+                    return {
                         sounds: data.sounds,
                         favs: data.favs
-                    }
+                    };
                 }}
             />
             <Route

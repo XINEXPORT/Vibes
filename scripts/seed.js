@@ -139,22 +139,27 @@ const music4 = await Sound.create({
 })
 
 const guySoundscape1 = await guyFieti.createSoundscape({
+    name: 'Soundscape 1',
     isPrivate: false
 });
 
 const guySoundscape2 = await guyFieti.createSoundscape({
+    name: 'Soundscape 2',
     isPrivate: false
 });
 
 const guySoundscape3 = await guyFieti.createSoundscape({
+    name: 'Soundscape 3',
     isPrivate: false
 });
 
 const guySoundscape4 = await guyFieti.createSoundscape({
+    name: 'Soundscape 4',
     isPrivate: false
 });
 
 const guySoundscape5 = await guyFieti.createSoundscape({
+    name: 'Soundscape 5',
     isPrivate: false
 });
 

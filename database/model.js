@@ -84,6 +84,9 @@ Soundscape.init(
             primaryKey: true,
             allowNull: false
         },
+        name: {
+            type: DataTypes.STRING(25)
+        },
         isPrivate: {
             type: DataTypes.BOOLEAN,
             allowNull: false

@@ -62,7 +62,7 @@ const getSounds = async (req, res) => {
     const sounds = [
         {
             type: "Ambient",
-            ambient: await Sound.findAll({
+            sounds: await Sound.findAll({
                 where: {
                     type: "Ambient"
                 }
@@ -70,7 +70,7 @@ const getSounds = async (req, res) => {
         },
         {
             type: "Environment",
-            environment: await Sound.findAll({
+            sounds: await Sound.findAll({
                 where: {
                     type: "Environment"
                 }
@@ -78,7 +78,7 @@ const getSounds = async (req, res) => {
         },
         {
             type: "Music",
-            music: await Sound.findAll({
+            sounds: await Sound.findAll({
                 where: {
                     type: "Music"
                 }
