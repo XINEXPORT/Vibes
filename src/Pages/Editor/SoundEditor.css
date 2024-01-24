@@ -1,7 +1,9 @@
-.Editor{
-    background-color: green;
+.SoundEditor{
+    padding: 20px;
+    display: flex;
+    align-items: center;
 }
-.sound-modal{
-    background-color: red;
+.SoundEditor button{
+    margin: 0 8px;
     padding: 20px;
 }
