@@ -1,20 +1,20 @@
 import ViteExpress from 'vite-express';
 import morgan from 'morgan';
-import session from 'express-session'
-import express from 'express'
+import session from 'express-session';
+import express from 'express';
 import {
     login,
     logout,
     checkStatus,
     register,
-} from './controllers/authController.js'
+} from './controllers/authController.js';
 import { 
     getFriends, 
     getUsers,
     upload,
     addAudio,
     getSounds,
-    getFavSounds
+    postFavSounds
  } from './controllers/controller.js';
 
 const app = express();
@@ -34,7 +34,7 @@ ViteExpress.config({ printViteDevServerHost: true });
 app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
-app.get('/api/favs', getFavSounds);
+app.post('/api/favs', postFavSounds)
 app.post('/api/user/:id', upload, addAudio);
 
 //Auth Endpoints
