@@ -3,6 +3,7 @@
     width: 100vh;
 }
 .accordion-tab {
+    margin-top: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,14 +17,16 @@
 .accordion-tab:hover{
     background-color: yellow;
 }
-.accordion-info{
+.sound-details{
     transition: .5s;
+    background-color: #AEC6CF;
+
 }
-.accordion-info.hide{
+.sound-accordion.hide{
     height: 0;
     overflow: hidden;
 }
-.accordion-info.show{
+.sound-accordion.show{
     height: 50px;
     display: flex;
     justify-content: center;
@@ -32,7 +35,7 @@
 }
 .sound-accordion {
     display: flex;
-    flex-direction: column;
+    flex-direction: grid;
     justify-content: center;
     align-items: center;
 }

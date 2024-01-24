@@ -4,42 +4,36 @@ import SoundAccordion from './SoundAccordion.jsx'
 import './SoundEditor.css'
 
 const SoundEditor = ({sounds}) =>{
-    console.log(sounds);
+    console.log(sounds)
+
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal)
-    const [isSound1ModalOpen, setIsSound1ModalOpen] = useState(false);
-    const [isSound2ModalOpen, setIsSound2ModalOpen] = useState(false);
-    const [isSound3ModalOpen, setIsSound3ModalOpen] = useState(false);
-    const [isSound4ModalOpen, setIsSound4ModalOpen] = useState(false);
 
-    const openSound1Modal = () =>{
-        setIsSound1ModalOpen(true); 
-    }
-    const openSound2Modal = () =>{
-        setIsSound1ModalOpen(true); 
-    }
-    const openSound3Modal = () =>{
-        setIsSound1ModalOpen(true); 
-    }
-    const openSound4Modal = () =>{
-        setIsSound1ModalOpen(true); 
-    }
+    //setActive Index is what sound we're editing
+    const [activeIndex, setActiveIndex] = useState(null)
+    const [selectedSounds, setSelectedSounds] = useState({1:null,2:null, 3:null, 4:null})
 
     return (
-        <div className = "SoundEditor">
-            <div>
-                <button onClick = {openSound1Modal}>Sound 1</button>
-                <button onClick = {openSound2Modal}>Sound 2</button>
-                <button onClick = {openSound3Modal}>Sound 3</button>
-                <button onClick = {openSound4Modal}>Sound 4</button>
-            </div>
+        <div>
+        <button onClick = {()=>setActiveIndex(1)}>Sound1</button>
+        <button onClick = {()=>setActiveIndex(2)}>Sound2</button>
+        <button onClick = {()=>setActiveIndex(3)}>Sound3</button>
+        <button onClick = {()=>setActiveIndex(4)}>Sound4</button>
 
-            {isSound1ModalOpen &&(
+        <div>
+        
+                <SoundAccordion hidden={activeIndex === null} sounds={sounds} activeIndex={activeIndex} selectedSounds={selectedSounds} setSelectedSounds={setSelectedSounds}/>
+            
+        <div className = "SoundEditor">
+          
+            {/* {isSound1ModalOpen &&(
                 <div className="modal">
                 <SoundAccordion sounds = {sounds}/>
-                <button className="btn-close" onClick= {()=> setIsSound1ModalOpen(false)}>Close</button>
+                <button id="btn-close" onClick= {()=> setIsSound1ModalOpen(false)}>Close</button>
                 </div>
-            )}
+            )} */}
+        </div>
+        </div>
         </div>
     )
 }
