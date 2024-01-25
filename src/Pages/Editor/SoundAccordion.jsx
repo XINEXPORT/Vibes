@@ -1,7 +1,7 @@
 import './SoundAccordion.css'
 import { useState } from 'react';
 
-const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
+const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, selectedFX, setSelectedFX, hidden}) =>{
 
     const [visible, setVisible] = useState(null)
 
@@ -44,7 +44,15 @@ const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds,
          <section style={{color:"black" , width:300}}>
             <h1>FX</h1>
             <label>Volume:</label>
-            <div></div>
+            <input
+            onChange={()=>{
+                let newSoundList={...selectedSounds}
+                newSoundList[`sound${activeIndex}`] = {fx}
+            }}
+            ></input>
+            <div>
+
+            </div>
             <label>Playback Speed:</label>
             <select name="playback-speed" id="playback-speed">
                 <option value="">0.25</option>

@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SoundAccordion from './SoundAccordion.jsx';
 import './SoundEditor.css';
 
-const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
- 
+const SoundEditor = ({sounds, setSelectedSounds, selectedSounds, selectedFX, setSelectedFX}) =>{
 
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal);
@@ -44,6 +43,8 @@ const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
                     activeIndex={activeIndex} 
                     selectedSounds={selectedSounds} 
                     setSelectedSounds={setSelectedSounds}
+                    selectedFX={selectedFX}
+                    setSelectedFX={setSelectedFX}
                 />
             
         </section>
