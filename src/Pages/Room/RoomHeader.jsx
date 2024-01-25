@@ -8,6 +8,8 @@ import { CiPlay1 } from "react-icons/ci";
 
 const RoomHeader = () =>{
     const {sounds, favs} = useLoaderData();
+    const [selectedSounds, setSelectedSounds] = useState({sound1:null,sound2:null, sound3:null, sound4:null})
+    console.log(selectedSounds)
 
     let mySoundscapes;
     if (favs) {
@@ -20,7 +22,11 @@ const RoomHeader = () =>{
     return(
         <div className="Header">
             <div>
-            <SoundEditor sounds={sounds}/>
+            <SoundEditor 
+            sounds={sounds}
+            selectedSounds={selectedSounds}
+            setSelectedSounds={setSelectedSounds}
+            />
             </div>
             <div className='select/save-div'>
                 {favs ?

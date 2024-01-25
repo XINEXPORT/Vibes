@@ -3,19 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import SoundAccordion from './SoundAccordion.jsx';
 import './SoundEditor.css';
 
-const SoundEditor = ({sounds}) =>{
 
-    // Function to save sounds to the selectedSounds object:
-    const setSounds = () => {
+const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
+    console.log(sounds)
 
-    }
 
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal);
 
     //setActive Index is what sound we're editing
-    const [activeIndex, setActiveIndex] = useState(null);
-    const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
+
+    const [activeIndex, setActiveIndex] = useState(null)
 
 
     return (
