@@ -57,10 +57,6 @@ const SoundAccordion = ({
             default:
         };
 
-        if (fx) {
-            console.log(fx.volume)
-            }
-
     useEffect(() => {
         return setVolume(fx ? fx.volume : 50);
     }, [activeIndex]);
