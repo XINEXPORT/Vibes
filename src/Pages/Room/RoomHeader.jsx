@@ -8,8 +8,22 @@ import { CiPlay1 } from "react-icons/ci";
 
 const RoomHeader = () =>{
     const {sounds, favs} = useLoaderData();
-    const [selectedSounds, setSelectedSounds] = useState({sound1:null,sound2:null, sound3:null, sound4:null})
-    console.log(selectedSounds)
+    const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
+    const [soundscapeName, setSoundscapeName] = useState('');
+    const [isPrivate, setIsPrivate] = useState(true);
+    console.log(isPrivate);
+    
+
+    // Function for saving soundscapes:
+    const saveSounds = async() => {
+        const newSoundscape = {
+            name: soundscapeName,
+            isPrivate: isPrivate,
+            selectedSounds: selectedSounds
+        };
+        await axios.post('/apit/favs', newSoundscape);
+        return;
+    };
 
     let mySoundscapes;
     if (favs) {
@@ -40,9 +54,12 @@ const RoomHeader = () =>{
                 <></>
                 }
                 <div className='save-soundscape-div'>
-                    <button className='save-soundscape-btn' onClick={async() => {
-                        await axios.post('/api/favs', selectedSounds);
-                    }}>Save Soundscape</button>
+                    <input type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
+                    <select name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
+                        <option value={true}>Pivate</option>
+                        <option value={false}>Public</option>
+                    </select>
+                    <button className='save-soundscape-btn' onClick={async() => saveSounds()}>Save Soundscape</button>
                 </div>
             </div>
             <div className="play">

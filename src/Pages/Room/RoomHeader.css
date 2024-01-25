@@ -1,9 +1,10 @@
 .Header{
     display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
     position: fixed;
     top:0;
     width: 81.8vw;
-    align-items: flex-start;
     padding: 20px;
     background-color: #AEC6CF;
     height: 100px;
@@ -31,4 +32,9 @@
 }
 .soundscape{
     padding: 20px;
+}
+
+.save-soundscape-div {
+    display: flex;
+    flex-direction: column;
 }

@@ -126,28 +126,33 @@ const getSounds = async (req, res) => {
 
 // Post favorite sounds
 const postFavSounds = async(req, res) => {
-    const { name, isPrivate, userId, sounds: { sound1, sound2, sound3, sound4 } } = req.selectedSounds;
-    const newSoundscape = await Soundscape.create({
-        userId: userId,
-        name: name,
-        isPrivate: isPrivate
-    });
-    const soundSave = async(sound) => {
-        if (sound) {
-            await SoundscapeSound.create({
-                soundscapeId: newSoundscape.soundscapeId,
-                soundId: sound.sound.soundId,
-                volume: sound.fx.volume
-            });
-        } else {
-            return;
+    const { name, isPrivate, sounds: { sound1, sound2, sound3, sound4 } } = req.newSoundscape;
+    if (req.session.user) {
+        const user = req.session.user
+        const newSoundscape = await Soundscape.create({
+            userId: user.userId,
+            name: name,
+            isPrivate: isPrivate
+        });
+        const soundSave = async(sound) => {
+            if (sound) {
+                await SoundscapeSound.create({
+                    soundscapeId: newSoundscape.soundscapeId,
+                    soundId: sound.sound.soundId,
+                    volume: sound.fx.volume
+                });
+            } else {
+                return;
+            };
         };
-    };
-    soundSave(sound1);
-    soundSave(sound2);
-    soundSave(sound3);
-    soundSave(sound4);
-    res.status(200).json({success: true});
+        soundSave(sound1);
+        soundSave(sound2);
+        soundSave(sound3);
+        soundSave(sound4);
+        res.status(200).json({success: true});
+    } else {
+        res.status(401).json({error: 'Must be logged in to save a soundscape.'})
+    }
 };
 
 //Upload Audio
