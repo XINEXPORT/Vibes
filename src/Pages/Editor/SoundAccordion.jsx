@@ -2,7 +2,6 @@ import './SoundAccordion.css'
 import { useState } from 'react';
 
 const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
-console.log(sounds);
 
     const [visible, setVisible] = useState(null)
 
