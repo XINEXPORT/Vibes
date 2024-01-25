@@ -4,7 +4,7 @@ import SoundAccordion from './SoundAccordion.jsx'
 import './SoundEditor.css'
 
 const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
-    console.log(sounds)
+ 
 
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal)

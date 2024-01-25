@@ -2,10 +2,8 @@ import './SoundAccordion.css'
 import { useState } from 'react';
 
 const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
-console.log(sounds);
 
     const [visible, setVisible] = useState(null)
-    console.log(visible)
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -22,14 +20,15 @@ console.log(sounds);
                         {sound.type}
                     </div>
     
-                    <div className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
+                    <div 
+                    className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
 
                         return(
                             <span className = "sound-details">
                             <div onClick={() => {
                                 let newSoundList= {...selectedSounds }
-                                newSoundList[`sound${activeIndex}`] = soundObj
+                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:100}}
                                 setSelectedSounds(newSoundList);
                             }}>
                                 {soundObj.name}
