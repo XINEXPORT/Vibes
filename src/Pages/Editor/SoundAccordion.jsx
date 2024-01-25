@@ -24,8 +24,6 @@ const SoundAccordion = ({
     setSoundFour,
     setFxFour
     }) => {
-
-
     const [volume, setVolume] = useState(selectedSounds[`sound${activeIndex}`] ? selectedSounds[`sound${activeIndex}`].fx.volume : 50);
     const [visible, setVisible] = useState(null);
 
