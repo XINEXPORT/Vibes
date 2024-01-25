@@ -4,9 +4,7 @@ import { useState } from 'react';
 const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, hidden}) =>{
 
     const [visible, setVisible] = useState(null)
-
     console.log(visible)
-
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -29,7 +27,8 @@ const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds,
                         return(
                             <span className = "sound-details">
                             <div onClick={() => {
-                                let newSoundList= {...selectedSounds, activeIndex:soundObj}
+                                let newSoundList= {...selectedSounds }
+                                newSoundList[`sound${activeIndex}`] = soundObj
                                 setSelectedSounds(newSoundList);
                             }}>
                                 {soundObj.name}
