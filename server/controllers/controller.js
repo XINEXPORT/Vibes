@@ -126,7 +126,8 @@ const getSounds = async (req, res) => {
 
 // Post favorite sounds
 const postFavSounds = async(req, res) => {
-    const { name, isPrivate, sounds: { sound1, sound2, sound3, sound4 } } = req.newSoundscape;
+    console.log(req.body, "<----------- this is req.body");
+    const { name, isPrivate, selectedSounds: { sound1, sound2, sound3, sound4 } } = req.body;
     if (req.session.user) {
         const user = req.session.user
         const newSoundscape = await Soundscape.create({

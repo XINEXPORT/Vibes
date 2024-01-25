@@ -1,7 +1,8 @@
+import './RoomHeader.css';
 import Editor from '../Editor/SoundEditor.jsx';
+import axios from 'axios';
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import './RoomHeader.css';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1 } from "react-icons/ci";
 
@@ -16,12 +17,13 @@ const RoomHeader = () =>{
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
+        console.log('ping?')
         const newSoundscape = {
             name: soundscapeName,
             isPrivate: isPrivate,
             selectedSounds: selectedSounds
         };
-        await axios.post('/apit/favs', newSoundscape);
+        await axios.post('/api/favs', newSoundscape);
         return;
     };
 
@@ -59,7 +61,7 @@ const RoomHeader = () =>{
                         <option value={true}>Pivate</option>
                         <option value={false}>Public</option>
                     </select>
-                    <button className='save-soundscape-btn' onClick={async() => saveSounds()}>Save Soundscape</button>
+                    <button className='save-soundscape-btn' onClick={() => saveSounds()}>Save Soundscape</button>
                 </div>
             </div>
             <div className="play">
