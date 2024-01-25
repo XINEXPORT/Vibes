@@ -20,6 +20,8 @@ const RoomHeader = () =>{
     const [fxFour, setFxFour] = useState();
     const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
+
+
     
 
     // Function for saving soundscapes:

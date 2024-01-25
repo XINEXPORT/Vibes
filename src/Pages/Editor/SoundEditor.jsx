@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SoundAccordion from './SoundAccordion.jsx';
 import './SoundEditor.css';
 
+
 const SoundEditor = ({
     sounds,
     setSelectedSounds,
@@ -23,7 +24,7 @@ const SoundEditor = ({
     setSoundFour,
     setFxFour
     }) => {
- 
+
 
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal);
