@@ -135,6 +135,7 @@ const postFavSounds = async(req, res) => {
             name: name,
             isPrivate: isPrivate
         });
+        
         const soundSave = async(sound) => {
             if (sound) {
                 await SoundscapeSound.create({

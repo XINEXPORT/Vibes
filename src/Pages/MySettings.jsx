@@ -27,6 +27,4 @@ const MySettings = ({userId, email, password, setEmail, setPassword}) => {
 
 
 
-
-
 export default MySettings

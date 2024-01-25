@@ -21,8 +21,8 @@ const RoomHeader = () =>{
     const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
 
+    console.log(selectedSounds);
 
-    
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
@@ -30,24 +30,25 @@ const RoomHeader = () =>{
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,
-                selectedSounds: {
-                    sound1: {
-                        sound: soundOne,
-                        fx: fxOne
-                    },
-                    sound2: {
-                        sound: soundTwo,
-                        fx: fxTwo
-                    },
-                    sound3: {
-                        sound: soundThree,
-                        fx: fxThree
-                    },
-                    sound4: {
-                        sound: soundFour,
-                        fx: fxFour
-                    }
-                }
+                selectedSounds: selectedSounds
+                // selectedSounds: {
+                //     sound1: {
+                //         sound: soundOne,
+                //         fx: fxOne
+                //     },
+                //     sound2: {
+                //         sound: soundTwo,
+                //         fx: fxTwo
+                //     },
+                //     sound3: {
+                //         sound: soundThree,
+                //         fx: fxThree
+                //     },
+                //     sound4: {
+                //         sound: soundFour,
+                //         fx: fxFour
+                //     }
+                // }
             };
             await axios.post('/api/favs', newSoundscape);
             return;
@@ -103,7 +104,7 @@ const RoomHeader = () =>{
                 <div className='save-soundscape-div'>
                     <input type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
                     <select name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
-                        <option value={true}>Pivate</option>
+                        <option value={true}>Private</option>
                         <option value={false}>Public</option>
                     </select>
                     <button className='save-soundscape-btn' onClick={() => saveSounds()}>Save Soundscape</button>

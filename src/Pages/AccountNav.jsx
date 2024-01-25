@@ -32,7 +32,7 @@ export default function AccountNav() {
             <div className='friends-list'>
                 <h4>Friends - {myFriends.length}</h4>
                 <div className="friends">
-                    {friendsList}
+                {friendsList}
                 </div>
             </div>
         </main>
