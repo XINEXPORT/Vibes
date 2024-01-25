@@ -147,10 +147,18 @@ const postFavSounds = async(req, res) => {
                 return;
             };
         };
-        soundSave(sound1);
-        soundSave(sound2);
-        soundSave(sound3);
-        soundSave(sound4);
+        if (sound1.sound) {
+            soundSave(sound1);
+        };
+        if (sound2.sound) {
+            soundSave(sound2);
+        };
+        if (sound3.sound) {
+            soundSave(sound3);
+        };
+        if (sound4.sound) {
+            soundSave(sound4);
+        };
         res.status(200).json({success: true});
     } else {
         res.status(401).json({error: 'Must be logged in to save a soundscape.'})

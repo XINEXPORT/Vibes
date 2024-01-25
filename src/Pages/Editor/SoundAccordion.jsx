@@ -48,7 +48,7 @@ const SoundAccordion = ({
                 setSound = setSoundThree;
                 setFx = setFxThree;
                 break;
-            case 3:
+            case 4:
                 sound = soundFour;
                 fx = fxFour;
                 setSound = setSoundFour;
@@ -80,7 +80,6 @@ const SoundAccordion = ({
                     >
                         {sound.type}
                     </div>
-    
                     <div 
                     className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
@@ -107,7 +106,7 @@ const SoundAccordion = ({
             <input 
                     type="range" 
                     min="0" 
-                    max="1"
+                    max="100"
                     value={volume} 
                     className="slider"
                     onChange ={(e)=>{

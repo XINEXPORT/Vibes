@@ -20,19 +20,18 @@ const RoomHeader = () =>{
     const [fxFour, setFxFour] = useState(null);
     const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
-
-
-
-
     const [isPlaying, setIsPlaying] = useState(false);
 
     const audio1 = useRef(null);
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
-    
 
     console.log(audio1)
+    soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null
+    soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null
+    soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null
+    soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
@@ -51,7 +50,50 @@ const RoomHeader = () =>{
             };
         };
     };
-    
+
+    const setSoundscape = (ID) => {
+        console.log(favs, ID)
+        const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
+        console.log(soundscape)
+        if (soundscape.sounds) {
+            if (soundscape.sounds[0]) {
+                if (soundscape.sounds[0] !== soundOne) {
+                    setSoundOne(soundscape.sounds[0]);
+                    setFxOne({volume: soundscape.sounds[0].soundscapeSound.volume});
+                };
+            } else {
+                setSoundOne(null);
+                setFxOne(null);
+            };
+            if (soundscape.sounds[1]) {
+                if (soundscape.sounds[1] !== soundTwo) {
+                    setSoundTwo(soundscape.sounds[1]);
+                    setFxTwo({volume: soundscape.sounds[1].soundscapeSound.volume});
+                };
+            } else {
+                setSoundTwo(null);
+                setFxTwo(null);
+            };
+            if (soundscape.sounds[2]) {
+                if (soundscape.sounds[2] !== soundThree) {
+                    setSoundThree(soundscape.sounds[2]);
+                    setFxThree({volume: soundscape.sounds[2].soundscapeSound.volume});
+                };
+            } else {
+                setSoundThree(null);
+                setFxThree(null);
+            };
+            if (soundscape.sounds[3]) {
+                if (soundscape.sounds[3] !== soundThree) {
+                    setSoundFour(soundscape.sounds[3]);
+                    setFxFour({volume: soundscape.sounds[3].soundscapeSound.volume});
+                };
+            } else {
+                setSoundFour(null);
+                setFxFour(null);
+            };
+        };
+    };
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
@@ -59,25 +101,24 @@ const RoomHeader = () =>{
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,
-                selectedSounds: selectedSounds
-                // selectedSounds: {
-                //     sound1: {
-                //         sound: soundOne,
-                //         fx: fxOne
-                //     },
-                //     sound2: {
-                //         sound: soundTwo,
-                //         fx: fxTwo
-                //     },
-                //     sound3: {
-                //         sound: soundThree,
-                //         fx: fxThree
-                //     },
-                //     sound4: {
-                //         sound: soundFour,
-                //         fx: fxFour
-                //     }
-                // }
+                selectedSounds: {
+                    sound1: {
+                        sound: soundOne,
+                        fx: fxOne
+                    },
+                    sound2: {
+                        sound: soundTwo,
+                        fx: fxTwo
+                    },
+                    sound3: {
+                        sound: soundThree,
+                        fx: fxThree
+                    },
+                    sound4: {
+                        sound: soundFour,
+                        fx: fxFour
+                    }
+                }
             };
             await axios.post('/api/favs', newSoundscape);
             return;
@@ -123,7 +164,8 @@ const RoomHeader = () =>{
                 {favs ?
                 <div className="fav-soundscape">
                     <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
-                    <select name="soundscape">
+                    <select name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
+                        <option value={null}>Soundscapes</option>
                         {mySoundscapes}
                     </select>
                 </div>
@@ -143,10 +185,10 @@ const RoomHeader = () =>{
                 <button id="play-btn" onClick={() => playPause()}><CiPlay1 /></button>
             </div>
             <div>
-                <audio ref={audio1} src={soundOne ? soundOne.sound : null} volume={fxOne ? fxOne.volume : null} />
-                <audio ref={audio2} src={soundTwo ? soundTwo.sound : null} />
-                <audio ref={audio3} src={soundThree ? soundThree.sound : null} />
-                <audio ref={audio4} src={soundFour ? soundFour.sound : null} />
+                <audio ref={audio1} src={soundOne ? soundOne.sound : null} loop />
+                <audio ref={audio2} src={soundTwo ? soundTwo.sound : null} loop />
+                <audio ref={audio3} src={soundThree ? soundThree.sound : null} loop />
+                <audio ref={audio4} src={soundFour ? soundFour.sound : null} loop />
             </div>
         </div>
     )
