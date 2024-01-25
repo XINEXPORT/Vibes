@@ -8,6 +8,7 @@ const SoundAccordion = ({
     selectedSounds,
     setSelectedSounds,
     hidden,
+    soundOne,
     fxOne,
     soundTwo,
     fxTwo,
@@ -24,7 +25,47 @@ const SoundAccordion = ({
     setSoundFour,
     setFxFour
     }) => {
-    const [volume, setVolume] = useState(selectedSounds[`sound${activeIndex}`] ? selectedSounds[`sound${activeIndex}`].fx.volume : 50);
+        let sound;
+        let fx;
+        let setSound;
+        let setFx;
+        switch(activeIndex) {
+            case 1:
+                sound = soundOne;
+                fx = fxOne;
+                setSound = setSoundOne;
+                setFx = setFxOne;
+                break;
+            case 2:
+                sound = soundTwo;
+                fx = fxTwo;
+                setSound = setSoundTwo;
+                setFx = setFxTwo;
+                break;
+            case 3:
+                sound = soundThree;
+                fx = fxThree;
+                setSound = setSoundThree;
+                setFx = setFxThree;
+                break;
+            case 3:
+                sound = soundFour;
+                fx = fxFour;
+                setSound = setSoundFour;
+                setFx = setFxFour;
+                break;
+            default:
+        };
+
+        if (fx) {
+            console.log(fx.volume)
+            }
+
+    useEffect(() => {
+        return setVolume(fx ? fx.volume : 50);
+    }, [activeIndex]);
+
+    const [volume, setVolume] = useState(fx ? fx.volume : 50);
     const [visible, setVisible] = useState(null);
 
     return (
@@ -37,7 +78,9 @@ const SoundAccordion = ({
                         key={soundIndex} 
                         className= "accordion-tab " 
                         onClick={()=> {
-                            setVisible(soundIndex)}}
+                            setVisible(soundIndex)
+                            setFx({volume: volume})
+                        }}
                     >
                         {sound.type}
                     </div>
@@ -49,9 +92,7 @@ const SoundAccordion = ({
                         return(
                             <span className = "sound-details">
                             <div onClick={() => {
-                                let newSoundList= {...selectedSounds }
-                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
-                                setSelectedSounds(newSoundList);
+                                setSound(soundObj);
                             }}>
                                 {soundObj.name}
                             </div>
@@ -70,14 +111,13 @@ const SoundAccordion = ({
             <input 
                     type="range" 
                     min="1" 
-                    max="100" 
-                    className = "slider" 
+                    max="100"
+                    value={volume} 
+                    className="slider"
                     onChange ={(e)=>{
-                        setVolume(e.target.value)
-                        let newSoundList= {...selectedSounds }
-                        newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
-                        setSelectedSounds(newSoundList);}
-                    }
+                        setVolume(e.target.value);
+                        setFx({volume: volume});
+                    }}
             />
             </div>
             <div>

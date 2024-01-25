@@ -8,6 +8,7 @@ const SoundEditor = ({
     sounds,
     setSelectedSounds,
     selectedSounds,
+    soundOne,
     fxOne,
     soundTwo,
     fxTwo,
@@ -64,6 +65,7 @@ const SoundEditor = ({
                     activeIndex={activeIndex} 
                     selectedSounds={selectedSounds} 
                     setSelectedSounds={setSelectedSounds}
+                    soundOne={soundOne}
                     fxOne={fxOne}
                     soundTwo={soundTwo}
                     fxTwo={fxTwo}

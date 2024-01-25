@@ -10,20 +10,17 @@ import { CiPlay1 } from "react-icons/ci";
 const RoomHeader = () =>{
     const {sounds, favs} = useLoaderData();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
-    const [soundOne, setSoundOne] = useState();
-    const [fxOne, setFxOne] = useState();
-    const [soundTwo, setSoundTwo] = useState();
-    const [fxTwo, setFxTwo] = useState();
-    const [soundThree, setSoundThree] = useState();
-    const [fxThree, setFxThree] = useState();
-    const [soundFour, setSoundFour] = useState();
-    const [fxFour, setFxFour] = useState();
+    const [soundOne, setSoundOne] = useState(null);
+    const [fxOne, setFxOne] = useState(null);
+    const [soundTwo, setSoundTwo] = useState(null);
+    const [fxTwo, setFxTwo] = useState(null);
+    const [soundThree, setSoundThree] = useState(null);
+    const [fxThree, setFxThree] = useState(null);
+    const [soundFour, setSoundFour] = useState(null);
+    const [fxFour, setFxFour] = useState(null);
     const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
-
-
     
-
     // Function for saving soundscapes:
     const saveSounds = async() => {
         if (soundscapeName) {
