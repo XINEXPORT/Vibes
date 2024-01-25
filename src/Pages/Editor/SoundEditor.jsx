@@ -32,27 +32,28 @@ const SoundEditor = ({
 
     //setActive Index is what sound we're editing
     const [activeIndex, setActiveIndex] = useState(null);
+    console.log(soundOne)
 
     return (
         <section id="editor">
         <div className = "sound-btns">
-            {selectedSounds.sound1 ?
-            <button onClick = {()=>setActiveIndex(1)}>{selectedSounds.sound1.sound.name}</button>
+            {soundOne ?
+            <button onClick = {()=>setActiveIndex(1)}>{soundOne.name}</button>
             :
             <button onClick = {()=>setActiveIndex(1)}>Sound1</button>
             }
-            {selectedSounds.sound2 ?
-            <button onClick = {()=>setActiveIndex(2)}>{selectedSounds.sound2.sound.name}</button>
+            {soundTwo ?
+            <button onClick = {()=>setActiveIndex(2)}>{soundTwo.name}</button>
             :
             <button onClick = {()=>setActiveIndex(2)}>Sound2</button>
             }
-            {selectedSounds.sound3 ?
-            <button onClick = {()=>setActiveIndex(3)}>{selectedSounds.sound3.sound.name}</button>
+            {soundThree ?
+            <button onClick = {()=>setActiveIndex(3)}>{soundThree.name}</button>
             :
             <button onClick = {()=>setActiveIndex(3)}>Sound3</button>
             }
-            {selectedSounds.sound4 ?
-            <button onClick = {()=>setActiveIndex(4)}>{selectedSounds.sound4.sound.name}</button>
+            {soundFour ?
+            <button onClick = {()=>setActiveIndex(4)}>{soundFour.name}</button>
             :
             <button onClick = {()=>setActiveIndex(4)}>Sound4</button>
             }
