@@ -1,5 +1,6 @@
 import './SoundAccordion.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 
 const SoundAccordion = ({
     sounds,
@@ -24,7 +25,9 @@ const SoundAccordion = ({
     setFxFour
     }) => {
 
-    const [visible, setVisible] = useState(null)
+
+    const [volume, setVolume] = useState(selectedSounds[`sound${activeIndex}`] ? selectedSounds[`sound${activeIndex}`].fx.volume : 50);
+    const [visible, setVisible] = useState(null);
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -49,7 +52,7 @@ const SoundAccordion = ({
                             <span className = "sound-details">
                             <div onClick={() => {
                                 let newSoundList= {...selectedSounds }
-                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:100}}
+                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
                                 setSelectedSounds(newSoundList);
                             }}>
                                 {soundObj.name}
@@ -65,7 +68,23 @@ const SoundAccordion = ({
          <section style={{color:"black" , width:300}}>
             <h1>FX</h1>
             <label>Volume:</label>
-            <div></div>
+            <div>
+            <input 
+                    type="range" 
+                    min="1" 
+                    max="100" 
+                    className = "slider" 
+                    onChange ={(e)=>{
+                        setVolume(e.target.value)
+                        let newSoundList= {...selectedSounds }
+                        newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
+                        setSelectedSounds(newSoundList);}
+                    }
+            />
+            </div>
+            <div>
+
+            </div>
             <label>Playback Speed:</label>
             <select name="playback-speed" id="playback-speed">
                 <option value="">0.25</option>
