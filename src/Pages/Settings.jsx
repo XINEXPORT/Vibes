@@ -1,13 +1,13 @@
 import './Settings.css'
 import {useState} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import {useLoaderData} from 'react-router-dom'
 import MySettings from '../Pages/MySettings.jsx'
 import axios from 'axios'
 
 const Settings = ()=>{
-    const {userInfo} = useLoaderData();
-    const [email, setEmail]=useState(userInfo.email)
-    const [password, setPassword]=useState(userInfo.password)
+    const user = useSelector(state => state.login.user);
+
 
     return(
         <div>

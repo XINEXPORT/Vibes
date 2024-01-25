@@ -31,7 +31,6 @@ const SoundEditor = ({
     const modal = useSelector(state => state.editorOne.modal);
 
     //setActive Index is what sound we're editing
-
     const [activeIndex, setActiveIndex] = useState(null);
 
     return (

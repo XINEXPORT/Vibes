@@ -1,10 +1,12 @@
 import './AccountNav.css';
 import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData } from "react-router";
 
 export default function AccountNav() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -24,7 +26,9 @@ export default function AccountNav() {
         <main className="account-nav">
             <div className="account">
                 <h2>{user ? user.username : 'Guest'}</h2>
-                <button className="settings-btn" onClick={() => {}}><BsFillGearFill className='cog'/></button>
+                <button className="settings-btn" onClick={() => {}}><BsFillGearFill className='cog' onClick={()=>{
+                
+                }}/></button>
             </div>
             <div className="add-friend">
                 <button className="add-friend-btn" onClick={() => {}}>Add friend</button>
@@ -32,7 +36,7 @@ export default function AccountNav() {
             <div className='friends-list'>
                 <h4>Friends - {myFriends.length}</h4>
                 <div className="friends">
-                    {friendsList}
+                {friendsList}
                 </div>
             </div>
         </main>

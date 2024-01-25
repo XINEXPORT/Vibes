@@ -106,8 +106,8 @@ const SoundAccordion = ({
             <div>
             <input 
                     type="range" 
-                    min="1" 
-                    max="100"
+                    min="0" 
+                    max="1"
                     value={volume} 
                     className="slider"
                     onChange ={(e)=>{
