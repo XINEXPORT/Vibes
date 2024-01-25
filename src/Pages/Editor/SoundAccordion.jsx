@@ -5,9 +5,7 @@ const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds,
 console.log(sounds);
 
     const [visible, setVisible] = useState(null)
-
     console.log(visible)
-
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -30,7 +28,8 @@ console.log(sounds);
                         return(
                             <span className = "sound-details">
                             <div onClick={() => {
-                                let newSoundList= {...selectedSounds, activeIndex:soundObj}
+                                let newSoundList= {...selectedSounds }
+                                newSoundList[`sound${activeIndex}`] = soundObj
                                 setSelectedSounds(newSoundList);
                             }}>
                                 {soundObj.name}

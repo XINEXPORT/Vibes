@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import SoundAccordion from './SoundAccordion.jsx'
 import './SoundEditor.css'
 
-const SoundEditor = ({sounds}) =>{
+const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
     console.log(sounds)
 
     const dispatch = useDispatch();
@@ -11,8 +11,6 @@ const SoundEditor = ({sounds}) =>{
 
     //setActive Index is what sound we're editing
     const [activeIndex, setActiveIndex] = useState(null)
-    const [selectedSounds, setSelectedSounds] = useState({sound1:null,sound2:null, sound3:null, sound4:null})
-
 
     return (
         <section id="editor">
