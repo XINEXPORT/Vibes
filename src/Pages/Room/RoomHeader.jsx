@@ -20,7 +20,7 @@ const RoomHeader = () =>{
     };
 
     return(
-        <div className = "Header">
+        <div className="Header">
             <div>
             <SoundEditor 
             sounds={sounds}
@@ -32,7 +32,7 @@ const RoomHeader = () =>{
                 {favs ?
                 <div className="fav-soundscape">
                     <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
-                    <select name="soundscape" >
+                    <select name="soundscape">
                         {mySoundscapes}
                     </select>
                 </div>
