@@ -10,21 +10,48 @@ import { CiPlay1 } from "react-icons/ci";
 const RoomHeader = () =>{
     const {sounds, favs} = useLoaderData();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
-    const [soundscapeName, setSoundscapeName] = useState('');
+    const [soundOne, setSoundOne] = useState();
+    const [fxOne, setFxOne] = useState();
+    const [soundTwo, setSoundTwo] = useState();
+    const [fxTwo, setFxTwo] = useState();
+    const [soundThree, setSoundThree] = useState();
+    const [fxThree, setFxThree] = useState();
+    const [soundFour, setSoundFour] = useState();
+    const [fxFour, setFxFour] = useState();
+    const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
-    console.log(isPrivate);
     
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
-        console.log('ping?')
-        const newSoundscape = {
-            name: soundscapeName,
-            isPrivate: isPrivate,
-            selectedSounds: selectedSounds
+        if (soundscapeName) {
+            const newSoundscape = {
+                name: soundscapeName,
+                isPrivate: isPrivate,
+                selectedSounds: {
+                    sound1: {
+                        sound: soundOne,
+                        fx: fxOne
+                    },
+                    sound2: {
+                        sound: soundTwo,
+                        fx: fxTwo
+                    },
+                    sound3: {
+                        sound: soundThree,
+                        fx: fxThree
+                    },
+                    sound4: {
+                        sound: soundFour,
+                        fx: fxFour
+                    }
+                }
+            };
+            await axios.post('/api/favs', newSoundscape);
+            return;
+        } else {
+            alert('You must enter a name to save your soundscape.');
         };
-        await axios.post('/api/favs', newSoundscape);
-        return;
     };
 
     let mySoundscapes;
@@ -42,6 +69,22 @@ const RoomHeader = () =>{
             sounds={sounds}
             selectedSounds={selectedSounds}
             setSelectedSounds={setSelectedSounds}
+            soundOne={soundOne}
+            fxOne={fxOne}
+            soundTwo={soundTwo}
+            fxTwo={fxTwo}
+            soundThree={soundThree}
+            fxThree={fxThree}
+            soundFour={soundFour}
+            fxFour={fxFour}
+            setSoundOne={setSoundOne}
+            setFxOne={setFxOne}
+            setSoundTwo={setSoundTwo}
+            setFxTwo={setFxTwo}
+            setSoundThree={setSoundThree}
+            setFxThree={setFxThree}
+            setSoundFour={setSoundFour}
+            setFxFour={setFxFour}
             />
             </div>
             <div className='select/save-div'>

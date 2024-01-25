@@ -3,7 +3,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import SoundAccordion from './SoundAccordion.jsx';
 import './SoundEditor.css';
 
-const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
+const SoundEditor = ({
+    sounds,
+    setSelectedSounds,
+    selectedSounds,
+    fxOne,
+    soundTwo,
+    fxTwo,
+    soundThree,
+    fxThree,
+    soundFour,
+    fxFour,
+    setSoundOne,
+    setFxOne,
+    setSoundTwo,
+    setFxTwo,
+    setSoundThree,
+    setFxThree,
+    setSoundFour,
+    setFxFour
+    }) => {
  
 
     const dispatch = useDispatch();
@@ -44,6 +63,21 @@ const SoundEditor = ({sounds, setSelectedSounds, selectedSounds}) =>{
                     activeIndex={activeIndex} 
                     selectedSounds={selectedSounds} 
                     setSelectedSounds={setSelectedSounds}
+                    fxOne={fxOne}
+                    soundTwo={soundTwo}
+                    fxTwo={fxTwo}
+                    soundThree={soundThree}
+                    fxThree={fxThree}
+                    soundFour={soundFour}
+                    fxFour={fxFour}
+                    setSoundOne={setSoundOne}
+                    setFxOne={setFxOne}
+                    setSoundTwo={setSoundTwo}
+                    setFxTwo={setFxTwo}
+                    setSoundThree={setSoundThree}
+                    setFxThree={setFxThree}
+                    setSoundFour={setSoundFour}
+                    setFxFour={setFxFour}
                 />
             
         </section>
