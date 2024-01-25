@@ -1,7 +1,30 @@
 import './SoundAccordion.css'
 import { useState, useEffect } from 'react';
 
-const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, selectedFX, setSelectedFX, hidden}) =>{
+
+const SoundAccordion = ({
+    sounds,
+    activeIndex,
+    selectedSounds,
+    setSelectedSounds,
+    hidden,
+    fxOne,
+    soundTwo,
+    fxTwo,
+    soundThree,
+    fxThree,
+    soundFour,
+    fxFour,
+    setSoundOne,
+    setFxOne,
+    setSoundTwo,
+    setFxTwo,
+    setSoundThree,
+    setFxThree,
+    setSoundFour,
+    setFxFour
+    }) => {
+
 
     const [volume, setVolume] = useState(selectedSounds[`sound${activeIndex}`] ? selectedSounds[`sound${activeIndex}`].fx.volume : 50);
     const [visible, setVisible] = useState(null);
