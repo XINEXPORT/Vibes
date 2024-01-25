@@ -24,7 +24,7 @@ const SoundAccordion = ({
     setFxFour
     }) => {
 
-    const [visible, setVisible] = useState(null)
+    const [visible, setVisible] = useState(null);
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
