@@ -6,18 +6,8 @@ console.log(sounds);
 
     const [visible, setVisible] = useState(null)
 
-    // const toggleAccordion = (index) =>{
-    //     let newVisible = {...visible}
-
-    //     newVisible[index] = !newVisible[index]
-    //     setVisible (newVisible)
-    // }
-
     console.log(visible)
-        // ({...prevnewVisible
-        //     [index]: !prevVisible[index],
-        // })
-    
+
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -53,7 +43,23 @@ console.log(sounds);
                     </section>
           ))} 
          </section> 
-         <section style={{color:"white"}}>FX</section>
+         <section style={{color:"black" , width:300}}>
+            <h1>FX</h1>
+            <label>Volume:</label>
+            <div></div>
+            <label>Playback Speed:</label>
+            <select name="playback-speed" id="playback-speed">
+                <option value="">0.25</option>
+                <option value="">0.5</option>
+                <option value="">0.75</option>
+                <option value="">Normal</option>
+                <option value="">1.25</option>
+                <option value="">1.5</option>
+                <option value="">1.75</option>
+                <option value="">2</option>
+            </select>
+         </section>
+         
      </div>
     );
 }
