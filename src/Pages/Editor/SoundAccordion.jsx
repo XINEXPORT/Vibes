@@ -6,18 +6,8 @@ console.log(sounds);
 
     const [visible, setVisible] = useState(null)
 
-    // const toggleAccordion = (index) =>{
-    //     let newVisible = {...visible}
-
-    //     newVisible[index] = !newVisible[index]
-    //     setVisible (newVisible)
-    // }
-
     console.log(visible)
-        // ({...prevnewVisible
-        //     [index]: !prevVisible[index],
-        // })
-    
+
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
