@@ -1,9 +1,10 @@
 import './SoundAccordion.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds, selectedFX, setSelectedFX, hidden}) =>{
 
-    const [visible, setVisible] = useState(null)
+    const [volume, setVolume] = useState(selectedSounds[`sound${activeIndex}`] ? selectedSounds[`sound${activeIndex}`].fx.volume : 50);
+    const [visible, setVisible] = useState(null);
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -28,7 +29,7 @@ const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds,
                             <span className = "sound-details">
                             <div onClick={() => {
                                 let newSoundList= {...selectedSounds }
-                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:100}}
+                                newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
                                 setSelectedSounds(newSoundList);
                             }}>
                                 {soundObj.name}
@@ -44,12 +45,20 @@ const SoundAccordion = ({sounds, activeIndex, selectedSounds, setSelectedSounds,
          <section style={{color:"black" , width:300}}>
             <h1>FX</h1>
             <label>Volume:</label>
-            <input
-            onChange={()=>{
-                let newSoundList={...selectedSounds}
-                newSoundList[`sound${activeIndex}`] = {fx}
-            }}
-            ></input>
+            <div>
+            <input 
+                    type="range" 
+                    min="1" 
+                    max="100" 
+                    className = "slider" 
+                    onChange ={(e)=>{
+                        setVolume(e.target.value)
+                        let newSoundList= {...selectedSounds }
+                        newSoundList[`sound${activeIndex}`] = {sound: soundObj, fx:{volume:volume}}
+                        setSelectedSounds(newSoundList);}
+                    }
+            />
+            </div>
             <div>
 
             </div>

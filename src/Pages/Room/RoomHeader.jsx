@@ -13,6 +13,7 @@ const RoomHeader = () =>{
     const [soundscapeName, setSoundscapeName] = useState('');
     const [isPrivate, setIsPrivate] = useState(true);
     console.log(isPrivate);
+    console.log(selectedSounds);
     
 
     // Function for saving soundscapes:
