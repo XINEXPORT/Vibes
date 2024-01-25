@@ -1,7 +1,7 @@
 import './RoomHeader.css';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1 } from "react-icons/ci";
@@ -21,6 +21,37 @@ const RoomHeader = () =>{
     const [soundscapeName, setSoundscapeName] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
 
+
+
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const audio1 = useRef(null);
+    const audio2 = useRef(null);
+    const audio3 = useRef(null);
+    const audio4 = useRef(null);
+    
+
+    console.log(audio1)
+
+    const playPause = () => {
+        if (soundOne || soundTwo || soundThree || soundFour) {
+            if (!isPlaying) {
+                audio1.current.play();
+                audio2.current.play();
+                audio3.current.play();
+                audio4.current.play();
+                setIsPlaying(!isPlaying);
+            } else {
+                audio1.current.pause();
+                audio2.current.pause();
+                audio3.current.pause();
+                audio4.current.pause();
+                setIsPlaying(!isPlaying);
+            };
+        };
+    };
+    
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
@@ -109,10 +140,15 @@ const RoomHeader = () =>{
                 </div>
             </div>
             <div className="play">
-                <button id="play-btn"><CiPlay1 /></button>
+                <button id="play-btn" onClick={() => playPause()}><CiPlay1 /></button>
+            </div>
+            <div>
+                <audio ref={audio1} src={soundOne ? soundOne.sound : null} volume={fxOne ? fxOne.volume : null} />
+                <audio ref={audio2} src={soundTwo ? soundTwo.sound : null} />
+                <audio ref={audio3} src={soundThree ? soundThree.sound : null} />
+                <audio ref={audio4} src={soundFour ? soundFour.sound : null} />
             </div>
         </div>
-        
     )
 }
 
