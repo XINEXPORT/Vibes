@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {useLoaderData} from 'react-router-dom'
 import axios from 'axios'
 
-const Settings = ({closeModal, username, password, email})=>{
+const Settings = ({closeModal, username, email})=>{
     const user = useSelector(state => state.login.user);
 
 
@@ -18,8 +18,6 @@ const Settings = ({closeModal, username, password, email})=>{
                     <div className = "form">{username}</div>
                 <label className = "email">Email</label>
                     <div className = "form">{email}</div>
-                <label className = "password">Password</label>
-                    <div className = "form">{password}</div>
              </div>
         </div>
     )
