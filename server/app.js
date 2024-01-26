@@ -36,15 +36,11 @@ ViteExpress.config({ printViteDevServerHost: true });
 app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
-<<<<<<< HEAD
-app.post('/api/favs', postFavSounds)
-app.post('/api/sounds', upload, addAudio);
-=======
+
 app.post('/api/favs', postFavSounds);
 app.delete('/api/deletefav', deleteFav);
-app.delete('api/deletesoundscape', deleteSoundscape);
-app.post('/api/user/:id', upload, addAudio);
->>>>>>> 7344577e614beea2997a2b9c85e7900e772e59d1
+app.delete('/api/deletesoundscape/:id', deleteSoundscape);
+app.post('/api/sounds', upload, addAudio);
 
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus);

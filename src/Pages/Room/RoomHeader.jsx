@@ -19,6 +19,7 @@ const RoomHeader = () =>{
     const [soundFour, setSoundFour] = useState(null);
     const [fxFour, setFxFour] = useState(null);
     const [soundscapeName, setSoundscapeName] = useState(null);
+    const [soundscapeId, setSoundscapeId] = useState(null);
     const [deletesoundscape, deleteSoundScape] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -55,6 +56,8 @@ const RoomHeader = () =>{
 
         const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
         console.log(soundscape)
+        setSoundscapeId(+ID)
+
         if (soundscape.sounds) {
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {
@@ -131,12 +134,15 @@ const RoomHeader = () =>{
     if (favs) {
         mySoundscapes = favs.map((soundscape) => {
             const { name, soundscapeId } = soundscape;
-            console.log(soundscape)
             return <option key={soundscapeId} value={soundscapeId}>{name}</option>
         });
        
     };
 
+    //Delete a soundscape
+    const handleDeleteSoundscape = async (soundscapeId)=>{
+        const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
+    }
 
     return(
         <div className="Header">
@@ -171,7 +177,10 @@ const RoomHeader = () =>{
                         <option value={null}>Soundscapes</option>
                         {mySoundscapes}
                     </select>
-                    <button name="soundscape-delete">Delete</button>
+                    <button 
+                    name="soundscape-delete"
+                    onClick={(e)=> handleDeleteSoundscape(soundscapeId)}>
+                        Delete</button>
                 </div>
                 :
                 <></>
