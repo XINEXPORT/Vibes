@@ -32,7 +32,7 @@ const Settings = ({openModal, closeModal, username, email})=>{
 
     return(
         <div className = "modalBackground"> 
-        <div >
+        <div>
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
                 onClick={()=>closeModal(false)}> X </div>
@@ -48,7 +48,7 @@ const Settings = ({openModal, closeModal, username, email})=>{
                 <Form.Label className = "upload-sounds">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
-                    <Form.Label> Sound Name </Form.Label>
+                    <Form.Label > Sound Name </Form.Label>
                     <Form.Control
                     type = "text"
                     />
