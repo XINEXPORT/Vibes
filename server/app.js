@@ -14,7 +14,9 @@ import {
     upload,
     addAudio,
     getSounds,
-    postFavSounds
+    postFavSounds,
+    deleteFav,
+    deleteSoundscape
  } from './controllers/controller.js';
 
 const app = express();
@@ -34,7 +36,9 @@ ViteExpress.config({ printViteDevServerHost: true });
 app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
-app.post('/api/favs', postFavSounds)
+app.post('/api/favs', postFavSounds);
+app.delete('/api/deletefav', deleteFav);
+app.delete('api/deletesoundscape', deleteSoundscape);
 app.post('/api/user/:id', upload, addAudio);
 
 //Auth Endpoints
