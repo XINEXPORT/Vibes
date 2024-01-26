@@ -161,20 +161,32 @@ const postFavSounds = async(req, res) => {
         };
         res.status(200).json({success: true});
     } else {
-        res.status(401).json({error: 'Must be logged in to save a soundscape.'})
-    }
+        res.status(401).json({error: 'Must be logged in to save a soundscape.'});
+    };
+};
+
+const deleteFav = async(req, res) => {
+
+}
+
+const deleteSoundscape = async(req, res) => {
+    const { soundscapeId } = req;
+    await Soundscape.destroy({
+        where: {
+            soundscapeId: soundscapeId
+        }
+    });
+    res.status(200).json({success: true});
 };
 
 //Upload Audio
 const addAudio = async (req,res) => {
 
     const sound = {
-        sound: req.file.path,
-        name: req.body.name,
-        type: req.body.type,
-        user: req.body.userId
+        sound: req.file,
+        type: req.body.type
     }
-    const audio = await MySound.create(sound)
+    const audio = await MySound.create(info)
     res.status(200). send(audio)
     console.log(audio)
 
@@ -186,7 +198,7 @@ const storage = multer.diskStorage({
         cb (null, 'public/audio');
     },
     filename: (req, file, cb) =>{
-        cb(null, Date.now() + path.extname(file.originalname))
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
@@ -203,7 +215,7 @@ const upload = multer({
         }
         cb ('Provide the proper file format to upload. MP3, WAV, AACC, OGG, and FLAC are supported.')
     }
-    }).array('sound', 3)
+    }).array('sound', 3);
 
 export {
     getFriends,
@@ -211,5 +223,7 @@ export {
     upload,
     addAudio,
     getSounds,
-    postFavSounds
+    postFavSounds,
+    deleteFav,
+    deleteSoundscape
 };
