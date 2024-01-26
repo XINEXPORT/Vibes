@@ -71,6 +71,14 @@ await FriendsList.create({
     userId: 5,
     friendId: 4
 });
+await FriendsList.create({
+    userId: 6,
+    friendId: 4
+});
+await FriendsList.create({
+    userId: 6,
+    friendId: 3
+});
 
 
 //SoundSeed

@@ -1,0 +1,33 @@
+#sttings-modal {
+    position: fixed;
+    min-width: 80%;
+    min-height: 80%;
+    top: 0;
+    right: 0;
+    background-color: rgba(32, 32, 32, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+#settings-modal h1 {
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+#settings-modal label {
+    font-size: 20px;
+}
+.info {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;    
+    align-items: center;
+    gap: 5px;
+}
+.upload {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
