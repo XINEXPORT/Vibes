@@ -1,11 +1,12 @@
-import './Settings.css'
-import {useState} from 'react'
+import './Settings.css';
+import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {useLoaderData} from 'react-router-dom'
-import axios from 'axios'
+import {useLoaderData} from 'react-router-dom';
+import axios from 'axios';
 
-const Settings = ({closeModal, username, email})=>{
+const Settings = ({closeModal, username, email, sounds, favs})=>{
     const user = useSelector(state => state.login.user);
+    
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];

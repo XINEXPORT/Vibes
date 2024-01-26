@@ -42,7 +42,7 @@ app.post('/api/sounds', upload, addAudio);
 =======
 app.post('/api/favs', postFavSounds);
 app.delete('/api/deletefav', deleteFav);
-app.delete('api/deletesoundscape', deleteSoundscape);
+app.delete('/api/deletesoundscape/:id', deleteSoundscape);
 app.post('/api/user/:id', upload, addAudio);
 >>>>>>> 7344577e614beea2997a2b9c85e7900e772e59d1
 

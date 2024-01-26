@@ -32,7 +32,6 @@ const SoundEditor = ({
 
     //setActive Index is what sound we're editing
     const [activeIndex, setActiveIndex] = useState(null);
-    console.log(soundOne)
 
     return (
         <section id="editor">

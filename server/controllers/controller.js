@@ -170,7 +170,8 @@ const deleteFav = async(req, res) => {
 }
 
 const deleteSoundscape = async(req, res) => {
-    const { soundscapeId } = req;
+    console.log(req)
+    const soundscapeId = req.params.id;
     await Soundscape.destroy({
         where: {
             soundscapeId: soundscapeId

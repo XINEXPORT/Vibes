@@ -27,16 +27,6 @@ const router = createBrowserRouter(
             <Route
                 path="/room"
                 element={<Room/>}
-                loader={async() => {
-                    const { data } = await axios.get(`/api/friends`);
-                    return {
-                        data: data
-                    };
-                }}
-            />
-            <Route
-                path="/settings"
-                element={<Settings/>}
             />
         </Route>
     )
