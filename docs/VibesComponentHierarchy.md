@@ -2,13 +2,18 @@
 - Login/Register Modal
 - MainRoom
     - RoomHeader
+        - MyFavoriteSoundscapesList
+            - DeleteBtn
+        - SaveSoundscape
+            - SaveSoundscapeName
+            - SaveSoundscapeBtn
         - SoundEditor
             - SoundAccordion
-            - FX
-            - SaveSoundscape
-        - Playback
+                - FX
+        - PlayAll
     - AccountNav
+        - Logout
         - Settings
-            - MySettings
             - UploadAudio
+        - FriendsList
     

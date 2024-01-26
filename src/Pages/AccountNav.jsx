@@ -9,7 +9,6 @@ import axios from 'axios';
 export default function AccountNav() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
-    console.log(user)
 
     const [openModal, setOpenModal] = useState(false)
 
@@ -40,6 +39,7 @@ export default function AccountNav() {
     return (
         <main className="account-nav">
             <div className="account">
+
                 <h2>{user ? user.username : 'Guest'}</h2>
                 <button 
                     className="settings-btn" 

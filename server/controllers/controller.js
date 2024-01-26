@@ -185,11 +185,12 @@ const addAudio = async (req,res) => {
     const sound = {
         sound: req.file,
         type: req.body.type
-    };
-    const audio = await MySound.create(info);
-    res.status(200). send(audio);
-    console.log(audio);
-};
+    }
+    const audio = await MySound.create(info)
+    res.status(200). send(audio)
+    console.log(audio)
+
+}
 
 //Audio Controller
 const storage = multer.diskStorage({

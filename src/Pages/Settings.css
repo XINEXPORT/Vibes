@@ -23,15 +23,11 @@
     font-weight: bold;
     padding: 5px;
 }
-.titleCloseBtn{
+.modalContainer-btn{
     display: flex;
-    justify-content: flex-end;
-}
-.titleCloseBtn button{
     background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
+    font-size: 20px;
+    justify-content: flex-end;
 }
 .modalContainer .username{
     display: flex;
