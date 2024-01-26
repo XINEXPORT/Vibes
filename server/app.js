@@ -38,7 +38,7 @@ app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 app.post('/api/favs', postFavSounds);
 app.delete('/api/deletefav', deleteFav);
-app.delete('api/deletesoundscape', deleteSoundscape);
+app.delete('/api/deletesoundscape/:id', deleteSoundscape);
 app.post('/api/user/:id', upload, addAudio);
 
 //Auth Endpoints

@@ -27,34 +27,32 @@ const RoomHeader = () =>{
     const audio3 = useRef(null);
     const audio4 = useRef(null);
 
-    console.log(audio1)
-    soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null
-    soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null
-    soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null
-    soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null
+    console.log(audio1, audio2, audio3, audio4);
+    soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
+    soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null;
+    soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null;
+    soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null;
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
             if (!isPlaying) {
+                setIsPlaying(!isPlaying);
                 audio1.current.play();
                 audio2.current.play();
                 audio3.current.play();
                 audio4.current.play();
-                setIsPlaying(!isPlaying);
             } else {
+                setIsPlaying(!isPlaying);
                 audio1.current.pause();
                 audio2.current.pause();
                 audio3.current.pause();
                 audio4.current.pause();
-                setIsPlaying(!isPlaying);
             };
         };
     };
 
     const setSoundscape = (ID) => {
-        console.log(favs, ID)
         const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
-        console.log(soundscape)
         if (soundscape.sounds) {
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {

@@ -1,17 +1,18 @@
-import './Settings.css'
-import {useState} from 'react'
+import './Settings.css';
+import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {useLoaderData} from 'react-router-dom'
-import axios from 'axios'
+import {useLoaderData} from 'react-router-dom';
+import axios from 'axios';
 
-const Settings = ({closeModal, username, email})=>{
+const Settings = ({closeModal, username, email, sounds, favs})=>{
     const user = useSelector(state => state.login.user);
+    
 
 
     return(
         <div className = "modalBackground">
             <div className = "modalContainer">
-                <button 
+                <button
                 onClick={()=>closeModal(false)}> X </button>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
