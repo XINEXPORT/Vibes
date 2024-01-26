@@ -9,7 +9,6 @@ import axios from 'axios';
 export default function AccountNav() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
-    console.log(user)
 
     const [openModal, setOpenModal] = useState(false)
 
