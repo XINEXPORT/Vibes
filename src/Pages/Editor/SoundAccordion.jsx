@@ -85,13 +85,13 @@ const SoundAccordion = ({
                     {sound.sounds.map((soundObj)=>{
 
                         return(
-                            <span className = "sound-details">
-                            <div onClick={() => {
-                                setSound(soundObj);
-                            }}>
-                                {soundObj.name}
-                            </div>
-                            <audio src={soundObj.sound} controls></audio>
+                            <span className="sound-details" key={soundObj.soundId}>
+                                <div onClick={() => {
+                                    setSound(soundObj);
+                                }}>
+                                    {soundObj.name}
+                                </div>
+                                <audio src={soundObj.sound} controls></audio>
                             </span>
                         )
                     })}

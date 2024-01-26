@@ -1,6 +1,7 @@
-import './Settings.css'
-import {useState} from 'react'
+import './Settings.css';
+import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+
 import { Container, Form, Button } from 'react-bootstrap'
 import {useLoaderData} from 'react-router-dom'
 import axios from 'axios'
@@ -12,7 +13,10 @@ import axios from 'axios'
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
 const Settings = ({openModal, closeModal, username, email})=>{
+
+
     const user = useSelector(state => state.login.user);
+    
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
