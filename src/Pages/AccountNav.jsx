@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom'
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData } from "react-router";
+import axios from 'axios';
 
 export default function AccountNav() {
     const dispatch = useDispatch();
@@ -11,6 +12,14 @@ export default function AccountNav() {
     if (!user) {
         dispatch({type: 'modal-on'});
     };
+
+    const logoutUser = async () => {
+        const { data } = await axios.post('/api/auth/logout');
+        if (data.success) {
+          dispatch({ type: 'logout' });
+          navigate("/")
+        }
+      };
 
     const data = useLoaderData();
     let myFriends = [];
@@ -26,9 +35,12 @@ export default function AccountNav() {
         <main className="account-nav">
             <div className="account">
                 <h2>{user ? user.username : 'Guest'}</h2>
-                <button className="settings-btn" onClick={() => {}}><BsFillGearFill className='cog' onClick={()=>{
-                
-                }}/></button>
+                <button 
+                    className="settings-btn" 
+                    onClick={() => {}}><BsFillGearFill 
+                    className='cog' onClick={()=>{}}/>
+                </button>
+                <button onClick={logoutUser}>Logout</button>
             </div>
             <div className="add-friend">
                 <button className="add-friend-btn" onClick={() => {}}>Add friend</button>
@@ -38,6 +50,7 @@ export default function AccountNav() {
                 <div className="friends">
                 {friendsList}
                 </div>
+                
             </div>
         </main>
     );
