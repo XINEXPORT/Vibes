@@ -35,7 +35,7 @@ app.get('/api/friends', getFriends);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 app.post('/api/favs', postFavSounds)
-app.post('/api/user/:id', upload, addAudio);
+app.post('/api/sounds', upload, addAudio);
 
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus);

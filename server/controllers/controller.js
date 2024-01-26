@@ -169,10 +169,12 @@ const postFavSounds = async(req, res) => {
 const addAudio = async (req,res) => {
 
     const sound = {
-        sound: req.file,
-        type: req.body.type
+        sound: req.file.path,
+        name: req.body.name,
+        type: req.body.type,
+        user: req.body.userId
     }
-    const audio = await MySound.create(info)
+    const audio = await MySound.create(sound)
     res.status(200). send(audio)
     console.log(audio)
 
