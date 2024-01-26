@@ -28,15 +28,6 @@ export default function AccountNav() {
         dispatch({type: 'modal-on'});
     };
 
-    let mySounds = <></>;
-    if (favs) {
-        mySounds = favs.map((soundscape) => {
-            return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
-        });
-    };
-
-    console.log(toDelete)
-
     let myFriends = [];
     if (data) {
         myFriends = [... data.myFriends];
@@ -66,24 +57,11 @@ export default function AccountNav() {
                     className='cog'/>
                 </button>
                 {modalState ?
-                <div className = "modalBackground">
-                    <div className = "modalContainer">
-                        <button onClick={() => setInfo()}> X </button>
-                        <label className = "title">User Settings</label>         
-                        <label className = "username">Username</label>
-                        <div className = "form">{user.username}</div>
-                        <label className = "email">Email</label>
-                        <div className = "form">{user.email}</div>
-                        <div>
-                            <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
-                                {mySounds}
-                            </select>
-                            <button onClick={async() => {
-                                await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                            }}>Delete</button>
-                        </div>
-                    </div>
-                </div>
+                <Settings
+                    favs={favs}
+                    toDelete={toDelete}
+                    setToDelete={setToDelete}
+                />
                 :
                 <></>
                 }

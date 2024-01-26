@@ -1,7 +1,6 @@
 import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
 import { Container, Form, Button } from 'react-bootstrap'
 import {useLoaderData} from 'react-router-dom'
 import axios from 'axios'
@@ -12,11 +11,8 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({openModal, closeModal, username, email})=>{
-
-
+const Settings = ({openModal, closeModal, username, email, favs, toDelete, setToDelete}) => {
     const user = useSelector(state => state.login.user);
-    
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -30,6 +26,14 @@ const Settings = ({openModal, closeModal, username, email})=>{
             let {data}=await axios.post(`/api/sounds`, formData)
       }
 
+    let mySounds = <></>;
+    if (favs) {
+        mySounds = favs.map((soundscape) => {
+            return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
+        });
+    };
+
+    console.log(toDelete)
     return(
         <div className = "modalBackground"> 
         <div>
@@ -38,10 +42,17 @@ const Settings = ({openModal, closeModal, username, email})=>{
                 onClick={()=>closeModal(false)}> X </div>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
-                    <div className = "form">{username}</div>
+                <div className = "form">{username}</div>
                 <label className = "email">Email</label>
-                    <div className = "form">{email}</div>
-             
+                <div className = "form">{email}</div>
+                <div>
+                    <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
+                        {mySounds}
+                    </select>
+                    <button onClick={async() => {
+                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                    }}>Delete</button>
+                </div>
               
                 <Form method = "PUT" encType = 'multipart/form-data' className = "upload" >
                 <Form.Group controlId="fileName" className="mb-3">
