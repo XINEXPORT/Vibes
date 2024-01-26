@@ -1,33 +1,53 @@
-#sttings-modal {
+.modalBackground{
+    width: 100vh;   
+    height: 100vh;  
     position: fixed;
-    min-width: 80%;
-    min-height: 80%;
-    top: 0;
-    right: 0;
-    background-color: rgba(32, 32, 32, 0.85);
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3;
 }
-#settings-modal h1 {
-    font-size: 40px;
-    letter-spacing: 2px;
-    font-weight: 700;
-}
-#settings-modal label {
-    font-size: 20px;
-}
-.info {
-    display:flex;
+.modalContainer{
+    width: 200px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: black 0px 5px 15px;
+    display: flex;
     flex-direction: column;
-    justify-content: center;    
-    align-items: center;
-    gap: 5px;
+    padding: 25px;
 }
-.upload {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+.modalContainer .title{
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 5px;
+}
+.titleCloseBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+.titleCloseBtn button{
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+.modalContainer .username{
+    display: flex;
     align-items: center;
-    gap: 5px;
+    text-decoration: underline;
+}
+.modalContainer .password{
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+}
+.modalContainer .email{
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+}
+.form{
+    padding: 5px;
 }
