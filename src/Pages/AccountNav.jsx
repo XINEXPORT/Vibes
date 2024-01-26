@@ -57,6 +57,7 @@ export default function AccountNav() {
     return (
         <main className="account-nav">
             <div className="account">
+
                 <h2>{user ? user.username : 'Guest'}</h2>
                 <button 
                     className="settings-btn" 

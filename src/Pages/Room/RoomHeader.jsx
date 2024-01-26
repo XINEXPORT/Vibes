@@ -19,6 +19,7 @@ const RoomHeader = () =>{
     const [soundFour, setSoundFour] = useState(null);
     const [fxFour, setFxFour] = useState(null);
     const [soundscapeName, setSoundscapeName] = useState(null);
+    const [deletesoundscape, deleteSoundScape] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -27,7 +28,6 @@ const RoomHeader = () =>{
     const audio3 = useRef(null);
     const audio4 = useRef(null);
 
-    console.log(audio1, audio2, audio3, audio4);
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
     soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null;
     soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null;
@@ -129,9 +129,12 @@ const RoomHeader = () =>{
     if (favs) {
         mySoundscapes = favs.map((soundscape) => {
             const { name, soundscapeId } = soundscape;
+            console.log(soundscape)
             return <option key={soundscapeId} value={soundscapeId}>{name}</option>
         });
+       
     };
+
 
     return(
         <div className="Header">
@@ -166,6 +169,7 @@ const RoomHeader = () =>{
                         <option value={null}>Soundscapes</option>
                         {mySoundscapes}
                     </select>
+                    <button name="soundscape-delete">Delete</button>
                 </div>
                 :
                 <></>
