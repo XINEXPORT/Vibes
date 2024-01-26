@@ -47,3 +47,9 @@
 .form{
     padding: 5px;
 }
+.upload-sounds{
+    text-decoration: underline;
+}
+.save-btn{
+    width: 60px;
+}

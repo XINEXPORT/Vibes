@@ -1,10 +1,20 @@
 import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {useLoaderData} from 'react-router-dom';
-import axios from 'axios';
 
-const Settings = ({closeModal, username, email, sounds, favs})=>{
+import { Container, Form, Button } from 'react-bootstrap'
+import {useLoaderData} from 'react-router-dom'
+import axios from 'axios'
+
+//how to display my created soundscapes
+//pass open modalstate
+//useEffect(()=>{}, [openModal])
+//return needs to show a fragment or the modal code
+//return(openModal ? <> : <div>{soundscapes}</div>)
+
+const Settings = ({openModal, closeModal, username, email})=>{
+
+
     const user = useSelector(state => state.login.user);
     
 
@@ -15,11 +25,14 @@ const Settings = ({closeModal, username, email, sounds, favs})=>{
 
       const handleSaveClick= async () => {
         const formData = new FormData()
-        formData.append('audio', audio)
+            formData.append('audio', audio)
+
+            let {data}=await axios.post(`/api/sounds`, formData)
       }
 
     return(
-        <div className = "modalBackground">
+        <div className = "modalBackground"> 
+        <div >
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
                 onClick={()=>closeModal(false)}> X </div>
@@ -28,19 +41,31 @@ const Settings = ({closeModal, username, email, sounds, favs})=>{
                     <div className = "form">{username}</div>
                 <label className = "email">Email</label>
                     <div className = "form">{email}</div>
-             </div>
-             <>  
-                {/* <Form method = "PUT" encType = 'multipart/form-data' >
+             
+              
+                <Form method = "PUT" encType = 'multipart/form-data' className = "upload" >
                 <Form.Group controlId="fileName" className="mb-3">
-                <Form.Label>Upload Sounds</Form.Label>
+                <Form.Label className = "upload-sounds">Upload Sounds</Form.Label>
+
+                <Form.Group controlId="name" className="mb-3">
+                    <Form.Label> Sound Name </Form.Label>
+                    <Form.Control
+                    type = "text"
+                    />
+                </Form.Group>
+
                 <Form.Control 
                     type="file" 
                     name= "audio" 
                     onChange= {handleAudioUpload}
                  />
                 </Form.Group>
-                </Form> */}
-            </>
+                </Form>
+
+                <button className = "save-btn" onClick={handleSaveClick}>Save</button>
+
+            </div>
+            </div>
         </div>
     )
 }

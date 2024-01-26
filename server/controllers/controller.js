@@ -171,7 +171,9 @@ const deleteFav = async(req, res) => {
 
 const deleteSoundscape = async(req, res) => {
     console.log(req)
-    const soundscapeId = req.params.id;
+
+    const { soundscapeId } = req.params.id;
+
     await Soundscape.destroy({
         where: {
             soundscapeId: soundscapeId
@@ -184,10 +186,10 @@ const deleteSoundscape = async(req, res) => {
 const addAudio = async (req,res) => {
 
     const sound = {
-        sound: req.file,
+        sound: req.file.path,
         type: req.body.type
     }
-    const audio = await MySound.create(info)
+    const audio = await MySound.create(sound)
     res.status(200). send(audio)
     console.log(audio)
 
