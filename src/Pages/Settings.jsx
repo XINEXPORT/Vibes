@@ -11,9 +11,8 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({openModal, modalState, username, email, favs, toDelete, setToDelete}) => {
-    const user = useSelector((state) => state.login.user);
-    // const [audio, setAudio] = useSelector(null);
+const Settings = ({openModal, closeModal, username, email, favs, toDelete, setToDelete}) => {
+    const user = useSelector(state => state.login.user);
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -37,10 +36,10 @@ const Settings = ({openModal, modalState, username, email, favs, toDelete, setTo
     console.log(toDelete)
     return(
         <div className = "modalBackground"> 
-        <div>
+        <div >
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
-                onClick={()=>modalState(false)}> X </div>
+                onClick={()=>closeModal(false)}> X </div>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
                 <div className = "form">{username}</div>
@@ -60,7 +59,7 @@ const Settings = ({openModal, modalState, username, email, favs, toDelete, setTo
                 <Form.Label className = "upload-sounds">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
-                    <Form.Label > Sound Name </Form.Label>
+                    <Form.Label> Sound Name </Form.Label>
                     <Form.Control
                     type = "text"
                     />
