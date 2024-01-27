@@ -11,8 +11,9 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({openModal, closeModal, username, email, favs, toDelete, setToDelete}) => {
-    const user = useSelector(state => state.login.user);
+const Settings = ({openModal, modalState, username, email, favs, toDelete, setToDelete}) => {
+    const user = useSelector((state) => state.login.user);
+    // const [audio, setAudio] = useSelector(null);
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -39,7 +40,7 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
         <div>
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
-                onClick={()=>closeModal(false)}> X </div>
+                onClick={()=>modalState(false)}> X </div>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
                 <div className = "form">{username}</div>
