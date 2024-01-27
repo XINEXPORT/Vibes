@@ -61,6 +61,8 @@ export default function AccountNav() {
                     favs={favs}
                     toDelete={toDelete}
                     setToDelete={setToDelete}
+                    username = {user.username}
+                    email = {user.email}
                 />
                 :
                 <></>
