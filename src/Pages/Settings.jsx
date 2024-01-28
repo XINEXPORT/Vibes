@@ -33,7 +33,6 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
         });
     };
 
-    console.log(toDelete)
     return(
         <div className = "modalBackground"> 
         <div >

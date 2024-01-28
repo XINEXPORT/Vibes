@@ -11,7 +11,6 @@ function App() {
     <div>
       <AccountNav/>
       <LoginPage/>
-      <Room/>
       <Outlet/>
     </div>
   )

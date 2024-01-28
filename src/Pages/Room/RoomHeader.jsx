@@ -1,4 +1,5 @@
 import './RoomHeader.css';
+import Room from './Room.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef } from 'react';
@@ -204,6 +205,7 @@ const RoomHeader = () =>{
                 <audio ref={audio3} src={soundThree ? soundThree.sound : null} loop />
                 <audio ref={audio4} src={soundFour ? soundFour.sound : null} loop />
             </div>
+            <Room />
         </div>
     )
 }

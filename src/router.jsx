@@ -24,10 +24,6 @@ const router = createBrowserRouter(
                     };
                 }}
             />
-            <Route
-                path="/room"
-                element={<Room/>}
-            />
         </Route>
     )
 );
