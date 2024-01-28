@@ -2,6 +2,7 @@ import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {  Form } from 'react-bootstrap'
+
 import axios from 'axios'
 
 //how to display my created soundscapes
@@ -10,8 +11,9 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({openModal, closeModal, username, email, favs, toDelete, setToDelete}) => {
+const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState}) => {
     const user = useSelector(state => state.login.user);
+    console.log(user);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
@@ -23,7 +25,7 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
 
       const handleSaveClick = async () => {
         const formData = new FormData()
-
+        formData.append('userId', user.userId)
         formData.append('audio', audio)
         formData.append('name', name)
         formData.append('type', type)
@@ -49,7 +51,8 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
         <div >
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
-                onClick={()=>closeModal(false)}> X </div>
+                onClick={()=>modalState(false)}> X 
+                </div>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
                 <div className = "form">{username}</div>
@@ -78,12 +81,13 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
                 </Form.Group>
 
                 <Form.Group controlId="type" className="mb-3">
-                    <Form.Label> Sound Type </Form.Label>
+                   
                     <select class="form-control" 
                             id="exampleFormControlSelect1"
                             value = {type}
                             onChange={(e)=>setType(e.target.value)}
                             >
+                        <option>Select Sound Type</option>
                         <option>Environment</option>
                         <option>Ambient</option>
                         <option>Music</option>

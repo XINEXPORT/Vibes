@@ -17,6 +17,7 @@ export default function loginReducer(state = initialState, action){
         case 'modal-on':
             return {...state, modal:'flex'};
         case 'modal-off':
+            console.log('Modal off action dispatched');
             return {...state, modal:'none'};
         default:
             return state;
