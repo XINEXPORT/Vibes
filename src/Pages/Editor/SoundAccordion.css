@@ -63,11 +63,5 @@
     overflow: hidden;
 }
 .accordion-drop.show-details{
-    max-height: 500px;
+    max-height: 1000px;
 }
-/* .hide sound-details{
-    opacity:0;
-}
-.show sound-details{
-    opacity: 1;
-} */

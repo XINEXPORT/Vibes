@@ -188,6 +188,7 @@ const addAudio = async (req,res) => {
 
     const sound = {
         sound: req.file.path,
+        userId:req.body.userId,
         name:req.body.name,
         type: req.body.type
     }
@@ -209,7 +210,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5000000 },
+    limits: { fileSize: 10 * 1024 * 1024},
     fileFilter: (req, file, cb) => {
         const fileType = /\.(mp3|wav|aac|ogg|flac)$/i;
         const extname = path.extname(file.originalname).toLowerCase();
