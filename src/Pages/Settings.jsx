@@ -1,8 +1,7 @@
 import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Form, Button } from 'react-bootstrap'
-import {useLoaderData} from 'react-router-dom'
+import {  Form } from 'react-bootstrap'
 import axios from 'axios'
 
 //how to display my created soundscapes
@@ -13,17 +12,28 @@ import axios from 'axios'
 
 const Settings = ({openModal, closeModal, username, email, favs, toDelete, setToDelete}) => {
     const user = useSelector(state => state.login.user);
+    const [audio, setAudio] = useState(null);
+    const [type, setType] = useState(null);
+    const [name, setName] = useState(null);
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
         setAudio(file);
       }
 
-      const handleSaveClick= async () => {
+      const handleSaveClick = async () => {
         const formData = new FormData()
-            formData.append('audio', audio)
 
-            let {data}=await axios.post(`/api/sounds`, formData)
+        formData.append('audio', audio)
+        formData.append('name', name)
+        formData.append('type', type)
+    
+        try {
+          let { data } = await axios.post(`/api/sounds`, formData)
+          console.log(data);
+        } catch (error) {
+          console.error("Error uploading audio:", error);
+        }
       }
 
     let mySounds = <></>;
@@ -54,7 +64,7 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
                     }}>Delete</button>
                 </div>
               
-                <Form method = "PUT" encType = 'multipart/form-data' className = "upload" >
+                <Form method = "POST" encType = 'multipart/form-data' className = "upload" >
                 <Form.Group controlId="fileName" className="mb-3">
                 <Form.Label className = "upload-sounds">Upload Sounds</Form.Label>
 
@@ -62,7 +72,22 @@ const Settings = ({openModal, closeModal, username, email, favs, toDelete, setTo
                     <Form.Label> Sound Name </Form.Label>
                     <Form.Control
                     type = "text"
+                    value = {name}
+                    onChange = {(e) => setName(e.target.value)}
                     />
+                </Form.Group>
+
+                <Form.Group controlId="type" className="mb-3">
+                    <Form.Label> Sound Type </Form.Label>
+                    <select class="form-control" 
+                            id="exampleFormControlSelect1"
+                            value = {type}
+                            onChange={(e)=>setType(e.target.value)}
+                            >
+                        <option>Environment</option>
+                        <option>Ambient</option>
+                        <option>Music</option>
+                    </select>
                 </Form.Group>
 
                 <Form.Control 

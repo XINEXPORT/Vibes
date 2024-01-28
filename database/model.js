@@ -140,6 +140,9 @@ MySound.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        name: {
+            type: DataTypes.STRING(25)
+        },
         type: {
             type: DataTypes.STRING(25)
         }
