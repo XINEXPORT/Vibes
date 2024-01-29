@@ -19,7 +19,8 @@
     align-items: center;
     justify-content: flex-start;
     transition: .5s;
-    
+    max-height: 490px;
+    overflow-y: scroll;
 }
 .hide .sound-accordion{
     height: 0;
@@ -51,7 +52,6 @@
 }
 .accordion-drop{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;    
     border-left: 5px solid black;
@@ -64,5 +64,5 @@
     overflow: hidden;
 }
 .accordion-drop.show-details{
-    max-height: 500px;
+    background-color: #AEC6CF;
 }
