@@ -220,8 +220,8 @@ FriendRequest.init(
 User.belongsToMany(User, {as: 'me', through: FriendsList, foreignKey: 'userId'});
 User.belongsToMany(User, {as: 'friend', through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
 
-User.belongsToMany(User, {as: 'requester', through: FriendRequest, foreignKey: 'userId'});
-User.belongsToMany(User, {as: 'requestee', through: FriendRequest, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
+User.belongsToMany(User, {as: 'requester', through: FriendRequest, foreignKey: 'requesterId'});
+User.belongsToMany(User, {as: 'requestee', through: FriendRequest, foreignKey: 'requesteeId', onDelete: 'CASCADE', hooks: true});
 
 User.hasMany(Soundscape, {foreignKey: 'userId'});
 Soundscape.belongsTo(User, {foreignKey: 'userId'});
@@ -245,6 +245,7 @@ export {
     db,
     User,
     FriendsList,
+    FriendRequest,
     Soundscape,
     SoundscapeSound,
     MySound,

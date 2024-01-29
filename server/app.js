@@ -11,6 +11,8 @@ import {
 import { 
     getFriends,
     findFriends,
+    requestFriend,
+    respondToRequest,
     getUsers,
     upload,
     addAudio,
@@ -36,6 +38,8 @@ ViteExpress.config({ printViteDevServerHost: true });
 //Endpoints:
 app.get('/api/friends', getFriends);
 app.get('/api/findfriends', findFriends);
+app.post('/api/request', requestFriend);
+app.post('/api/respond', respondToRequest);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 
