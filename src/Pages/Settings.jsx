@@ -11,7 +11,7 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState}) => {
+const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState, setModalState}) => {
     const user = useSelector(state => state.login.user);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
@@ -50,7 +50,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
         <div >
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
-                onClick={()=>modalState(false)}> X 
+                onClick={()=>setModalState(false)}> X 
                 </div>
                 <label className = "title">User Settings</label>         
                 <label className = "username">Username</label>
