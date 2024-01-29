@@ -11,11 +11,23 @@ import RoomHeader from './Pages/Room/RoomHeader.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<App/>}>
+        <Route
+            path="/"
+            element={<App/>}
+            loader={async() => {
+                const { data: { sounds, favs } } = await axios.get('/api/sounds');
+                const { myFriends } = await axios.get('/api/friends');
+                return {
+                    mySounds: sounds,
+                    myFavs: favs,
+                    myFriends: myFriends
+                };
+            }}
+        >
             <Route
                 index
                 element={<RoomHeader />}
-                loader={async()=>{
+                loader={async() => {
                     const {data} = await axios.get(`/api/sounds`);
                     console.log(data.favs)
                     return {

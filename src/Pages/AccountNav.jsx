@@ -7,14 +7,14 @@ import { useLoaderData } from "react-router";
 import axios from 'axios';
 
 export default function AccountNav() {
-    let data;
+    const { mySounds, myFavs, myFriends } = useLoaderData();
     const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
-    const [sounds, setSounds] = useState();
-    const [favs, setFavs] = useState();
-    const [toDelete, setToDelete] = useState();
+    const [sounds, setSounds] = useState(mySounds ? mySounds : null);
+    const [favs, setFavs] = useState(myFavs ? myFavs : null);
+    const [toDelete, setToDelete] = useState(myFavs[0] ? myFavs[0].soundscapeId : null);
 
     const setInfo = async() => {
         const { data: { sounds, favs } } = await axios.get('/api/sounds');
@@ -28,12 +28,12 @@ export default function AccountNav() {
         dispatch({type: 'modal-on'});
     };
 
-    let myFriends = [];
-    if (data) {
-        myFriends = [... data.myFriends];
+    let friends = [];
+    if (myFriends) {
+        friends = [... myFriends];
     };
 
-    let friendsList = myFriends.map((friend) => {
+    let friendsList = friends.map((friend) => {
         return <h4>{friend.username}</h4>
     });
 
@@ -78,7 +78,7 @@ export default function AccountNav() {
                 <button className="add-friend-btn" onClick={() => {}}>Add friend</button>
             </div>
             <div className='friends-list'>
-                <h4>Friends - {myFriends.length}</h4>
+                <h4>Friends - {friends.length}</h4>
                 <div className="friends">
                 {friendsList}
                 </div>
