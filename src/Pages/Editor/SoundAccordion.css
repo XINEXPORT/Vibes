@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: flex-start;
     transition: .5s;
+    
 }
 .hide .sound-accordion{
     height: 0;

@@ -13,7 +13,6 @@ import axios from 'axios'
 
 const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState}) => {
     const user = useSelector(state => state.login.user);
-    console.log(user);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
@@ -37,6 +36,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
           console.error("Error uploading audio:", error);
         }
       }
+
 
     let mySounds = <></>;
     if (favs) {
