@@ -30,6 +30,19 @@ async function getFriends(req, res) {
     };
 };
 
+async function findFriends(req, res) {
+    if (req.session.user) {
+        const userSearch = await User.findAll({
+            attributes: ['username', 'userId']
+        });
+        res.status(200).json({
+            userSearch: userSearch
+        });
+    } else {
+        res.status(400).json({success: false});
+    };
+};
+
 //Fetch the Logged In User details
 const getUsers = async (req,res) => {
     if(req.session.user){
@@ -226,6 +239,7 @@ const upload = multer({
 
 export {
     getFriends,
+    findFriends,
     getUsers,
     upload,
     addAudio,
