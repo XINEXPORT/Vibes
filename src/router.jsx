@@ -5,7 +5,7 @@ import {
     Route
 } from 'react-router-dom';
 import App from './App.jsx';
-import Room from './Pages/Room/Room.jsx';
+import Room from './Pages/Room/RoomBackground.jsx';
 import Settings from './Pages/Settings.jsx';
 import RoomHeader from './Pages/Room/RoomHeader.jsx';
 
@@ -23,10 +23,6 @@ const router = createBrowserRouter(
                         favs: data.favs
                     };
                 }}
-            />
-            <Route
-                path="/room"
-                element={<Room/>}
             />
         </Route>
     )
