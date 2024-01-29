@@ -7,7 +7,6 @@ import LoginPage from './Login/LoginPage.jsx';
 
 
 function App() {
-  console.log('hit')
   return (
     <div>
       <AccountNav/>
