@@ -39,7 +39,7 @@ async function findFriends(req, res) {
             userSearch: userSearch
         });
     } else {
-        res.status(400).json({success: false});
+        res.status(200).json({success: false});
     };
 };
 
