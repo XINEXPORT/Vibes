@@ -28,7 +28,7 @@ app.use('../public/audio', express.static('.public/audio'));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(session({secret: 'this is a secret', saveUniinitialized: true, resave:false}));
+app.use(session({secret: 'this is a secret', saveUninitialized: true, resave:false}));
 
 ViteExpress.config({ printViteDevServerHost: true });
 

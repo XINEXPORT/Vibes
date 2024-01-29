@@ -14,15 +14,7 @@ export default function AccountNav() {
     const [modalState, setModalState] = useState(false);
     const [sounds, setSounds] = useState(mySounds ? mySounds : null);
     const [favs, setFavs] = useState(myFavs ? myFavs : null);
-    const [toDelete, setToDelete] = useState(myFavs[0] ? myFavs[0].soundscapeId : null);
-
-    const setInfo = async() => {
-        const { data: { sounds, favs } } = await axios.get('/api/sounds');
-        setSounds(sounds);
-        setFavs(favs);
-        setToDelete(favs[0].soundscapeId);
-        setModalState(!modalState);
-    };
+    const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -54,7 +46,7 @@ export default function AccountNav() {
                 <h2>{user ? user.username : 'Guest'}</h2>
                 <button 
                     className="settings-btn" 
-                    onClick={() => setInfo()}>
+                    onClick={() => setModalState(!modalState)}>
                     <BsFillGearFill 
                     className='cog'/>
                 </button>
