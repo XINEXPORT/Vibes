@@ -39,7 +39,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
 
     let mySounds = <></>;
-    if (favs) {
+    if (favs[0]) {
         mySounds = favs.map((soundscape) => {
             return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
         });
@@ -81,7 +81,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
                 <Form.Group controlId="type" className="mb-3">
                    
-                    <select class="form-control" 
+                    <select className="form-control" 
                             id="exampleFormControlSelect1"
                             value = {type}
                             onChange={(e)=>setType(e.target.value)}
