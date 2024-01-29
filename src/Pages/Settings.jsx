@@ -45,7 +45,6 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
         });
     };
 
-    console.log(toDelete)
     return(
         <div className = "modalBackground"> 
         <div >

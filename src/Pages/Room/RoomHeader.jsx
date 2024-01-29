@@ -1,4 +1,5 @@
 import './RoomHeader.css';
+import RoomBackground from './RoomBackground.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef } from 'react';
@@ -147,63 +148,66 @@ const RoomHeader = () =>{
 
     return(
         <div className="Header">
-            <div>
-            <SoundEditor 
-            sounds={sounds}
-            selectedSounds={selectedSounds}
-            setSelectedSounds={setSelectedSounds}
-            soundOne={soundOne}
-            fxOne={fxOne}
-            soundTwo={soundTwo}
-            fxTwo={fxTwo}
-            soundThree={soundThree}
-            fxThree={fxThree}
-            soundFour={soundFour}
-            fxFour={fxFour}
-            setSoundOne={setSoundOne}
-            setFxOne={setFxOne}
-            setSoundTwo={setSoundTwo}
-            setFxTwo={setFxTwo}
-            setSoundThree={setSoundThree}
-            setFxThree={setFxThree}
-            setSoundFour={setSoundFour}
-            setFxFour={setFxFour}
-            />
-            </div>
-            <div className='select/save-div'>
-                {favs ?
-                <div className="fav-soundscape">
-                    <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
-                    <select name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
-                        <option value={null}>Soundscapes</option>
-                        {mySoundscapes}
-                    </select>
-                    <button 
-                    name="soundscape-delete"
-                    onClick={(e)=> handleDeleteSoundscape(soundscapeId)}>
-                        Delete</button>
+            <div className='header-wrapper'>
+                <div>
+                <SoundEditor 
+                sounds={sounds}
+                selectedSounds={selectedSounds}
+                setSelectedSounds={setSelectedSounds}
+                soundOne={soundOne}
+                fxOne={fxOne}
+                soundTwo={soundTwo}
+                fxTwo={fxTwo}
+                soundThree={soundThree}
+                fxThree={fxThree}
+                soundFour={soundFour}
+                fxFour={fxFour}
+                setSoundOne={setSoundOne}
+                setFxOne={setFxOne}
+                setSoundTwo={setSoundTwo}
+                setFxTwo={setFxTwo}
+                setSoundThree={setSoundThree}
+                setFxThree={setFxThree}
+                setSoundFour={setSoundFour}
+                setFxFour={setFxFour}
+                />
                 </div>
-                :
-                <></>
-                }
-                <div className='save-soundscape-div'>
-                    <input type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
-                    <select name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
-                        <option value={true}>Private</option>
-                        <option value={false}>Public</option>
-                    </select>
-                    <button className='save-soundscape-btn' onClick={() => saveSounds()}>Save Soundscape</button>
+                <div className='select/save-div'>
+                    {favs ?
+                    <div className="fav-soundscape">
+                        <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
+                        <select name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
+                            <option value={null}>Soundscapes</option>
+                            {mySoundscapes}
+                        </select>
+                        <button 
+                        name="soundscape-delete"
+                        onClick={(e)=> handleDeleteSoundscape(soundscapeId)}>
+                            Delete</button>
+                    </div>
+                    :
+                    <></>
+                    }
+                    <div className='save-soundscape-div'>
+                        <input type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
+                        <select name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
+                            <option value={true}>Private</option>
+                            <option value={false}>Public</option>
+                        </select>
+                        <button className='save-soundscape-btn' onClick={() => saveSounds()}>Save Soundscape</button>
+                    </div>
+                </div>
+                <div className="play">
+                    <button id="play-btn" onClick={() => playPause()}><CiPlay1 /></button>
+                </div>
+                <div>
+                    <audio ref={audio1} src={soundOne ? soundOne.sound : null} loop />
+                    <audio ref={audio2} src={soundTwo ? soundTwo.sound : null} loop />
+                    <audio ref={audio3} src={soundThree ? soundThree.sound : null} loop />
+                    <audio ref={audio4} src={soundFour ? soundFour.sound : null} loop />
                 </div>
             </div>
-            <div className="play">
-                <button id="play-btn" onClick={() => playPause()}><CiPlay1 /></button>
-            </div>
-            <div>
-                <audio ref={audio1} src={soundOne ? soundOne.sound : null} loop />
-                <audio ref={audio2} src={soundTwo ? soundTwo.sound : null} loop />
-                <audio ref={audio3} src={soundThree ? soundThree.sound : null} loop />
-                <audio ref={audio4} src={soundFour ? soundFour.sound : null} loop />
-            </div>
+            <RoomBackground />
         </div>
     )
 }
