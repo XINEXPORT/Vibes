@@ -194,7 +194,9 @@ const RoomHeader = () =>{
                             <option value={true}>Private</option>
                             <option value={false}>Public</option>
                         </select>
-                        <button className='save-soundscape-btn' onClick={() => saveSounds()}>Save Soundscape</button>
+                        <button className='save-soundscape-btn' onClick={() => {
+                            saveSounds();
+                        }}>Save Soundscape</button>
                     </div>
                 </div>
                 <div className="play">

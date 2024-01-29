@@ -9,7 +9,8 @@ import {
     register,
 } from './controllers/authController.js';
 import { 
-    getFriends, 
+    getFriends,
+    findFriends,
     getUsers,
     upload,
     addAudio,
@@ -34,6 +35,7 @@ ViteExpress.config({ printViteDevServerHost: true });
 
 //Endpoints:
 app.get('/api/friends', getFriends);
+app.get('/api/findfriends', findFriends);
 app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 
