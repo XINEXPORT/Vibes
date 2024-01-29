@@ -26,7 +26,7 @@ async function getFriends(req, res) {
             myFriends: myFriends[0].friend
         });
     } else {
-        res.status(401).json({success: false});
+        res.status(201);
     };
 };
 
