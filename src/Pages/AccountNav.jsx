@@ -13,11 +13,12 @@ export default function AccountNav() {
     const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
+    const [friendRequestModalState, setFriendRequestModalState] = useState(false);
     const [sounds, setSounds] = useState(mySounds ? mySounds : null);
     const [favs, setFavs] = useState(myFavs ? myFavs : null);
     const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
-    const [input, setInput] = useState();
-    const[friendReqList, setFriendReqList] = useState([]);
+    const [searchInput, setSearchInput] = useState();
+    const [friendReqList, setFriendReqList] = useState([]);
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -72,7 +73,22 @@ export default function AccountNav() {
             </div>
             <div className="add-friend">
                 <button className="add-friend-btn" 
-                        onClick={() => {}}>Add friends</button>
+                        onClick={() => setFriendRequestModalState(!friendRequestModalState)}>
+                        Add friends
+                </button>
+
+                {friendRequestModalState ?
+                <AddFriendModal
+                    userId = {user.userId}
+                    username = {user.username}
+                    searchInput  = {searchInput}
+                    setSearchInput = {setSearchInput}
+                    friendReqList = {friendReqList}
+                    setFriendReqList = {setFriendReqList}
+                    />
+                    :
+                    <></>
+                }
             </div>
 
             <div className = 'friend-requests'></div>

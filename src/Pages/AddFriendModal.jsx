@@ -1,12 +1,17 @@
 import './AddFriendModal.css'
 
-const AddFriendModal = ({input, setInput, friendReqList, setFriendReqList})=>{
+const AddFriendModal = ({searchInput, setSearchInput, friendReqList, setFriendReqList, userId, username})=>{
 
 
     return(
         <div>
         <label>Search Friends</label>
-        <input>type friend name</input>
+        <input
+        placeholder="type friend name"
+        onChange = {()=>{}}
+        ></input>
+        <button>Send Friend Request</button>
+        <button>Cancel</button>
         </div>
     )
 }
