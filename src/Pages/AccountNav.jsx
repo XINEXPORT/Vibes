@@ -68,6 +68,7 @@ export default function AccountNav() {
                     username = {user.username}
                     email = {user.email}
                     modalState = {modalState}
+                    setModalState = {setModalState}
                 />
                 :
                 <></>
