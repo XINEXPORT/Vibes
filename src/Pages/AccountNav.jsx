@@ -45,8 +45,10 @@ export default function AccountNav() {
         };
     };
 
+
     return (
         <main className="account-nav">
+            
             <div className="account">
 
                 <h2>{user ? user.username : 'Guest'}</h2>
@@ -56,11 +58,16 @@ export default function AccountNav() {
                     <BsFillGearFill 
                     className='cog'/>
                 </button>
+                
                 {modalState ?
                 <Settings
                     favs={favs}
                     toDelete={toDelete}
                     setToDelete={setToDelete}
+                    userId = {user.userId}
+                    username = {user.username}
+                    email = {user.email}
+                    modalState = {modalState}
                 />
                 :
                 <></>

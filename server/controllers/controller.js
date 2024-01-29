@@ -141,7 +141,8 @@ const postFavSounds = async(req, res) => {
                 await SoundscapeSound.create({
                     soundscapeId: newSoundscape.soundscapeId,
                     soundId: sound.sound.soundId,
-                    volume: sound.fx.volume
+                    // volume: sound.fx.volume
+                    //REMOVED DUE TO SERVER CRASHING
                 });
             } else {
                 return;
@@ -187,9 +188,11 @@ const addAudio = async (req,res) => {
 
     const sound = {
         sound: req.file.path,
+        userId:req.body.userId,
+        name:req.body.name,
         type: req.body.type
     }
-    const audio = await MySound.create(sound)
+    const audio = await Sound.create(sound)
     res.status(200). send(audio)
     console.log(audio)
 
@@ -207,18 +210,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: {fileSize: '5000000'},
-    fileFilter: (req, file, cb) =>{
-        const fileType = /mp3|wav|aac|ogg|flac|/
-        const mimetype =fileType.test(file.mimetype)
-        const extname = fileType.test(path.extname(file.originalname))
+    limits: { fileSize: 10 * 1024 * 1024},
+    fileFilter: (req, file, cb) => {
+        const fileType = /\.(mp3|wav|aac|ogg|flac)$/i;
+        const extname = path.extname(file.originalname).toLowerCase();
 
-        if(mimetype && extname){
-            return cb(null,true)
+        if (fileType.test(extname)) {
+            return cb(null, true);
         }
-        cb ('Provide the proper file format to upload. MP3, WAV, AACC, OGG, and FLAC are supported.')
+
+        console.log('File rejected:', file.mimetype, extname);
+        cb(new Error('Provide the proper file format to upload. MP3, WAV, AAC, OGG, and FLAC are supported.'), false);
     }
-    }).array('sound', 3);
+}).single('audio');
 
 export {
     getFriends,

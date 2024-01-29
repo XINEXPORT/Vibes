@@ -43,8 +43,6 @@ app.delete('/api/deletesoundscape/:id', deleteSoundscape);
 app.post('/api/sounds', upload, addAudio);
 
 
-
-
 //Auth Endpoints
 app.get('/api/auth/status', checkStatus);
 app.post('/api/auth/login', login);
