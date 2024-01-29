@@ -16,7 +16,7 @@ const router = createBrowserRouter(
             element={<App/>}
             loader={async() => {
                 const { data: { sounds, favs } } = await axios.get('/api/sounds');
-                const { myFriends } = await axios.get('/api/friends');
+                const { data: { myFriends } } = await axios.get('/api/friends');
                 return {
                     mySounds: sounds,
                     myFavs: favs,
@@ -29,7 +29,6 @@ const router = createBrowserRouter(
                 element={<RoomHeader />}
                 loader={async() => {
                     const {data} = await axios.get(`/api/sounds`);
-                    console.log(data.favs)
                     return {
                         sounds: data.sounds,
                         favs: data.favs
