@@ -4,12 +4,13 @@ import AddFriendModal from './AddFriendModal.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import axios from 'axios';
 
 export default function AccountNav() {
     const { mySounds, myFavs, myFriends, userSearch } = useLoaderData();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
@@ -69,7 +70,10 @@ export default function AccountNav() {
                 :
                 <></>
                 }
-                <button onClick={logoutUser}>Logout</button>
+                <button onClick={() => {
+                    logoutUser();
+                    navigate('/');
+                }}>Logout</button>
             </div>
             <div className="add-friend">
                 <button className="add-friend-btn" 
