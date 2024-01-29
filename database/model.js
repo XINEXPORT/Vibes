@@ -195,9 +195,33 @@ FriendsList.init(
     }
 );
 
+class FriendRequest extends Model {
+    [util.inspect.custom](){
+        return this.toJSON();
+    };
+};
+
+FriendRequest.init(
+    {
+        friendRequestId: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false
+        }
+    },
+    {
+        modelName: 'friendRequest',
+        sequelize: db
+    }
+);
+
 // Table Relations:
 User.belongsToMany(User, {as: 'me', through: FriendsList, foreignKey: 'userId'});
 User.belongsToMany(User, {as: 'friend', through: FriendsList, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
+
+User.belongsToMany(User, {as: 'requester', through: FriendRequest, foreignKey: 'userId'});
+User.belongsToMany(User, {as: 'requestee', through: FriendRequest, foreignKey: 'friendId', onDelete: 'CASCADE', hooks: true});
 
 User.hasMany(Soundscape, {foreignKey: 'userId'});
 Soundscape.belongsTo(User, {foreignKey: 'userId'});

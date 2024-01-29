@@ -8,7 +8,7 @@ import { useLoaderData } from "react-router";
 import axios from 'axios';
 
 export default function AccountNav() {
-    const { mySounds, myFavs, myFriends } = useLoaderData();
+    const { mySounds, myFavs, myFriends, userSearch } = useLoaderData();
     const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
 

@@ -17,10 +17,12 @@ const router = createBrowserRouter(
             loader={async() => {
                 const { data: { sounds, favs } } = await axios.get('/api/sounds');
                 const { data: { myFriends } } = await axios.get('/api/friends');
+                const { data: { userSearch } } = await axios.get('/api/findfriends');
                 return {
                     mySounds: sounds,
                     myFavs: favs,
-                    myFriends: myFriends
+                    myFriends: myFriends,
+                    userSearch: userSearch
                 };
             }}
         >
