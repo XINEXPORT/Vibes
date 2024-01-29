@@ -1,6 +1,7 @@
 import {
     User,
     FriendsList,
+    FriendRequest,
     Soundscape,
     SoundscapeSound,
     Sound,
@@ -43,8 +44,52 @@ async function findFriends(req, res) {
     };
 };
 
+async function requestFriend(req, res) {
+    if (req.session.user) {
+        await FriendRequest.create({
+            requesterId: req.session.user.userId,
+            requesteeId: req.body.userId
+        });
+        res.status(200).json({success: true});
+    } else {
+        res.status(200).json({success: false});
+    };
+};
+
+async function respondToRequest(req, res) {
+    const { accept, requesterId } = req.body;
+    const { userId } = req.session.user;
+    if (accept) {
+        await FriendRequest.destroy({
+            where: {
+                requesterId: requesterId,
+                requesteeId: userId
+            }
+        });
+        await FriendsList.create({
+            userId: userId,
+            friendId: requesterId
+        });
+        await FriendsList.create({
+            userId: requesterId,
+            friendId: userId
+        });
+        res.status(200).json({success: true});
+    } else if (!accept) {
+        await FriendRequest.destroy({
+            where: {
+                requesterId: requesterId,
+                requesteeId: userId
+            }
+        });
+        res.status(200).json({success: true});
+    } else {
+        res.status(200).json({success: false});
+    };
+};
+
 //Fetch the Logged In User details
-const getUsers = async (req,res) => {
+const getUsers = async (req, res) => {
     if(req.session.user){
         let users = await User.findOne(
             {where:{
@@ -240,6 +285,8 @@ const upload = multer({
 export {
     getFriends,
     findFriends,
+    requestFriend,
+    respondToRequest,
     getUsers,
     upload,
     addAudio,
