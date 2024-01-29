@@ -14,7 +14,7 @@ export default function AccountNav() {
     const [modalState, setModalState] = useState(false);
     const [sounds, setSounds] = useState(mySounds ? mySounds : null);
     const [favs, setFavs] = useState(myFavs ? myFavs : null);
-    const [toDelete, setToDelete] = useState(myFavs[0] ? myFavs[0].soundscapeId : null);
+    const [toDelete, setToDelete] = useState(myFavs ? myFavs[0].soundscapeId : null);
 
     const setInfo = async() => {
         const { data: { sounds, favs } } = await axios.get('/api/sounds');
