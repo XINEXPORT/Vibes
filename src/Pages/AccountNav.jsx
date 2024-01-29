@@ -85,6 +85,7 @@ export default function AccountNav() {
                     setSearchInput = {setSearchInput}
                     friendReqList = {friendReqList}
                     setFriendReqList = {setFriendReqList}
+                    userSearch = {userSearch}
                     />
                     :
                     <></>

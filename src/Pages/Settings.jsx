@@ -2,7 +2,6 @@ import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {  Form } from 'react-bootstrap'
-
 import axios from 'axios'
 
 //how to display my created soundscapes
@@ -47,7 +46,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
     return(
         <div className = "modalBackground"> 
-        <div >
+        <div>
             <div className = "modalContainer">
                 <div className = "modalContainer-btn"
                 onClick={()=>setModalState(false)}> X 
