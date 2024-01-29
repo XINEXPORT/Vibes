@@ -48,7 +48,7 @@ async function requestFriend(req, res) {
     if (req.session.user) {
         await FriendRequest.create({
             requesterId: req.session.user.userId,
-            requesteeId: req.body.userId
+            requesteeId: req.body.requesteeId
         });
         res.status(200).json({success: true});
     } else {

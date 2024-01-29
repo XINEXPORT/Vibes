@@ -1,11 +1,13 @@
 import {useSelector, useDispatch} from 'react-redux'
 import {useState} from 'react'
+import { useNavigate } from 'react-router'
 import axios from "axios"
 import './LoginPage.css'
 
 const LoginPage = () => {
     const dispatch = useDispatch();
     const modal = useSelector(state => state.login.modal);
+    const navigate = useNavigate();
 
     //LOGIN STATE
     const [logUsername, setLogUsername] = useState('');
@@ -67,7 +69,10 @@ const LoginPage = () => {
                             placeholder = "enter your password"
                             onChange = {(e)=> setLogPassword(e.target.value)}
                         />
-                        <button onClick = {loginUser}>Login</button>
+                        <button onClick = {() => {
+                            loginUser();
+                            navigate('/');
+                            }}>Login</button>
                     </section>
 
                     <section className = "register">
@@ -90,7 +95,11 @@ const LoginPage = () => {
                             placeholder = "enter your password"
                             onChange = {(e)=> setRegPassword(e.target.value)}
                         />
-                        <button onClick = {registerUser}>Register</button>
+                        <button onClick={() => {
+                            registerUser();
+                            navigate('/');
+                        }
+                        }>Register</button>
                     </section>
                 </main>
             </div>
