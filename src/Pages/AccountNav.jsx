@@ -1,5 +1,6 @@
 import './AccountNav.css';
 import Settings from './Settings.jsx';
+import AddFriendModal from './AddFriendModal.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
@@ -13,9 +14,12 @@ export default function AccountNav() {
     const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
+    const [friendRequestModalState, setFriendRequestModalState] = useState(false);
     const [sounds, setSounds] = useState(mySounds ? mySounds : null);
     const [favs, setFavs] = useState(myFavs ? myFavs : null);
     const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
+    const [searchInput, setSearchInput] = useState();
+    const [friendReqList, setFriendReqList] = useState([]);
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -72,8 +76,32 @@ export default function AccountNav() {
                 }}>Logout</button>
             </div>
             <div className="add-friend">
-                <button className="add-friend-btn" onClick={() => {}}>Add friend</button>
+                <button className="add-friend-btn" 
+                        onClick={() => setFriendRequestModalState(!friendRequestModalState)}>
+                        Add friends
+                </button>
+
+                {friendRequestModalState ?
+                <AddFriendModal
+                    userId = {user.userId}
+                    username = {user.username}
+                    searchInput  = {searchInput}
+                    setSearchInput = {setSearchInput}
+                    friendReqList = {friendReqList}
+                    setFriendReqList = {setFriendReqList}
+                    userSearch = {userSearch}
+                    />
+                    :
+                    <></>
+                }
             </div>
+
+            <div className = 'friend-requests'></div>
+            <h4>Friend Requests</h4>
+            <div>
+                <p>list of friend requests</p>
+            </div>
+
             <div className='friends-list'>
                 <h4>Friends - {friends.length}</h4>
                 <div className="friends">

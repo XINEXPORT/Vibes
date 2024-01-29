@@ -1,0 +1,8 @@
+.friendchoices{
+    overflow-y: scroll;
+    height: 400px;
+}
+.friend-choice{
+    display: flex;
+    justify-content: space-between;
+}
