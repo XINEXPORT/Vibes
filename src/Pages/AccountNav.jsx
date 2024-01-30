@@ -1,6 +1,7 @@
 import './AccountNav.css';
 import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
+import FriendRequests from './FriendRequests.jsx'
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
@@ -96,10 +97,8 @@ export default function AccountNav() {
                 }
             </div>
 
-            <div className = 'friend-requests'></div>
-            <h4>Friend Requests</h4>
-            <div>
-                <p>list of friend requests</p>
+            <div className="">
+            <FriendRequests/>
             </div>
 
             <div className='friends-list'>

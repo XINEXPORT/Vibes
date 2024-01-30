@@ -55,6 +55,7 @@
 
 .add-friend {
     height: 7%;
+    z-index:4;
 }
 
 .add-friend-btn {
@@ -65,8 +66,3 @@
 
 }
 
-.friend-requests{
-    height: 5%;
-    display: flex;
-    flex-direction: column;
-}

@@ -1,0 +1,5 @@
+.friend-requests{
+    height: 5%;
+    display: flex;
+    flex-direction: column;
+}

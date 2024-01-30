@@ -30,14 +30,13 @@ useEffect(()=>{
             return username.includes(input)
         
         })
-      console.log(results)
-      //add <button onClick = {handleFriendRequest(user.userId)}> Add Friend </buton>
-      //currently is crashing due to handler not working
+      
       const searchField = results.map((user)=>{
+        console.log(username)
             return(    
             <div className= "friend-choice">
                 <p>{user.username}</p>
-                <button onClick = {""}>Add Friend</button>
+                <button onClick = {()=>handleFriendRequest(user.userId)}> Add Friend </button>
             </div>
             )
         })
@@ -47,18 +46,14 @@ useEffect(()=>{
 },[input])
 
    
-// const handleFriendRequest = async (requesteeId) => {
-//         const inputData = new FormData()
-//         inputData.append('requesteeId', requesteeId)
+const handleFriendRequest = async (requesteeId) => {
+    console.log("hit")
 
-//    try {
-//         const {data} = await axios.post(`/api/request`, userId);
-
-//         } catch (error) {
-//             console.log (error)("Error requesting friend:", error)
-//         }
-//     };
-
+        const {data} = await axios.post(`/api/request`, {
+            requesteeId: requesteeId
+        });
+       
+};
 
     return (
         <div className = "addfriendmodal">
@@ -67,10 +62,6 @@ useEffect(()=>{
 
         <Form.Label className = "friend-request">Search For Friends</Form.Label>
         <Form.Group controlId="friendId" className="mb-3">
-            <Form.Control
-                    type = "input"
-                    onChange = {(e) => setInput(e.target.value)}
-                    />
         </Form.Group>
 
         <div className = "friendchoices">
