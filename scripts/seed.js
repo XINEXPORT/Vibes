@@ -80,6 +80,16 @@ await FriendsList.create({
     friendId: 3
 });
 
+let friends = await FriendsList.findAll()
+console.log(friends);
+let user = await User.findOne({
+    where: {userId: 1},
+    include: {
+        model: User,
+        as: 'Friends'
+    }
+});
+console.log(user);
 
 //SoundSeed
 //Bio Evnviromental Sounds

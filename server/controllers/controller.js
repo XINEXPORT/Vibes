@@ -13,18 +13,16 @@ import path from 'path';
 
 async function getFriends(req, res) {
     if (req.session.user) {
-        const id = req.session.user.userId;
-        const myFriends = await User.findAll({
-            where: {
-                userId: id
-            },
+        const userId = req.session.user.userId;
+        let { friends } = await User.findOne({
+            where: {userId: req.session.user.userId},
             include: {
                 model: User,
-                as: 'friend'
+                as: 'Friends'
             }
         });
         res.status(200).json({
-            myFriends: myFriends[0].friend
+            myFriends: friends
         });
     } else {
         res.status(200).json({myFriends: null});
@@ -67,11 +65,11 @@ async function respondToRequest(req, res) {
             }
         });
         await FriendsList.create({
-            userId: userId,
+            myId: userId,
             friendId: requesterId
         });
         await FriendsList.create({
-            userId: requesterId,
+            myId: requesterId,
             friendId: userId
         });
         res.status(200).json({success: true});
@@ -91,11 +89,11 @@ async function respondToRequest(req, res) {
 //Fetch the Logged In User details
 const getUsers = async (req, res) => {
     if(req.session.user){
-        let users = await User.findOne(
-            {where:{
+        let users = await User.findOne({
+            where: {
                 userId: req.session.user.userId
-            }}
-        );
+            }
+        });
         res.json(users);
     } else{
         res.json({error: 'not logged in'});
