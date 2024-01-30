@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import App from './App.jsx';
 import Room from './Pages/Room/RoomBackground.jsx';
-import Settings from './Pages/Settings.jsx';
+import Settings from './Pages/AccountNav/Settings.jsx';
 import RoomHeader from './Pages/Room/RoomHeader.jsx';
 
 const router = createBrowserRouter(
