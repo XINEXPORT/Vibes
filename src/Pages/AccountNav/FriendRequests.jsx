@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
 const FriendRequests =({ myRequests, user})=>{
+
     const [friendRequestResponse, setFriendRequestResponse] = useState(myRequests);
+    
+    useEffect((
+
+
+    )=>{},[myRequests])
 
     let userId 
     let username
@@ -19,12 +25,13 @@ const FriendRequests =({ myRequests, user})=>{
     const handleAcceptFriend = async (userId, accept) => {
         console.log("hit")
 
-        const {data: {myRequests}} = await axios.post (`/api/respond`,{
+        const {data} = await axios.post (`/api/respond`,{
             requesteeId: userId,
             accept: accept
         });
        
-        setFriendRequestResponse(myRequests)
+       
+        setFriendRequestResponse(data.myRequests)
     };
 
     let requests = <></>
