@@ -303,7 +303,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 10 * 1024 * 1024},
+    limits: { fileSize: 10 * 4024 * 4024},
     fileFilter: (req, file, cb) => {
         const fileType = /\.(mp3|wav|aac|ogg|flac)$/i;
         const extname = path.extname(file.originalname).toLowerCase();
