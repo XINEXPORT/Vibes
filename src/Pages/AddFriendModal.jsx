@@ -1,30 +1,19 @@
 import './AddFriendModal.css'
 import axios from 'axios'
-import {  Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
-const AddFriendModal = ({searchInput, 
-                        setSearchInput, 
-                        friendReqList, 
-                        setFriendReqList, 
-                        userId, 
-                        username, 
-                        friendRequestModalState, 
-                        setFriendRequestModalState,
+const AddFriendModal = ({             
+                        username,
                         userSearch
                     })=> {
-
-console.log(userSearch)
-const user = useSelector(state => state.login.user);
-const [selectedFriend, setSelectedFriend] = useState(null);
+// console.log(userSearch)
 const [friend, setFriend]=useState(null)
 const [input, setInput] = useState("");
 
 useEffect(()=>{
     return ()=>{
         const results = userSearch.filter((user)=>{
-            
             const {username} = user
             console.log(username)
             return username.includes(input)
@@ -57,17 +46,11 @@ const handleFriendRequest = async (requesteeId) => {
 
     return (
         <div className = "addfriendmodal">
-
         <input onChange = {(e)=>setInput(e.target.value)}/>
+
         <div className = "friendchoices">
            {friend}
         </div>
-            
-
-        <div className = "friendreq-modalContainer"
-        onClick={()=>setFriendRequestModalState(false)}> X 
-        </div>
-        
             
         </div>
     );
