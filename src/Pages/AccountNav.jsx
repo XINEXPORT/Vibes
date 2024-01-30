@@ -21,6 +21,7 @@ export default function AccountNav() {
     const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
+    console.log(myFriends)
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -32,7 +33,7 @@ export default function AccountNav() {
     };
 
     let friendsList = friends.map((friend) => {
-        return <h4>{friend.username}</h4>
+        return <h4>{friend.user.username}</h4>
     });
 
     const logoutUser = async () => {
