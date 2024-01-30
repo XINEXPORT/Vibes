@@ -21,7 +21,7 @@ const FriendRequests =()=>{
     <div className = 'friend-requests'>
         <h4>Friend Requests</h4>
             <div>
-                {friend}
+                {}
             </div>
             </div>
 )}

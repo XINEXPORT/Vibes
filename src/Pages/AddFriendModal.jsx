@@ -57,13 +57,8 @@ const handleFriendRequest = async (requesteeId) => {
 
     return (
         <div className = "addfriendmodal">
-        <Form method = "POST" encType = 'multipart/form-data' className = "upload" >
-        <Form.Group controlId="friendRequest" className="mb-3"></Form.Group>
 
-        <Form.Label className = "friend-request">Search For Friends</Form.Label>
-        <Form.Group controlId="friendId" className="mb-3">
-        </Form.Group>
-
+        <input onChange = {(e)=>setInput(e.target.value)}/>
         <div className = "friendchoices">
            {friend}
         </div>
@@ -73,7 +68,7 @@ const handleFriendRequest = async (requesteeId) => {
         onClick={()=>setFriendRequestModalState(false)}> X 
         </div>
         
-            </Form>
+            
         </div>
     );
 };
