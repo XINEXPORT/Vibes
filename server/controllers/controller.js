@@ -109,8 +109,8 @@ async function respondToRequest(req, res) {
             friendId: requesteeId
         });
         await FriendsList.create({
-            userId: user.userId,
-            friendId: requesteeId
+            userId: requesteeId,
+            friendId: user.userId
         });
         res.status(200).json({success: true});
     } else if (!accept) {
