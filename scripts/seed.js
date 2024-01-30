@@ -1,5 +1,5 @@
 import {Op} from 'sequelize';
-import {db, User, Sound, Soundscape, SoundscapeSound, MySound, UserSoundscape, FriendsList} from '../database/model.js';
+import {db, User, Sound, Soundscape, SoundscapeSound, MySound, UserSoundscape, FriendsList, FriendRequest} from '../database/model.js';
 
 await db.sync ({force: true});
 
@@ -80,8 +80,23 @@ await FriendsList.create({
     friendId: 3
 });
 
+await FriendRequest.create({
+    userId: 1,
+    requesteeId: 5
+});
+
+await FriendRequest.create({
+    userId: 2,
+    requesteeId: 5
+});
+
+await FriendRequest.create({
+    userId: 5,
+    requesteeId: 3
+});
+
 let friends = await FriendsList.findAll()
-console.log(friends);
+
 let user = await User.findOne({
     where: {userId: 1},
     include: {
@@ -241,3 +256,4 @@ await SoundscapeSound.create({
     soundId: room.soundId
 });
 
+await db.close();
