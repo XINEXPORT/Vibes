@@ -3,11 +3,18 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
-const FriendRequests =({username, myFriends})=>{
+const FriendRequests =({ myRequests, user})=>{
     const [friendRequestResponse, setFriendRequestResponse] = useState(null);
-    console.log(username)
+    let userId 
+    let username
+    if (user){
+        userId = user.userId
+        username = user.username
+    } 
+        
+    console.log(myRequests)
 
-    const handleAcceptFriend = async (userId) => {
+    const handleAcceptFriend = async (userId, accept) => {
         console.log("hit")
 
         const {data} = await axios.post (`/api/respond`,{
@@ -15,26 +22,30 @@ const FriendRequests =({username, myFriends})=>{
         });
     };
 
-    // useEffect(() => {
-    //         const request = myFriends.map((user)=>{
-    //                 <div key = {user.userId}
-    //                      className = "accept">
-    //                     <p>{user.username}</p>
-    //                     <button onClick = {()=>handleAcceptFriend
-    //                     (user.userId)}>Accept Friend </button>
-    //                 </div>
-    //         });
-    // setFriendRequestResponse(request)
-    // }, [myFriends, handleAcceptFriend])
-
+    let requests = <></>
+    if(myRequests ){
+        requests = myRequests.map((user)=>{
+            <div key = {user.userId}
+                 className = "accept">
+                <p>{user.username}</p>
+                <button onClick = {()=>handleAcceptFriend
+                    (user.userId, true)}>Accept Friend </button>
+                 <button onClick = {()=>handleAcceptFriend
+                    (user.userId, false)}>Decline Friend </button>
+                </div>
+        });
+    }
+        
 
     return  (
     <div className = 'friend-requests'>
         <h4>Friend Requests</h4>
             <div className = "requestname">
-                {username}
+         
             </div>
+
             {friendRequestResponse}
+
          </div>
 )}
 
