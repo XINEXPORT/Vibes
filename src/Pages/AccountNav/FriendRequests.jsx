@@ -18,24 +18,30 @@ const FriendRequests =({ myRequests, user})=>{
         console.log("hit")
 
         const {data} = await axios.post (`/api/respond`,{
-            requestorId: userId
+            requesteeId: userId,
+            accept: accept
         });
     };
 
     let requests = <></>
-    if(myRequests ){
-        requests = myRequests.map((user)=>{
-            <div key = {user.userId}
+    if(myRequests){
+
+        requests = myRequests.map((request)=>{
+            return(
+            <div key = {request.user.userId}
                  className = "accept">
-                <p>{user.username}</p>
+                <p>{request.user.username}</p>
                 <button onClick = {()=>handleAcceptFriend
-                    (user.userId, true)}>Accept Friend </button>
+                    (request.user.userId, true)}>Accept Friend </button>
                  <button onClick = {()=>handleAcceptFriend
-                    (user.userId, false)}>Decline Friend </button>
+                    (request.user.userId, false)}>Decline Friend </button>
                 </div>
+)
         });
-    }
         
+        console.log(requests)
+
+    }
 
     return  (
     <div className = 'friend-requests'>
@@ -44,7 +50,7 @@ const FriendRequests =({ myRequests, user})=>{
          
             </div>
 
-            {friendRequestResponse}
+            {requests}
 
          </div>
 )}
