@@ -8,21 +8,28 @@ import {
     MySound,
     UserSoundscape
 } from '../../database/model.js';
+import { Sequelize } from 'sequelize';
 import multer from 'multer';
 import path from 'path';
 
 async function getFriends(req, res) {
     if (req.session.user) {
         const userId = req.session.user.userId;
-        let { friends } = await User.findOne({
+        const { Friends } = await User.findOne({
             where: {userId: userId},
             include: {
                 model: User,
                 as: 'Friends'
             }
         });
+        const requests = await FriendRequest.findAll({
+            where: {
+                requesteeId: userId
+            }
+        });
         res.status(200).json({
-            myFriends: friends
+            myFriends: Friends,
+            myRequests: requests,
         });
     } else {
         res.status(200).json({myFriends: null});
@@ -31,8 +38,24 @@ async function getFriends(req, res) {
 
 async function findFriends(req, res) {
     if (req.session.user) {
+        const { userId } = req.session.user;
         const userSearch = await User.findAll({
-            attributes: ['username', 'userId']
+            where: {
+                [Sequelize.Op.and]: [
+                    {
+                        userId: {
+                            [Sequelize.Op.notIn]: [
+                                Sequelize.literal(`SELECT friend_id FROM friends_lists WHERE user_id = ${userId}`)
+                            ]
+                        }
+                    },
+                    {
+                        userId: {
+                            [Sequelize.Op.ne]: userId
+                        }
+                    }
+                ]
+            }
         });
         res.status(200).json({
             userSearch: userSearch
