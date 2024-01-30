@@ -95,29 +95,29 @@ async function requestFriend(req, res) {
 };
 
 async function respondToRequest(req, res) {
-    const { accept, userId } = req.body;
+    const { accept, requesteeId } = req.body;
     const user = req.session.user;
     if (accept) {
         await FriendRequest.destroy({
             where: {
                 userId: user.userId,
-                requesteeId: userId
+                requesteeId: requesteeId
             }
         });
         await FriendsList.create({
             userId: user.userId,
-            friendId: userId
+            friendId: requesteeId
         });
         await FriendsList.create({
             userId: user.userId,
-            friendId: userId
+            friendId: requesteeId
         });
         res.status(200).json({success: true});
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
                 userId: user.userId,
-                requesteeId: userId
+                requesteeId: requesteeId
             }
         });
         res.status(200).json({success: true});
