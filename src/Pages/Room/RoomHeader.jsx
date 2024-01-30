@@ -2,7 +2,7 @@ import './RoomHeader.css';
 import RoomBackground from './RoomBackground.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1 } from "react-icons/ci";
@@ -26,10 +26,20 @@ const RoomHeader = () =>{
     const [isPlaying, setIsPlaying] = useState(false);
     const [myFavorites, setMyFavorites] = useState();
 
+    useEffect(() => {
+        if (isPlaying) {
+            audio1.current.play();
+            audio2.current.play();
+            audio3.current.play();
+            audio4.current.play();
+        };
+    }, [soundOne, soundTwo, soundThree, soundFour]);
+
     const audio1 = useRef(null);
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
+    console.log(audio1);
 
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
     soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null;
