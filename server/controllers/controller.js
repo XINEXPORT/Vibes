@@ -99,8 +99,8 @@ async function respondToRequest(req, res) {
     if (accept) {
         await FriendRequest.destroy({
             where: {
-                userId: userId,
-                requesteeId: requesteeId
+                userId: requesteeId,
+                requesteeId: userId
             }
         });
         await FriendsList.create({
@@ -114,8 +114,8 @@ async function respondToRequest(req, res) {
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
-                userId: userId,
-                requesteeId: requesteeId
+                userId: requesteeId,
+                requesteeId: userId
             }
         });
         const friends = await FriendsList.findAll({
