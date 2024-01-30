@@ -16,12 +16,13 @@ const router = createBrowserRouter(
             element={<App/>}
             loader={async() => {
                 const { data: { sounds, favs } } = await axios.get('/api/sounds');
-                const { data: { myFriends } } = await axios.get('/api/friends');
+                const { data: { myFriends, myRequests } } = await axios.get('/api/friends');
                 const { data: { userSearch } } = await axios.get('/api/findfriends');
                 return {
                     mySounds: sounds,
                     myFavs: favs,
                     myFriends: myFriends,
+                    myRequests: myRequests,
                     userSearch: userSearch
                 };
             }}

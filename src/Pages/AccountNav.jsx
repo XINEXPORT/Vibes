@@ -1,14 +1,15 @@
 import './AccountNav.css';
 import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
+import FriendRequests from './FriendRequests.jsx'
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import axios from 'axios';
 
 export default function AccountNav() {
-    const { mySounds, myFavs, myFriends, userSearch } = useLoaderData();
+    const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
@@ -96,10 +97,11 @@ export default function AccountNav() {
                 }
             </div>
 
-            <div className = 'friend-requests'></div>
-            <h4>Friend Requests</h4>
-            <div>
-                <p>list of friend requests</p>
+            <div className="">
+            <FriendRequests
+                user = {user}
+                myRequests = {myRequests}
+            />
             </div>
 
             <div className='friends-list'>
