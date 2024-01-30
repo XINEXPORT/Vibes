@@ -25,13 +25,30 @@ const RoomHeader = () =>{
     const [isPrivate, setIsPrivate] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
     const [myFavorites, setMyFavorites] = useState();
+    console.log(favs)
 
     useEffect(() => {
         if (isPlaying) {
-            audio1.current.play();
-            audio2.current.play();
-            audio3.current.play();
-            audio4.current.play();
+            if (soundOne) {
+                audio1.current.play();
+            } else {
+                audio1.current.pause();
+            };
+            if (soundTwo) {
+                audio2.current.play();
+            } else {
+                audio2.current.pause();
+            };
+            if (soundThree) {
+                audio3.current.play();
+            } else {
+                audio3.current.pause();
+            };
+            if (soundFour) {
+                audio4.current.play();
+            } else {
+                audio4.current.pause();
+            };
         };
     }, [soundOne, soundTwo, soundThree, soundFour]);
 
@@ -49,13 +66,13 @@ const RoomHeader = () =>{
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
             if (!isPlaying) {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(true);
                 audio1.current.play();
                 audio2.current.play();
                 audio3.current.play();
                 audio4.current.play();
             } else {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(false);
                 audio1.current.pause();
                 audio2.current.pause();
                 audio3.current.pause();
@@ -69,7 +86,6 @@ const RoomHeader = () =>{
 
         console.log(soundscape)
         setSoundscapeId(+ID)
-
 
         if (soundscape.sounds) {
             if (soundscape.sounds[0]) {
@@ -114,6 +130,7 @@ const RoomHeader = () =>{
     // Function for saving soundscapes:
     const saveSounds = async() => {
         if (soundscapeName) {
+            console.log(fxOne)
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,

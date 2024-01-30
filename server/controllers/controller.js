@@ -278,8 +278,7 @@ const postFavSounds = async(req, res) => {
                 await SoundscapeSound.create({
                     soundscapeId: newSoundscape.soundscapeId,
                     soundId: sound.sound.soundId,
-                    // volume: sound.fx.volume
-                    //REMOVED DUE TO SERVER CRASHING
+                    volume: sound.fx.volume
                 });
             } else {
                 return;
