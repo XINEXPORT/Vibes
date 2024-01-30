@@ -15,15 +15,21 @@ import path from 'path';
 async function getFriends(req, res) {
     if (req.session.user) {
         const userId = req.session.user.userId;
-        let { friends } = await User.findOne({
+        const { Friends } = await User.findOne({
             where: {userId: userId},
             include: {
                 model: User,
                 as: 'Friends'
             }
         });
+        const requests = await FriendRequest.findAll({
+            where: {
+                requesteeId: userId
+            }
+        });
         res.status(200).json({
-            myFriends: friends
+            myFriends: Friends,
+            myRequests: requests,
         });
     } else {
         res.status(200).json({myFriends: null});
