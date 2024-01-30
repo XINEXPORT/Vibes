@@ -33,7 +33,7 @@ async function getFriends(req, res) {
         });
         res.status(200).json({
             myFriends: Friends,
-            myRequests: requests,
+            myRequests: Requests,
         });
     } else {
         res.status(200).json({myFriends: null});
