@@ -21,6 +21,7 @@ async function getFriends(req, res) {
             },
             include: {
                 model: User,
+                attributes: ["username", "userId"]
             }
         });
         const requests = await FriendRequest.findAll({
@@ -29,8 +30,10 @@ async function getFriends(req, res) {
             },
             include: {
                 model: User,
+                attributes: ["username", "userId"]
             }
         });
+        console.log(friends, requests)
         res.status(200).json({
             myFriends: friends,
             myRequests: requests,
