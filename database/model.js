@@ -217,11 +217,9 @@ FriendRequest.init(
 );
 
 // Table Relations:
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId'});
-User.belongsToMany(User, {through: FriendsList, foreignKey: 'userId', as: 'friendId', onDelete: 'CASCADE', hooks: true});
+User.belongsToMany(User, {as: 'Friends', through: FriendsList, foreignKey: 'userId', otherKey: 'friendId'});
 
-User.belongsToMany(User, {through: FriendRequest, foreignKey: 'userId', as: 'requesterId'});
-User.belongsToMany(User, {through: FriendRequest, foreignKey: 'userId', as: 'requesteeId', onDelete: 'CASCADE', hooks: true});
+User.belongsToMany(User, {as: 'Requests', through: FriendRequest, foreignKey: 'requesterId', otherKey: 'requesteeId'});
 
 User.hasMany(Soundscape, {foreignKey: 'userId'});
 Soundscape.belongsTo(User, {foreignKey: 'userId'});
