@@ -15,25 +15,25 @@ import path from 'path';
 async function getFriends(req, res) {
     if (req.session.user) {
         const userId = req.session.user.userId;
-        const { Friends } = await User.findOne({
-            where: {userId: userId},
-            include: {
-                model: User,
-                as: 'Friends'
-            }
-        });
-        const { Requests } = await User.findOne({
+        const friends = await FriendsList.findAll({
             where: {
-                userId: userId
+                friendId: userId
             },
             include: {
                 model: User,
-                as: 'Requests'
+            }
+        });
+        const requests = await FriendRequest.findAll({
+            where: {
+                requesteeId: userId
+            },
+            include: {
+                model: User,
             }
         });
         res.status(200).json({
-            myFriends: Friends,
-            myRequests: Requests,
+            myFriends: friends,
+            myRequests: requests,
         });
     } else {
         res.status(200).json({myFriends: null});
@@ -73,13 +73,13 @@ async function requestFriend(req, res) {
     if (req.session.user) {
         const prevReq = await FriendRequest.findOne({
             where: {
-                requestorId: req.session.user.userId,
+                userId: req.session.user.userId,
                 requesteeId: req.body.requesteeId
             }
         });
         if (!prevReq) {
             await FriendRequest.create({
-                requestorId: req.session.user.userId,
+                userId: req.session.user.userId,
                 requesteeId: req.body.requesteeId
             });
             res.status(200).json({success: true});
@@ -92,28 +92,28 @@ async function requestFriend(req, res) {
 };
 
 async function respondToRequest(req, res) {
-    const { accept, requestorId } = req.body;
-    const { userId } = req.session.user;
+    const { accept, userId } = req.body;
+    const user = req.session.user;
     if (accept) {
         await FriendRequest.destroy({
             where: {
-                requestorId: requestorId,
+                userId: user.userId,
                 requesteeId: userId
             }
         });
         await FriendsList.create({
-            userId: userId,
-            friendId: requestorId
+            userId: user.userId,
+            friendId: userId
         });
         await FriendsList.create({
-            userId: requestorId,
+            userId: user.userId,
             friendId: userId
         });
         res.status(200).json({success: true});
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
-                requestorId: requestorId,
+                userId: user.userId,
                 requesteeId: userId
             }
         });

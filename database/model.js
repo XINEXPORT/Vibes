@@ -219,7 +219,13 @@ FriendRequest.init(
 // Table Relations:
 User.belongsToMany(User, {as: 'Friends', through: FriendsList, foreignKey: 'userId', otherKey: 'friendId'});
 
-User.belongsToMany(User, {as: 'Requests', through: FriendRequest, foreignKey: 'requestorId', otherKey: 'requesteeId'});
+User.hasMany(FriendsList, {foreignKey: 'userId'});
+FriendsList.belongsTo(User, {foreignKey: 'userId'});
+
+User.belongsToMany(User, {as: 'Requests', through: FriendRequest, foreignKey: 'userId', otherKey: 'requesteeId'});
+
+User.hasMany(FriendRequest, {foreignKey: 'userId'});
+FriendRequest.belongsTo(User, {foreignKey: "userId"});
 
 User.hasMany(Soundscape, {foreignKey: 'userId'});
 Soundscape.belongsTo(User, {foreignKey: 'userId'});
