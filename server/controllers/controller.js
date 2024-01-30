@@ -44,11 +44,21 @@ async function findFriends(req, res) {
 
 async function requestFriend(req, res) {
     if (req.session.user) {
-        await FriendRequest.create({
-            requestorId: req.session.user.userId,
-            requesteeId: req.body.requesteeId
+        const prevReq = await FriendRequest.findOne({
+            where: {
+                requestorId: req.session.user.userId,
+                requesteeId: req.body.requesteeId
+            }
         });
-        res.status(200).json({success: true});
+        if (!prevReq) {
+            await FriendRequest.create({
+                requestorId: req.session.user.userId,
+                requesteeId: req.body.requesteeId
+            });
+            res.status(200).json({success: true});
+        } else {
+            res.status(200).json({error: 'You have already sent a request to this user.'});
+        };
     } else {
         res.status(200).json({success: false});
     };
@@ -65,11 +75,11 @@ async function respondToRequest(req, res) {
             }
         });
         await FriendsList.create({
-            myId: userId,
+            userId: userId,
             friendId: requestorId
         });
         await FriendsList.create({
-            myId: requestorId,
+            userId: requestorId,
             friendId: userId
         });
         res.status(200).json({success: true});
@@ -102,15 +112,15 @@ const getUsers = async (req, res) => {
 
 // Fetch sound data
 const getSounds = async (req, res) => {
-    const user = req.session.user;
     let favs;
-    if (user) {
+    if (req.session.user) {
+        const { userId } = req.session.user;
         favs = await Soundscape.findAll({
             include: {
                 model: Sound
             },
             where: {
-                userId: user.userId
+                userId: userId
             }
         });
     };
@@ -141,7 +151,7 @@ const getSounds = async (req, res) => {
             })
         }
     ];
-    console.log(favs)
+
     res.status(200).json({
         success: true,
         sounds: sounds,
