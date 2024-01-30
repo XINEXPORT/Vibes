@@ -15,7 +15,7 @@ async function getFriends(req, res) {
     if (req.session.user) {
         const userId = req.session.user.userId;
         let { friends } = await User.findOne({
-            where: {userId: req.session.user.userId},
+            where: {userId: userId},
             include: {
                 model: User,
                 as: 'Friends'
@@ -45,7 +45,7 @@ async function findFriends(req, res) {
 async function requestFriend(req, res) {
     if (req.session.user) {
         await FriendRequest.create({
-            requesterId: req.session.user.userId,
+            requestorId: req.session.user.userId,
             requesteeId: req.body.requesteeId
         });
         res.status(200).json({success: true});
@@ -55,28 +55,28 @@ async function requestFriend(req, res) {
 };
 
 async function respondToRequest(req, res) {
-    const { accept, requesterId } = req.body;
+    const { accept, requestorId } = req.body;
     const { userId } = req.session.user;
     if (accept) {
         await FriendRequest.destroy({
             where: {
-                requesterId: requesterId,
+                requestorId: requestorId,
                 requesteeId: userId
             }
         });
         await FriendsList.create({
             myId: userId,
-            friendId: requesterId
+            friendId: requestorId
         });
         await FriendsList.create({
-            myId: requesterId,
+            myId: requestorId,
             friendId: userId
         });
         res.status(200).json({success: true});
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
-                requesterId: requesterId,
+                requestorId: requestorId,
                 requesteeId: userId
             }
         });
