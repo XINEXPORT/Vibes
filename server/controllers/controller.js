@@ -25,6 +25,10 @@ async function getFriends(req, res) {
         const requests = await FriendRequest.findAll({
             where: {
                 requesteeId: userId
+            },
+            include: {
+                model: User,
+                as: 'Requests'
             }
         });
         res.status(200).json({
