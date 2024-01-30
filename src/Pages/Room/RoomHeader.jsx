@@ -24,6 +24,7 @@ const RoomHeader = () =>{
     const [deletesoundscape, deleteSoundScape] = useState(null);
     const [isPrivate, setIsPrivate] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [myFavorites, setMyFavorites] = useState();
 
     const audio1 = useRef(null);
     const audio2 = useRef(null);
