@@ -7,7 +7,6 @@
 }
 .header-wrapper {
     display: flex;
-    align-items: flex-start;
     justify-content: space-around;
     position: fixed;
     box-sizing: border-box;
@@ -20,14 +19,17 @@
     z-index: 3;
 }
 .play{
-    padding: 20px;
-    padding-top: 10px;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }
 #play-btn{
-    background-color: #62dd73;
-    padding: 10px;
+    display: flex;
     align-content: center;
+    justify-content: center;
+    background-color: #62dd73;
+    padding: 15px 15px 15px 20px;
+    border-radius: 50%;
     font-size: 40px
 }
 #play-btn:hover{
