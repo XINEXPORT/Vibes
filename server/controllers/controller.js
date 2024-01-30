@@ -111,6 +111,28 @@ async function respondToRequest(req, res) {
             userId: requesteeId,
             friendId: userId
         });
+        const friends = await FriendsList.findAll({
+            where: {
+                friendId: userId
+            },
+            include: {
+                model: User,
+                attributes: ["username", "userId"]
+            }
+        });
+        const requests = await FriendRequest.findAll({
+            where: {
+                requesteeId: userId
+            },
+            include: {
+                model: User,
+                attributes: ["username", "userId"]
+            }
+        });
+        res.status(200).json({
+            myFriends: friends,
+            myRequests: requests,
+        });
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
