@@ -22,9 +22,9 @@ async function getFriends(req, res) {
                 as: 'Friends'
             }
         });
-        const requests = await FriendRequest.findAll({
+        const { Requests } = await User.findOne({
             where: {
-                requesteeId: userId
+                userId: userId
             },
             include: {
                 model: User,
@@ -33,7 +33,7 @@ async function getFriends(req, res) {
         });
         res.status(200).json({
             myFriends: Friends,
-            myRequests: requests,
+            myRequests: Requests,
         });
     } else {
         res.status(200).json({myFriends: null});
