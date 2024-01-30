@@ -20,7 +20,7 @@
     justify-content: flex-start;
     transition: .5s;
     max-height: 490px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 .hide .sound-accordion{
     height: 0;
@@ -58,6 +58,7 @@
     border-right: 5px solid black;
     transition: 1s;
     max-height: 300px;
+    overflow-y: scroll;
 }
 .accordion-drop.hide-details{
     height: 0;
