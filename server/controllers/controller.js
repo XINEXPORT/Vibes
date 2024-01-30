@@ -33,7 +33,6 @@ async function getFriends(req, res) {
                 attributes: ["username", "userId"]
             }
         });
-        console.log(friends, requests)
         res.status(200).json({
             myFriends: friends,
             myRequests: requests,
@@ -96,31 +95,51 @@ async function requestFriend(req, res) {
 
 async function respondToRequest(req, res) {
     const { accept, requesteeId } = req.body;
-    const user = req.session.user;
+    const { userId } = req.session.user;
     if (accept) {
         await FriendRequest.destroy({
             where: {
-                userId: user.userId,
+                userId: userId,
                 requesteeId: requesteeId
             }
         });
         await FriendsList.create({
-            userId: user.userId,
+            userId: userId,
             friendId: requesteeId
         });
         await FriendsList.create({
             userId: requesteeId,
-            friendId: user.userId
+            friendId: userId
         });
-        res.status(200).json({success: true});
     } else if (!accept) {
         await FriendRequest.destroy({
             where: {
-                userId: user.userId,
+                userId: userId,
                 requesteeId: requesteeId
             }
         });
-        res.status(200).json({success: true});
+        const friends = await FriendsList.findAll({
+            where: {
+                friendId: userId
+            },
+            include: {
+                model: User,
+                attributes: ["username", "userId"]
+            }
+        });
+        const requests = await FriendRequest.findAll({
+            where: {
+                requesteeId: userId
+            },
+            include: {
+                model: User,
+                attributes: ["username", "userId"]
+            }
+        });
+        res.status(200).json({
+            myFriends: friends,
+            myRequests: requests,
+        });
     } else {
         res.status(200).json({success: false});
     };
