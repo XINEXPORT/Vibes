@@ -6,7 +6,9 @@ import { useState, useRef } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1 } from "react-icons/ci";
+import socketIO from 'socket.io-client';
 
+const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () =>{
     const {sounds, favs} = useLoaderData();
