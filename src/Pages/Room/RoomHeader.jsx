@@ -28,10 +28,26 @@ const RoomHeader = () =>{
 
     useEffect(() => {
         if (isPlaying) {
-            audio1.current.play();
-            audio2.current.play();
-            audio3.current.play();
-            audio4.current.play();
+            if (soundOne) {
+                audio1.current.play();
+            } else {
+                audio1.current.pause();
+            };
+            if (soundTwo) {
+                audio2.current.play();
+            } else {
+                audio2.current.pause();
+            };
+            if (soundThree) {
+                audio3.current.play();
+            } else {
+                audio3.current.pause();
+            };
+            if (soundFour) {
+                audio4.current.play();
+            } else {
+                audio4.current.pause();
+            };
         };
     }, [soundOne, soundTwo, soundThree, soundFour]);
 
@@ -39,23 +55,29 @@ const RoomHeader = () =>{
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
-    console.log(audio1);
+    if (soundOne) {
+        console.log(audio1.current.currentTime);
+    };
 
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
+    soundOne ? audio1.current.playbackRate = fxOne ? fxOne.speed : 1 : null;
     soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null;
+    soundTwo ? audio2.current.playbackRate = fxTwo ? fxTwo.speed : 1 : null;
     soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null;
+    soundThree ? audio3.current.playbackRate = fxThree ? fxThree.speed : 1 : null;
     soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null;
+    soundFour ? audio4.current.playbackRate = fxFour ? fxFour.speed : 1 : null;
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
             if (!isPlaying) {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(true);
                 audio1.current.play();
                 audio2.current.play();
                 audio3.current.play();
                 audio4.current.play();
             } else {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(false);
                 audio1.current.pause();
                 audio2.current.pause();
                 audio3.current.pause();
@@ -66,16 +88,16 @@ const RoomHeader = () =>{
 
     const setSoundscape = (ID) => {
         const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
-
-        console.log(soundscape)
         setSoundscapeId(+ID)
-
 
         if (soundscape.sounds) {
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {
                     setSoundOne(soundscape.sounds[0]);
-                    setFxOne({volume: soundscape.sounds[0].soundscapeSound.volume});
+                    setFxOne({
+                        volume: soundscape.sounds[0].soundscapeSound.volume,
+                        speed: soundscape.sounds[0].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundOne(null);
@@ -84,7 +106,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[1]) {
                 if (soundscape.sounds[1] !== soundTwo) {
                     setSoundTwo(soundscape.sounds[1]);
-                    setFxTwo({volume: soundscape.sounds[1].soundscapeSound.volume});
+                    setFxTwo({
+                        volume: soundscape.sounds[1].soundscapeSound.volume,
+                        speed: soundscape.sounds[1].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundTwo(null);
@@ -93,7 +118,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[2]) {
                 if (soundscape.sounds[2] !== soundThree) {
                     setSoundThree(soundscape.sounds[2]);
-                    setFxThree({volume: soundscape.sounds[2].soundscapeSound.volume});
+                    setFxThree({
+                        volume: soundscape.sounds[2].soundscapeSound.volume,
+                        speed: soundscape.sounds[2].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundThree(null);
@@ -102,7 +130,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[3]) {
                 if (soundscape.sounds[3] !== soundThree) {
                     setSoundFour(soundscape.sounds[3]);
-                    setFxFour({volume: soundscape.sounds[3].soundscapeSound.volume});
+                    setFxFour({
+                        volume: soundscape.sounds[3].soundscapeSound.volume,
+                        speed: soundscape.sounds[3].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundFour(null);
@@ -114,6 +145,7 @@ const RoomHeader = () =>{
     // Function for saving soundscapes:
     const saveSounds = async() => {
         if (soundscapeName) {
+            console.log(fxOne)
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,
