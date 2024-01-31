@@ -27,6 +27,10 @@ const RoomHeader = () =>{
     const [myFavorites, setMyFavorites] = useState();
 
     useEffect(() => {
+        
+    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour, isPlaying])
+
+    useEffect(() => {
         if (isPlaying) {
             if (soundOne) {
                 audio1.current.play();
