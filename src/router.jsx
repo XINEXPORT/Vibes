@@ -29,7 +29,7 @@ const router = createBrowserRouter(
         >
             <Route
                 index
-                element={<RoomHeader socket={socket}/>}
+                element={<RoomHeader />}
                 loader={async() => {
                     const {data} = await axios.get(`/api/sounds`);
                     return {
