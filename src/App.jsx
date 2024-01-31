@@ -8,8 +8,6 @@ import socketIO from 'socket.io-client';
 
 const socket = socketIO.connect('http://localhost:8000');
 
-console.log(socket);
-
 function App() {
   return (
     <div>
