@@ -5,3 +5,7 @@
     width: 84vw;
     bottom: 0px;
 }
+img{
+    height: calc(100vh - 120px);
+    width: 84vw;
+}
