@@ -3,6 +3,7 @@ import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
 import FriendRequests from './FriendRequests.jsx'
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect} from 'react';
 import { useState } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
@@ -21,28 +22,40 @@ export default function AccountNav() {
     const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
+    const [friendslist, setFriendslist] = useState([]);
 
 
     if (!user) {
         dispatch({type: 'modal-on'});
     };
-console.log(user)
-    let friends = [];
-    if (myFriends) {
-        friends = [... myFriends];
-    };
 
-    let friendsList = friends.map((friend) => {
-        return <h4>{friend.user.username}</h4>
-    });
+    const setFriendsListHandler = (newFriendsList)=>{
+    setFriendslist(newFriendsList)
+        }
 
-    const logoutUser = async () => {
-        const { data } = await axios.post('/api/auth/logout');
-        if (data.success) {
-          dispatch({ type: 'logout' });
-          navigate("/");
+        useEffect(()=>{
+            if (myFriends){
+                setFriendslist(myFriends)
+            } else{
+                setFriendslist([])
+            }
+        },[myFriends])
+
+
+//Friendslist
+
+        let friendsListMapped = friendslist.map((friend) => {
+            return <h4>{friend.user.username}</h4>
+        });
+console.log(friendslist)
+//Logout
+        const logoutUser = async () => {
+            const { data } = await axios.post('/api/auth/logout');
+            if (data.success) {
+            dispatch({ type: 'logout' });
+            navigate("/");
+            };
         };
-    };
 
 
     return (
@@ -103,6 +116,8 @@ console.log(user)
             {!! user ? (<FriendRequests
                 user = {user}
                 myRequests = {myRequests}
+                myFriends = {myFriends}
+                setFriendsList = {setFriendsListHandler}
             />) : (
                 <></>
             )}
@@ -110,9 +125,9 @@ console.log(user)
             </div>
 
             <div className='friends-list'>
-                <h4>Friends - {friends.length}</h4>
+                <h4>Friends - {friendsListMapped.length}</h4>
                 <div className="friends">
-                {friendsList}
+                {friendsListMapped}
                 </div>
                 
             </div>
