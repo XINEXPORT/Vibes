@@ -2,6 +2,8 @@ import ViteExpress from 'vite-express';
 import morgan from 'morgan';
 import session from 'express-session';
 import express from 'express';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 import {
     login,
     logout,
@@ -24,6 +26,38 @@ import {
 
 const app = express();
 const port = '8000';
+
+//Socket
+const http = require('http').Server(app);
+const cors = require('cors');
+
+app.use(cors());
+
+const socketIO = require('socket.io')(http, {
+    cors: {
+        origin: "http://localhost:8000"
+    }
+});
+
+socketIO.on('connection', (socket) => {
+    console.log(`⚡: ${socket.id} user just connected!`);
+
+
+//sends the message to all the users on the server
+  socket.on('message', (data) => {
+    socketIO.emit('messageResponse', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('🔥: A user disconnected');
+  });
+});
+
+app.get('/api', (req, res) => {
+    res.json({
+      message: 'Hello world',
+    });
+  });
 
 //Audio Files Folder
 app.use('../public/audio', express.static('.public/audio'));

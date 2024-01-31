@@ -38,7 +38,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
 
     let mySounds = <></>;
-    if (favs[0]) {
+    if (favs&&favs.length > 0) {
         mySounds = favs.map((soundscape) => {
             return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
         });

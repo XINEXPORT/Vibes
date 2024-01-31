@@ -4,9 +4,17 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
 const FriendRequests =({ myRequests, user})=>{
-    const [friendRequestResponse, setFriendRequestResponse] = useState(null);
+
+    const [friendRequestResponse, setFriendRequestResponse] = useState(myRequests);
+    
+    useEffect((
+
+
+    )=>{},[myRequests])
+
     let userId 
     let username
+
     if (user){
         userId = user.userId
         username = user.username
@@ -18,38 +26,43 @@ const FriendRequests =({ myRequests, user})=>{
         console.log("hit")
 
         const {data} = await axios.post (`/api/respond`,{
-            requestorId: userId
+            requesteeId: userId,
+            accept: accept
         });
+       
+       
+        setFriendRequestResponse(data.myRequests)
     };
 
     let requests = <></>
-    if(myRequests ){
-        requests = myRequests.map((user)=>{
-            <div key = {user.userId}
+
+    if(friendRequestResponse){
+       
+    requests = friendRequestResponse.map((request)=>{
+            return(
+            <div key = {request.user.userId}
                  className = "accept">
-                <p>{user.username}</p>
+                <p>{request.user.username}</p>
                 <button onClick = {()=>handleAcceptFriend
-                    (user.userId, true)}>Accept Friend </button>
+                    (request.user.userId, true)}>Accept Friend </button>
                  <button onClick = {()=>handleAcceptFriend
-                    (user.userId, false)}>Decline Friend </button>
+                    (request.user.userId, false)}>Decline Friend </button>
                 </div>
+)
         });
-    }
         
+        console.log(requests)
+    
+    }
 
     return  (
     <div className = 'friend-requests'>
         <h4>Friend Requests</h4>
             <div className = "requestname">
-         
+             </div>
+                {requests}
             </div>
-
-            {friendRequestResponse}
-
-         </div>
 )}
-
-
 
 
 
