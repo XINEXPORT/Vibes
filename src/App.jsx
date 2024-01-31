@@ -4,7 +4,11 @@ import AccountNav from './Pages/AccountNav/AccountNav.jsx';
 import RoomHeader from './Pages/Room/RoomHeader.jsx';
 import Room from './Pages/Room/RoomBackground.jsx';
 import LoginPage from './Login/LoginPage.jsx';
+import socketIO from 'socket.io-client';
 
+const socket = socketIO.connect('http://localhost:8000');
+
+console.log(socket);
 
 function App() {
   return (
@@ -16,4 +20,4 @@ function App() {
   )
 }
 
-export default App;
+export { App, socket };

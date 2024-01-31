@@ -1,4 +1,4 @@
-import App from './App.jsx'
+import {App, socket} from './App.jsx'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
