@@ -26,7 +26,6 @@ const SoundEditor = ({
     setFxFour
     }) => {
 
-
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal);
 

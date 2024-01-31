@@ -2,7 +2,7 @@ import './RoomHeader.css';
 import RoomBackground from './RoomBackground.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1 } from "react-icons/ci";
@@ -28,26 +28,105 @@ const RoomHeader = () =>{
     const [isPlaying, setIsPlaying] = useState(false);
     const [myFavorites, setMyFavorites] = useState();
 
+    useEffect(() => {
+        socket.emit("broadcast_sound", {
+            soundBroadcast: true,
+            soundOne: soundOne,
+            fxOne: fxOne,
+            soundTwo: soundTwo,
+            fxTwo: fxTwo,
+            soundThree: soundThree,
+            fxThree: fxThree,
+            soundFour: soundFour,
+            fxFour: fxFour,
+        });
+    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour]);
+
+    useEffect(() => {
+        socket.emit("broadcast_playstate", {
+            playstateBroadcast: true,
+            isPlaying: isPlaying,
+            time1: audio1.current.currentTime,
+            time2: audio2.current.currentTime,
+            time3: audio3.current.currentTime,
+            time4: audio4.current.currentTime
+        });
+    }, [isPlaying]);
+
+    useEffect(() => {
+            socket.on("receive_sound", (data) => {
+                console.log(data)
+                // setSoundOne(data.soundOne);
+                // setFxOne(data.fxOne);
+                // setSoundTwo(data.soundTwo);
+                // setFxTwo(data.fxTwo);
+                // setSoundThree(data.soundThree);
+                // setFxThree(data.fxThree);
+                // setSoundFour(data.soundFour);
+                // setFxFour(data.fxFour);
+            });
+            socket.on("receive_playstate", (data) => {
+                console.log(data)
+                // setIsPlaying(data.isPlaying);
+                // audio1.current.currentTime = data.time1,
+                // audio2.current.currentTime = data.time2,
+                // audio3.current.currentTime = data.time3,
+                // audio4.current.currentTime = data.time4
+            });
+    }, [socket]);
+
+    useEffect(() => {
+        if (isPlaying) {
+            if (soundOne) {
+                audio1.current.play();
+            } else {
+                audio1.current.pause();
+            };
+            if (soundTwo) {
+                audio2.current.play();
+            } else {
+                audio2.current.pause();
+            };
+            if (soundThree) {
+                audio3.current.play();
+            } else {
+                audio3.current.pause();
+            };
+            if (soundFour) {
+                audio4.current.play();
+            } else {
+                audio4.current.pause();
+            };
+        };
+    }, [soundOne, soundTwo, soundThree, soundFour]);
+
     const audio1 = useRef(null);
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
+    if (soundOne) {
+        console.log(audio1.current.currentTime);
+    };
 
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
+    soundOne ? audio1.current.playbackRate = fxOne ? fxOne.speed : 1 : null;
     soundTwo ? audio2.current.volume = fxTwo ? fxTwo.volume / 100 : .5 : null;
+    soundTwo ? audio2.current.playbackRate = fxTwo ? fxTwo.speed : 1 : null;
     soundThree ? audio3.current.volume = fxThree ? fxThree.volume / 100 : .5 : null;
+    soundThree ? audio3.current.playbackRate = fxThree ? fxThree.speed : 1 : null;
     soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null;
+    soundFour ? audio4.current.playbackRate = fxFour ? fxFour.speed : 1 : null;
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
             if (!isPlaying) {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(true);
                 audio1.current.play();
                 audio2.current.play();
                 audio3.current.play();
                 audio4.current.play();
             } else {
-                setIsPlaying(!isPlaying);
+                setIsPlaying(false);
                 audio1.current.pause();
                 audio2.current.pause();
                 audio3.current.pause();
@@ -58,16 +137,16 @@ const RoomHeader = () =>{
 
     const setSoundscape = (ID) => {
         const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
-
-        console.log(soundscape)
         setSoundscapeId(+ID)
-
 
         if (soundscape.sounds) {
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {
                     setSoundOne(soundscape.sounds[0]);
-                    setFxOne({volume: soundscape.sounds[0].soundscapeSound.volume});
+                    setFxOne({
+                        volume: soundscape.sounds[0].soundscapeSound.volume,
+                        speed: soundscape.sounds[0].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundOne(null);
@@ -76,7 +155,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[1]) {
                 if (soundscape.sounds[1] !== soundTwo) {
                     setSoundTwo(soundscape.sounds[1]);
-                    setFxTwo({volume: soundscape.sounds[1].soundscapeSound.volume});
+                    setFxTwo({
+                        volume: soundscape.sounds[1].soundscapeSound.volume,
+                        speed: soundscape.sounds[1].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundTwo(null);
@@ -85,7 +167,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[2]) {
                 if (soundscape.sounds[2] !== soundThree) {
                     setSoundThree(soundscape.sounds[2]);
-                    setFxThree({volume: soundscape.sounds[2].soundscapeSound.volume});
+                    setFxThree({
+                        volume: soundscape.sounds[2].soundscapeSound.volume,
+                        speed: soundscape.sounds[2].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundThree(null);
@@ -94,7 +179,10 @@ const RoomHeader = () =>{
             if (soundscape.sounds[3]) {
                 if (soundscape.sounds[3] !== soundThree) {
                     setSoundFour(soundscape.sounds[3]);
-                    setFxFour({volume: soundscape.sounds[3].soundscapeSound.volume});
+                    setFxFour({
+                        volume: soundscape.sounds[3].soundscapeSound.volume,
+                        speed: soundscape.sounds[3].soundscapeSound.speed
+                    });
                 };
             } else {
                 setSoundFour(null);
@@ -106,6 +194,7 @@ const RoomHeader = () =>{
     // Function for saving soundscapes:
     const saveSounds = async() => {
         if (soundscapeName) {
+            console.log(fxOne)
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,

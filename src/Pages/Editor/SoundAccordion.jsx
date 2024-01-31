@@ -1,5 +1,8 @@
 import './SoundAccordion.css'
 import { useState, useEffect } from 'react';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 
 const SoundAccordion = ({
@@ -58,11 +61,14 @@ const SoundAccordion = ({
         };
 
     useEffect(() => {
-        return setVolume(fx ? fx.volume : 50);
+        setVolume(fx ? fx.volume : 50);
+        setSpeed(fx ? fx.speed : 1);
     }, [activeIndex]);
 
     const [volume, setVolume] = useState(fx ? fx.volume : 50);
+    const [speed, setSpeed] = useState(fx ? fx.speed : 1);
     const [visible, setVisible] = useState(null);
+    console.log(fx);
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -72,10 +78,9 @@ const SoundAccordion = ({
                     <div 
                         id = {soundIndex}
                         key={soundIndex} 
-                        className= "accordion-tab " 
+                        className= "accordion-tab" 
                         onClick={()=> {
-                            setVisible(soundIndex)
-                            setFx({volume: volume})
+                            setVisible(soundIndex);
                         }}
                     >
                         {sound.type}
@@ -83,11 +88,14 @@ const SoundAccordion = ({
                     <div 
                     className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
-
-                        return(
+                        return (
                             <span className="sound-details" key={soundObj.soundId}>
                                 <div onClick={() => {
                                     setSound(soundObj);
+                                    setFx({
+                                        volume: Number(volume),
+                                        speed: Number(speed)
+                                    });
                                 }}>
                                     {soundObj.name}
                                 </div>
@@ -111,7 +119,8 @@ const SoundAccordion = ({
                     className="slider"
                     onChange ={(e)=>{
                         setVolume(e.target.value);
-                        setFx({volume: volume});
+                        const fxValues = {...fx};
+                        setFx({...fxValues, volume: Number(e.target.value)});
                     }}
             />
             </div>
@@ -119,15 +128,23 @@ const SoundAccordion = ({
 
             </div>
             <label>Playback Speed:</label>
-            <select name="playback-speed" id="playback-speed">
-                <option value="">0.25</option>
-                <option value="">0.5</option>
-                <option value="">0.75</option>
-                <option value="">Normal</option>
-                <option value="">1.25</option>
-                <option value="">1.5</option>
-                <option value="">1.75</option>
-                <option value="">2</option>
+            <select
+                name="playback-speed"
+                id="playback-speed"
+                onChange={(e) => {
+                    setSpeed(e.target.value);
+                    const fxValues = {...fx};
+                    setFx({...fxValues, speed: Number(e.target.value)});
+                }}
+            >
+                <option selected={speed === 0.25 ? 'selected' : ''} value={0.25}>0.25</option>
+                <option selected={speed === 0.5 ? 'selected' : ''} value={0.5}>0.5</option>
+                <option selected={speed === 0.75 ? 'selected' : ''} value={0.75}>0.75</option>
+                <option selected={speed === 1 ? 'selected' : ''} value={1}>Normal</option>
+                <option selected={speed === 1.25 ? 'selected' : ''} value={1.25}>1.25</option>
+                <option selected={speed === 1.5 ? 'selected' : ''} value={1.5}>1.5</option>
+                <option selected={speed === 1.75 ? 'selected' : ''} value={1.75}>1.75</option>
+                <option selected={speed === 2 ? 'selected' : ''} value={2}>2</option>
             </select>
          </section>
          

@@ -114,6 +114,9 @@ SoundscapeSound.init(
         },
         volume: {
             type: DataTypes.INTEGER
+        },
+        speed: {
+            type: DataTypes.FLOAT
         }
     },
     {
