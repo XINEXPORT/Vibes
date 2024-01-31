@@ -278,7 +278,8 @@ const postFavSounds = async(req, res) => {
                 await SoundscapeSound.create({
                     soundscapeId: newSoundscape.soundscapeId,
                     soundId: sound.sound.soundId,
-                    volume: sound.fx.volume
+                    volume: Number(sound.fx.volume),
+                    speed: Number(sound.fx.speed)
                 });
             } else {
                 return;
