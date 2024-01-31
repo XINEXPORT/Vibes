@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export { App, socket };
+export { App };
