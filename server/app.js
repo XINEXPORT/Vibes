@@ -93,6 +93,6 @@ socket.on ('broadcast_sound', (data) =>{
 });
 
 socket.on('disconnect', () => {
-  console.log('🔥: A user disconnected');
+  console.log('❌: A user disconnected');
 });
 });

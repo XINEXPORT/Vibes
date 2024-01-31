@@ -1,18 +1,16 @@
-import './FriendRequests.jsx'
+import './FriendRequests.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
-const FriendRequests =({ myRequests, user})=>{
+const FriendRequests =({ myFriends, myRequests, user, setFriendsList})=>{
 
     const [friendRequestResponse, setFriendRequestResponse] = useState(myRequests);
-    console.log(myRequests)
-    console.log(friendRequestResponse)
 
     useEffect((
 
-    )=>{setFriendRequestResponse(myRequests)},[myRequests])
-
+    )=>{setFriendRequestResponse(myRequests)},[myRequests, myFriends])
+console.log(myFriends)
     let userId 
     let username
 
@@ -30,6 +28,7 @@ const FriendRequests =({ myRequests, user})=>{
         });
        
         setFriendRequestResponse(data.myRequests)
+        setFriendsList(data.myFriends)
     };
 
     let requests = <></>
