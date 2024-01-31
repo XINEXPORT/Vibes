@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import './Room.css'
 
 const Room = ()=>{
     
