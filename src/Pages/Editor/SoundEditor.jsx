@@ -23,7 +23,9 @@ const SoundEditor = ({
     setSoundThree,
     setFxThree,
     setSoundFour,
-    setFxFour
+    setFxFour,
+    setBroadcastOne,
+    broadcastOne
     }) => {
 
     const dispatch = useDispatch();
@@ -79,6 +81,8 @@ const SoundEditor = ({
                     setFxThree={setFxThree}
                     setSoundFour={setSoundFour}
                     setFxFour={setFxFour}
+                    setBroadcastOne={setBroadcastOne}
+                    broadcastOne={broadcastOne}
                 />
             
         </section>
