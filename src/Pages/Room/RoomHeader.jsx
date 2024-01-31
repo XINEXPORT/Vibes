@@ -27,10 +27,11 @@ const RoomHeader = () =>{
     const [isPrivate, setIsPrivate] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
     const [myFavorites, setMyFavorites] = useState();
+    const [broadcastOne, setBroadcastOne] = useState(false);
+    const [broadcastTwo, setBroadcastTwo] = useState(false);
 
     useEffect(() => {
         socket.emit("broadcast_sound", {
-            soundBroadcast: true,
             soundOne: soundOne,
             fxOne: fxOne,
             soundTwo: soundTwo,
@@ -40,39 +41,49 @@ const RoomHeader = () =>{
             soundFour: soundFour,
             fxFour: fxFour,
         });
-    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour]);
+    }, [broadcastOne])
 
     useEffect(() => {
         socket.emit("broadcast_playstate", {
-            playstateBroadcast: true,
             isPlaying: isPlaying,
             time1: audio1.current.currentTime,
             time2: audio2.current.currentTime,
             time3: audio3.current.currentTime,
             time4: audio4.current.currentTime
         });
-    }, [isPlaying]);
+    }, [broadcastTwo])
 
     useEffect(() => {
-            socket.on("receive_sound", (data) => {
-                console.log(data)
-                // setSoundOne(data.soundOne);
-                // setFxOne(data.fxOne);
-                // setSoundTwo(data.soundTwo);
-                // setFxTwo(data.fxTwo);
-                // setSoundThree(data.soundThree);
-                // setFxThree(data.fxThree);
-                // setSoundFour(data.soundFour);
-                // setFxFour(data.fxFour);
-            });
-            socket.on("receive_playstate", (data) => {
-                console.log(data)
-                // setIsPlaying(data.isPlaying);
-                // audio1.current.currentTime = data.time1,
-                // audio2.current.currentTime = data.time2,
-                // audio3.current.currentTime = data.time3,
-                // audio4.current.currentTime = data.time4
-            });
+        socket.on("receive_sound", (data) => {
+            console.log(data);
+            setSoundOne(data.soundOne);
+            setFxOne(data.fxOne);
+            setSoundTwo(data.soundTwo);
+            setFxTwo(data.fxTwo);
+            setSoundThree(data.soundThree);
+            setFxThree(data.fxThree);
+            setSoundFour(data.soundFour);
+            setFxFour(data.fxFour);
+        });
+        socket.on("receive_playstate", (data) => {
+            console.log(data)
+            setIsPlaying(data.isPlaying);
+            audio1.current.currentTime = data.time1,
+            audio2.current.currentTime = data.time2,
+            audio3.current.currentTime = data.time3,
+            audio4.current.currentTime = data.time4
+            if (data.isPlaying) {
+                audio1.current.play();
+                audio2.current.play();
+                audio3.current.play();
+                audio4.current.play();
+            } else {
+                audio1.current.pause();
+                audio2.current.pause();
+                audio3.current.pause();
+                audio4.current.pause();
+            }
+        });
     }, [socket]);
 
     useEffect(() => {
@@ -121,12 +132,14 @@ const RoomHeader = () =>{
         if (soundOne || soundTwo || soundThree || soundFour) {
             if (!isPlaying) {
                 setIsPlaying(true);
+                setBroadcastTwo(!broadcastTwo);
                 audio1.current.play();
                 audio2.current.play();
                 audio3.current.play();
                 audio4.current.play();
             } else {
                 setIsPlaying(false);
+                setBroadcastTwo(!broadcastTwo);
                 audio1.current.pause();
                 audio2.current.pause();
                 audio3.current.pause();
@@ -262,6 +275,8 @@ const RoomHeader = () =>{
                 setFxThree={setFxThree}
                 setSoundFour={setSoundFour}
                 setFxFour={setFxFour}
+                setBroadcastOne={setBroadcastOne}
+                broadcastOne={broadcastOne}
                 />
                 </div>
                 <div className='select/save-div'>
