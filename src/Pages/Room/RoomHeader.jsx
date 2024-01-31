@@ -27,8 +27,8 @@ const RoomHeader = () =>{
     const [myFavorites, setMyFavorites] = useState();
 
     useEffect(() => {
-        
-    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour, isPlaying])
+
+    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour, isPlaying]);
 
     useEffect(() => {
         if (isPlaying) {
