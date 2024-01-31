@@ -26,7 +26,9 @@ const SoundAccordion = ({
     setSoundThree,
     setFxThree,
     setSoundFour,
-    setFxFour
+    setFxFour,
+    setBroadcastOne,
+    broadcastOne
     }) => {
         let sound;
         let fx;
@@ -68,7 +70,6 @@ const SoundAccordion = ({
     const [volume, setVolume] = useState(fx ? fx.volume : 50);
     const [speed, setSpeed] = useState(fx ? fx.speed : 1);
     const [visible, setVisible] = useState(null);
-    console.log(fx);
 
     return (
         <div id="accordion" className = {hidden ? "hide" : "show"}>
@@ -96,6 +97,7 @@ const SoundAccordion = ({
                                         volume: Number(volume),
                                         speed: Number(speed)
                                     });
+                                    setBroadcastOne(!broadcastOne);
                                 }}>
                                     {soundObj.name}
                                 </div>
@@ -121,6 +123,7 @@ const SoundAccordion = ({
                         setVolume(e.target.value);
                         const fxValues = {...fx};
                         setFx({...fxValues, volume: Number(e.target.value)});
+                        setBroadcastOne(!broadcastOne);
                     }}
             />
             </div>
@@ -135,6 +138,7 @@ const SoundAccordion = ({
                     setSpeed(e.target.value);
                     const fxValues = {...fx};
                     setFx({...fxValues, speed: Number(e.target.value)});
+                    setBroadcastOne(!broadcastOne);
                 }}
             >
                 <option selected={speed === 0.25 ? 'selected' : ''} value={0.25}>0.25</option>
