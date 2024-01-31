@@ -9,7 +9,6 @@ const FriendRequests =({ myRequests, user})=>{
     
     useEffect((
 
-
     )=>{},[myRequests])
 
     let userId 
@@ -29,7 +28,6 @@ const FriendRequests =({ myRequests, user})=>{
             requesteeId: userId,
             accept: accept
         });
-       
        
         setFriendRequestResponse(data.myRequests)
     };

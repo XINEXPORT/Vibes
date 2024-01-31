@@ -118,7 +118,7 @@ const SoundAccordion = ({
             <div>
 
             </div>
-            <label>Playback Speed:</label>
+            {/* <label>Playback Speed:</label>
             <select name="playback-speed" id="playback-speed">
                 <option value="">0.25</option>
                 <option value="">0.5</option>
@@ -128,7 +128,7 @@ const SoundAccordion = ({
                 <option value="">1.5</option>
                 <option value="">1.75</option>
                 <option value="">2</option>
-            </select>
+            </select> */}
          </section>
          
      </div>
