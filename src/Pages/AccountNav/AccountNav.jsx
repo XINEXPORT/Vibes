@@ -13,7 +13,6 @@ export default function AccountNav() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
-    const loggedIn = useSelector((state) => state.loggedIn);
 
     const [modalState, setModalState] = useState(false);
     const [friendRequestModalState, setFriendRequestModalState] = useState(false);
@@ -27,7 +26,7 @@ export default function AccountNav() {
     if (!user) {
         dispatch({type: 'modal-on'});
     };
-
+console.log(user)
     let friends = [];
     if (myFriends) {
         friends = [... myFriends];
@@ -101,7 +100,7 @@ export default function AccountNav() {
             </div>
 
             <div className="">
-            {loggedIn ? ( <FriendRequests
+            {!! user? (<FriendRequests
                 user = {user}
                 myRequests = {myRequests}
             />) : (

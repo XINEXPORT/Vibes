@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 const FriendRequests =({ myRequests, user})=>{
 
     const [friendRequestResponse, setFriendRequestResponse] = useState(myRequests);
-    
+    console.log(myRequests)
+    console.log(friendRequestResponse)
+
     useEffect((
 
-    )=>{},[myRequests])
+    )=>{setFriendRequestResponse(myRequests)},[myRequests])
 
     let userId 
     let username
@@ -19,7 +21,6 @@ const FriendRequests =({ myRequests, user})=>{
         username = user.username
     } 
         
-    console.log(myRequests)
 
     const handleAcceptFriend = async (userId, accept) => {
         console.log("hit")
