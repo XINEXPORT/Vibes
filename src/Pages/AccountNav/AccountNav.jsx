@@ -100,7 +100,7 @@ console.log(user)
             </div>
 
             <div className="">
-            {!! user? (<FriendRequests
+            {!! user ? (<FriendRequests
                 user = {user}
                 myRequests = {myRequests}
             />) : (

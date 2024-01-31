@@ -23,7 +23,6 @@ const FriendRequests =({ myRequests, user})=>{
         
 
     const handleAcceptFriend = async (userId, accept) => {
-        console.log("hit")
 
         const {data} = await axios.post (`/api/respond`,{
             requesteeId: userId,

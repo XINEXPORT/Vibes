@@ -2,8 +2,7 @@ import ViteExpress from 'vite-express';
 import morgan from 'morgan';
 import session from 'express-session';
 import express from 'express';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import {Server} from 'socket.io'
 import {
     login,
     logout,
@@ -28,30 +27,11 @@ const app = express();
 const port = '8000';
 
 //Socket
-const http = require('http').Server(app);
-const cors = require('cors');
+import cors from 'cors';
 
 app.use(cors());
 
-const socketIO = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:8000"
-    }
-});
 
-socketIO.on('connection', (socket) => {
-    console.log(`⚡: ${socket.id} user just connected!`);
-
-
-//sends the message to all the users on the server
-  socket.on('message', (data) => {
-    socketIO.emit('messageResponse', data);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('🔥: A user disconnected');
-  });
-});
 
 app.get('/api', (req, res) => {
     res.json({
@@ -89,4 +69,22 @@ app.post('/api/auth/login', login);
 app.post('/api/auth/logout', logout);
 app.post('/api/auth/register', register);
 
-ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
+const server = ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
+const io = new Server( server , {
+  cors: {
+      origin: "http://localhost:8000"
+  }
+});
+io.on('connection', (socket) => {
+  console.log(`⚡: ${socket.id} user just connected!`);
+
+
+//sends the message to all the users on the server
+socket.on('message', (data) => {
+  socket.broadcast.emit('messageResponse', data);
+});
+
+socket.on('disconnect', () => {
+  console.log('🔥: A user disconnected');
+});
+});
