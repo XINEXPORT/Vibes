@@ -1,5 +1,8 @@
 import './SoundAccordion.css'
 import { useState, useEffect } from 'react';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 
 const SoundAccordion = ({

@@ -4,7 +4,7 @@ import {
     createRoutesFromElements,
     Route
 } from 'react-router-dom';
-import {App, socket} from './App.jsx';
+import {App} from './App.jsx';
 import Room from './Pages/Room/RoomBackground.jsx';
 import Settings from './Pages/AccountNav/Settings.jsx';
 import RoomHeader from './Pages/Room/RoomHeader.jsx';

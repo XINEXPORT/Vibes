@@ -29,8 +29,51 @@ const RoomHeader = () =>{
     const [myFavorites, setMyFavorites] = useState();
 
     useEffect(() => {
-        
-    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour, isPlaying])
+        socket.emit("broadcast_sound", {
+            soundBroadcast: true,
+            soundOne: soundOne,
+            fxOne: fxOne,
+            soundTwo: soundTwo,
+            fxTwo: fxTwo,
+            soundThree: soundThree,
+            fxThree: fxThree,
+            soundFour: soundFour,
+            fxFour: fxFour,
+        });
+    }, [soundOne, fxOne, soundTwo, fxTwo, soundThree, fxThree, soundFour, fxFour]);
+
+    useEffect(() => {
+        socket.emit("broadcast_playstate", {
+            playstateBroadcast: true,
+            isPlaying: isPlaying,
+            time1: audio1.current.currentTime,
+            time2: audio2.current.currentTime,
+            time3: audio3.current.currentTime,
+            time4: audio4.current.currentTime
+        });
+    }, [isPlaying]);
+
+    useEffect(() => {
+            socket.on("receive_sound", (data) => {
+                console.log(data)
+                // setSoundOne(data.soundOne);
+                // setFxOne(data.fxOne);
+                // setSoundTwo(data.soundTwo);
+                // setFxTwo(data.fxTwo);
+                // setSoundThree(data.soundThree);
+                // setFxThree(data.fxThree);
+                // setSoundFour(data.soundFour);
+                // setFxFour(data.fxFour);
+            });
+            socket.on("receive_playstate", (data) => {
+                console.log(data)
+                // setIsPlaying(data.isPlaying);
+                // audio1.current.currentTime = data.time1,
+                // audio2.current.currentTime = data.time2,
+                // audio3.current.currentTime = data.time3,
+                // audio4.current.currentTime = data.time4
+            });
+    }, [socket]);
 
     useEffect(() => {
         if (isPlaying) {
