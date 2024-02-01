@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
-import { CiPlay1 } from "react-icons/ci";
+import { CiPlay1, CiPause1 } from "react-icons/ci";
 import socketIO from 'socket.io-client';
 
 const socket = socketIO.connect('http://localhost:8000');
@@ -307,7 +307,9 @@ const RoomHeader = () =>{
                     </div>
                 </div>
                 <div className="play">
-                    <button id="play-btn" onClick={() => playPause()}><CiPlay1 /></button>
+                    <button id="play-btn" onClick={() => playPause()}>
+                    {isPlaying? <CiPause1 /> : <CiPlay1 />}
+                    </button>
                 </div>
                 <div>
                     <audio ref={audio1} src={soundOne ? soundOne.sound : null} loop />

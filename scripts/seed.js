@@ -15,7 +15,29 @@ let arr = [{
 },{
     username: 'asydnor',
 }, {
-    username: 'choang'
+    username: 'choang',
+}, {
+    username: 'juniors',
+}, {
+    username: 'bellah',
+}, {
+    username: 'joseg',
+}, {
+    username: 'nmacdonald',
+}, {
+    username: 'alig',
+}, {
+    username: 'juicyp'
+}, {
+    username: 'juicyj',
+}, {
+    username: 'howardh',
+}, {
+    username: 'jimmyjohns',
+}, {
+    username: 'greenmonster',
+}, {
+    username: 'enum244'
 }];
 
 for (let i=0; i < arr.length; i++){

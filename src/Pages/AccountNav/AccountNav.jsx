@@ -93,7 +93,7 @@ console.log(friendslist)
             </div>
             <div className="add-friend">
                 <button className="add-friend-btn" 
-                        onClick={() => setFriendRequestModalState(!friendRequestModalState)}>
+                        onClick={setFriendRequestModalState}>
                         Add friends
                 </button>
 
@@ -106,6 +106,8 @@ console.log(friendslist)
                     friendReqList = {friendReqList}
                     setFriendReqList = {setFriendReqList}
                     userSearch = {userSearch}
+                    friendRequestModalState = {friendRequestModalState} 
+                    setFriendRequestModalState = {setFriendRequestModalState}
                     />
                     :
                     <></>
