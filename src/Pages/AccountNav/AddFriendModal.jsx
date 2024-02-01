@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 
 const AddFriendModal = ({             
                         username,
-                        userSearch
+                        userSearch,
+                        friendRequestModalState,
+                        setFriendRequestModalState
                     })=> {
 // console.log(userSearch)
 const [friend, setFriend]=useState(null)
@@ -45,13 +47,18 @@ const handleFriendRequest = async (requesteeId) => {
 };
 
     return (
-        <div className = "addfriendmodal">
-        <input onChange = {(e)=>setInput(e.target.value)}/>
-
-        <div className = "friendchoices">
-           {friend}
+        <div>
+            <div className="closebtn" 
+             onClick={() => setFriendRequestModalState(!friendRequestModalState)}>X
+        </div>
+        <div className = "modal">
+            <div className = "friendsearch">
+                <input placeholder = "search friend" onChange = {(e)=>setInput(e.target.value)}/>
+            </div>
+        {friend}
         </div>
             
+        
         </div>
     );
 };

@@ -29,6 +29,9 @@
     font-size: 20px;
     justify-content: flex-end;
 }
+.modalContainer-btn:hover{
+   color: #f6d258;
+}
 .modalContainer .username{
     display: flex;
     align-items: center;

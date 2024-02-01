@@ -1,7 +1,7 @@
-.friendchoices{
+.modal{
     overflow-y: scroll;
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 250px;
     border-radius: 12px;
     background-color: white;
     box-shadow: black 0px 5px 15px;
@@ -9,7 +9,21 @@
     flex-direction: column;
     padding: 25px;
 }
-.friend-choice{
+.friendsearch{
+    padding-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    padding: 6px;
+}
+.friendsearch input {
+    width: 100%;
+    padding: 8px;
+}
+.closebtn{
+    display: flex;
+    font-size: 20px;
+    justify-content: flex-end;
+    padding: 5px;
+}
+.closebtn:hover{
+    color: #f6d258;
 }
