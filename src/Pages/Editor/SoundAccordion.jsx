@@ -8,6 +8,7 @@ const socket = socketIO.connect('http://localhost:8000');
 const SoundAccordion = ({
     sounds,
     activeIndex,
+    setActiveIndex,
     selectedSounds,
     setSelectedSounds,
     hidden,
@@ -151,6 +152,8 @@ const SoundAccordion = ({
                 <option selected={speed === 2 ? 'selected' : ''} value={2}>2</option>
             </select>
          </section>
+
+         <div className = "close-accordion" onClick={()=>setActiveIndex(null)}>X</div>
          
      </div>
     );
