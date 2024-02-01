@@ -26,7 +26,7 @@ const Chatroom = ({user}) =>{
 
     return(
         <div>
-        <label>Chatroom</label>
+        <label className= "chatroom">Chatroom</label>
         <div id = "message-box">
             {messages.map(({message, id, user})=>{
                 console.log(message)

@@ -12,7 +12,7 @@
     color:grey;
     font-size: small;
 }
-label{
+.chatroom{
     font-weight: bold;
     display: flex;
     justify-content: center;
