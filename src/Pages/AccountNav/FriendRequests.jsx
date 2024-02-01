@@ -19,7 +19,6 @@ console.log(myFriends)
         username = user.username
     } 
         
-
     const handleAcceptFriend = async (userId, accept) => {
 
         const {data} = await axios.post (`/api/respond`,{
