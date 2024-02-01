@@ -1,0 +1,20 @@
+#message-box{
+    max-height: 500px;
+    overflow-y: scroll;
+}
+.input-box{
+    padding: 5px;
+    border-radius: .5rem;
+}
+.user{
+    display: flex;
+    justify-content: flex-end;
+    color:grey;
+    font-size: small;
+}
+label{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}

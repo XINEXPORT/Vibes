@@ -2,6 +2,7 @@ import './AccountNav.css';
 import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
 import FriendRequests from './FriendRequests.jsx'
+import Chatroom from './Chatroom.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -130,7 +131,13 @@ export default function AccountNav() {
                 <h4>Friends - {friendsListMapped.length}</h4>
                 <div className="friends">
                 {friendsListMapped}
-                </div>
+            </div>
+
+            <div className = "chatbox">
+                <Chatroom
+                user = {user}
+                />
+            </div>
                 
             </div>
         </main>
