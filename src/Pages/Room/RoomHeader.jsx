@@ -3,14 +3,17 @@ import RoomBackground from './RoomBackground.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
+import { useSelector } from "react-redux";
 import socketIO from 'socket.io-client';
 
 const socket = socketIO.connect('http://localhost:8000');
 
-const RoomHeader = () =>{
+const RoomHeader = () => {
+    const navigate = useNavigate();
+    const user = useSelector(state => state.login.user);
     const {sounds, favs} = useLoaderData();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
@@ -310,6 +313,16 @@ const RoomHeader = () =>{
                     <button id="play-btn" onClick={() => playPause()}>
                     {isPlaying? <CiPause1 /> : <CiPlay1 />}
                     </button>
+                </div>
+                <div>
+                    {user ?
+                    <button
+                        className="live-room-btn"
+                        onClick={() => navigate(`/${user.username}/room`)}
+                    >Open a<br/>live room</button>
+                    :
+                    <></>
+                    }
                 </div>
                 <div>
                     <audio ref={audio1} src={soundOne ? soundOne.sound : null} loop />
