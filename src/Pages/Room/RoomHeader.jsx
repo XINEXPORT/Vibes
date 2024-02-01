@@ -14,7 +14,7 @@ const socket = socketIO.connect('http://localhost:8000');
 const RoomHeader = () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
-    const {sounds, favs} = useLoaderData();
+    const {sounds, favs, params} = useLoaderData();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
     const [fxOne, setFxOne] = useState(null);
@@ -34,59 +34,67 @@ const RoomHeader = () => {
     const [broadcastTwo, setBroadcastTwo] = useState(false);
 
     useEffect(() => {
-        socket.emit("broadcast_sound", {
-            soundOne: soundOne,
-            fxOne: fxOne,
-            soundTwo: soundTwo,
-            fxTwo: fxTwo,
-            soundThree: soundThree,
-            fxThree: fxThree,
-            soundFour: soundFour,
-            fxFour: fxFour,
-        });
-    }, [broadcastOne])
+        if (params) {
+            socket.emit("broadcast_sound", {
+                room: params,
+                soundOne: soundOne,
+                fxOne: fxOne,
+                soundTwo: soundTwo,
+                fxTwo: fxTwo,
+                soundThree: soundThree,
+                fxThree: fxThree,
+                soundFour: soundFour,
+                fxFour: fxFour,
+            });
+        };
+    }, [broadcastOne]);
 
     useEffect(() => {
-        socket.emit("broadcast_playstate", {
-            isPlaying: isPlaying,
-            time1: audio1.current.currentTime,
-            time2: audio2.current.currentTime,
-            time3: audio3.current.currentTime,
-            time4: audio4.current.currentTime
-        });
-    }, [broadcastTwo])
+        if (params) {
+            socket.emit("broadcast_playstate", {
+                room: params,
+                isPlaying: isPlaying,
+                time1: audio1.current.currentTime,
+                time2: audio2.current.currentTime,
+                time3: audio3.current.currentTime,
+                time4: audio4.current.currentTime
+            });
+        };
+    }, [broadcastTwo]);
 
     useEffect(() => {
-        socket.on("receive_sound", (data) => {
-            console.log(data);
-            setSoundOne(data.soundOne);
-            setFxOne(data.fxOne);
-            setSoundTwo(data.soundTwo);
-            setFxTwo(data.fxTwo);
-            setSoundThree(data.soundThree);
-            setFxThree(data.fxThree);
-            setSoundFour(data.soundFour);
-            setFxFour(data.fxFour);
-        });
-        socket.on("receive_playstate", (data) => {
-            console.log(data)
-            setIsPlaying(data.isPlaying);
-            audio1.current.currentTime = data.time1,
-            audio2.current.currentTime = data.time2,
-            audio3.current.currentTime = data.time3,
-            audio4.current.currentTime = data.time4
-            if (data.isPlaying) {
-                audio1.current.play();
-                audio2.current.play();
-                audio3.current.play();
-                audio4.current.play();
-            } else {
-                audio1.current.pause();
-                audio2.current.pause();
-                audio3.current.pause();
-                audio4.current.pause();
-            }
-        });
+        if (params) {
+            socket.on("receive_sound", (data) => {
+                console.log(data);
+                setSoundOne(data.soundOne);
+                setFxOne(data.fxOne);
+                setSoundTwo(data.soundTwo);
+                setFxTwo(data.fxTwo);
+                setSoundThree(data.soundThree);
+                setFxThree(data.fxThree);
+                setSoundFour(data.soundFour);
+                setFxFour(data.fxFour);
+            });
+            socket.on("receive_playstate", (data) => {
+                console.log(data)
+                setIsPlaying(data.isPlaying);
+                audio1.current.currentTime = data.time1,
+                audio2.current.currentTime = data.time2,
+                audio3.current.currentTime = data.time3,
+                audio4.current.currentTime = data.time4
+                if (data.isPlaying) {
+                    audio1.current.play();
+                    audio2.current.play();
+                    audio3.current.play();
+                    audio4.current.play();
+                } else {
+                    audio1.current.pause();
+                    audio2.current.pause();
+                    audio3.current.pause();
+                    audio4.current.pause();
+                };
+            });
+        };
     }, [socket]);
 
     useEffect(() => {
@@ -318,7 +326,10 @@ const RoomHeader = () => {
                     {user ?
                     <button
                         className="live-room-btn"
-                        onClick={() => navigate(`/${user.username}/room`)}
+                        onClick={() => {
+                            socket.emit("join_room", user.username);
+                            navigate(`/${user.username}/room`)
+                        }}
                     >Open a<br/>live room</button>
                     :
                     <></>
