@@ -32,6 +32,21 @@ const RoomHeader = () => {
     const [myFavorites, setMyFavorites] = useState();
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null);
+    
+    useEffect(()=>{
+        if (!user){
+            setSoundOne(null)
+            setSoundTwo(null)
+            setSoundThree(null)
+            setSoundFour(null)
+            setFxOne(null)
+            setFxTwo(null)
+            setFxThree(null)
+            setFxFour(null)
+            setActiveIndex(null)
+        }
+    },[user])
 
     useEffect(() => {
         // if (params) {
@@ -284,6 +299,8 @@ const RoomHeader = () => {
                 setFxFour={setFxFour}
                 setBroadcastOne={setBroadcastOne}
                 broadcastOne={broadcastOne}
+                activeIndex = {activeIndex}
+                setActiveIndex = {setActiveIndex}
                 />
                 </div>
                 <div className='select/save-div'>

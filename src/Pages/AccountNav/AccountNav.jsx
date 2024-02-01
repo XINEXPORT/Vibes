@@ -88,7 +88,6 @@ export default function AccountNav() {
                 }
                 <button onClick={() => {
                     logoutUser();
-                    navigate('/');
                 }}>Logout</button>
 
             </div>
