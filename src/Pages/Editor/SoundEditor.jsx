@@ -57,7 +57,6 @@ const SoundEditor = ({
             <button onClick = {()=>setActiveIndex(4)}>Sound4</button>
             }
         </div>
-        
                 <SoundAccordion 
                     hidden={activeIndex === null} 
                     sounds={sounds} 

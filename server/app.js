@@ -19,6 +19,7 @@ import {
     addAudio,
     getSounds,
     postFavSounds,
+    getFav,
     deleteFav,
     deleteSoundscape
  } from './controllers/controller.js';
@@ -56,6 +57,7 @@ app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 
 app.post('/api/favs', postFavSounds);
+app.get('/api/getfav', getFav);
 app.delete('/api/deletefav', deleteFav);
 app.delete('/api/deletesoundscape/:id', deleteSoundscape);
 app.post('/api/sounds', upload, addAudio);

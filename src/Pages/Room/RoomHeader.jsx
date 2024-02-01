@@ -33,6 +33,7 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
+    console.log(params, user)
     
     useEffect(()=>{
         if (!user){
@@ -49,7 +50,7 @@ const RoomHeader = () => {
     },[user])
 
     useEffect(() => {
-        // if (params) {
+        if (params) {
             socket.emit("broadcast_sound", {
                 room: params,
                 soundOne: soundOne,
@@ -61,11 +62,11 @@ const RoomHeader = () => {
                 soundFour: soundFour,
                 fxFour: fxFour,
             });
-        // };
+        };
     }, [broadcastOne]);
 
     useEffect(() => {
-        // if (params) {
+        if (params) {
             socket.emit("broadcast_playstate", {
                 room: params,
                 isPlaying: isPlaying,
@@ -74,40 +75,42 @@ const RoomHeader = () => {
                 time3: audio3.current.currentTime,
                 time4: audio4.current.currentTime
             });
-        // };
+        };
     }, [broadcastTwo]);
 
     useEffect(() => {
-        socket.on("receive_sound", (data) => {
-            console.log(data);
-            setSoundOne(data.soundOne);
-            setFxOne(data.fxOne);
-            setSoundTwo(data.soundTwo);
-            setFxTwo(data.fxTwo);
-            setSoundThree(data.soundThree);
-            setFxThree(data.fxThree);
-            setSoundFour(data.soundFour);
-            setFxFour(data.fxFour);
-        });
-        socket.on("receive_playstate", (data) => {
-            console.log(data)
-            setIsPlaying(data.isPlaying);
-            audio1.current.currentTime = data.time1,
-            audio2.current.currentTime = data.time2,
-            audio3.current.currentTime = data.time3,
-            audio4.current.currentTime = data.time4
-            if (data.isPlaying) {
-                audio1.current.play();
-                audio2.current.play();
-                audio3.current.play();
-                audio4.current.play();
-            } else {
-                audio1.current.pause();
-                audio2.current.pause();
-                audio3.current.pause();
-                audio4.current.pause();
-            };
-        });
+        if (params) {
+            socket.on("receive_sound", (data) => {
+                console.log(data);
+                setSoundOne(data.soundOne);
+                setFxOne(data.fxOne);
+                setSoundTwo(data.soundTwo);
+                setFxTwo(data.fxTwo);
+                setSoundThree(data.soundThree);
+                setFxThree(data.fxThree);
+                setSoundFour(data.soundFour);
+                setFxFour(data.fxFour);
+            });
+            socket.on("receive_playstate", (data) => {
+                console.log(data)
+                setIsPlaying(data.isPlaying);
+                audio1.current.currentTime = data.time1,
+                audio2.current.currentTime = data.time2,
+                audio3.current.currentTime = data.time3,
+                audio4.current.currentTime = data.time4
+                if (data.isPlaying) {
+                    audio1.current.play();
+                    audio2.current.play();
+                    audio3.current.play();
+                    audio4.current.play();
+                } else {
+                    audio1.current.pause();
+                    audio2.current.pause();
+                    audio3.current.pause();
+                    audio4.current.pause();
+                };
+            });
+        };
     }, [socket]);
 
     useEffect(() => {
@@ -338,12 +341,15 @@ const RoomHeader = () => {
                 <div>
                     {user ?
                     params ?
+                    params.username === user.username ?
                     <button
                     className="live-room-btn"
                     onClick={() => {
                         navigate(`/`);
                     }}
                     >Close your<br/>live room</button>
+                    :
+                    <></>
                     :
                     <button
                         className="live-room-btn"

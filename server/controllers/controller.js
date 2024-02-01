@@ -303,6 +303,11 @@ const postFavSounds = async(req, res) => {
     };
 };
 
+const getFav = async(req, res) => {
+    const { userId } = req.session.user;
+    console.log(req.body)
+}
+
 const deleteFav = async(req, res) => {
 
 }
@@ -371,6 +376,7 @@ export {
     addAudio,
     getSounds,
     postFavSounds,
+    getFav,
     deleteFav,
     deleteSoundscape
 };

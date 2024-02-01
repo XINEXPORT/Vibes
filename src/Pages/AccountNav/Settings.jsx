@@ -15,11 +15,12 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
+    const [code, setCode] = useState(null);
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
         setAudio(file);
-      }
+      };
 
       const handleSaveClick = async () => {
         const formData = new FormData()
@@ -29,12 +30,12 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
         formData.append('type', type)
     
         try {
-          let { data } = await axios.post(`/api/sounds`, formData)
-          console.log(data);
+            let { data } = await axios.post(`/api/sounds`, formData)
+            console.log(data);
         } catch (error) {
-          console.error("Error uploading audio:", error);
+            console.error("Error uploading audio:", error);
         }
-      }
+        };
 
 
     let mySounds = <></>;
@@ -64,7 +65,15 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     <button onClick={async() => {
                         await axios.delete(`/api/deletesoundscape/${toDelete}`);
                     }}>Delete</button>
+                    <button onClick={async() => {
+                        
+                    }}>Get soundscape code</button>
                 </div>
+                {
+                <div>
+
+                </div>
+                }
               
                 <Form method = "POST" encType = 'multipart/form-data' className = "upload" >
                 <Form.Group controlId="fileName" className="mb-3">
