@@ -67,3 +67,12 @@
 .accordion-drop.show-details{
     background-color: #AEC6CF;
 }
+.close-accordion{
+    display: flex;
+    font-size: 20px;
+    justify-content: flex-end;
+    padding: 5px;
+}
+.close-accordion:hover{
+    color: #f6d258;
+}
