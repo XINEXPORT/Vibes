@@ -58,6 +58,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 <div className = "form">{email}</div>
                 <div>
                     <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
+                    <option value="" disabled selected>Select your soundscape</option>
                         {mySounds}
                     </select>
                     <button onClick={async() => {
@@ -85,7 +86,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                             value = {type}
                             onChange={(e)=>setType(e.target.value)}
                             >
-                        <option>Select Sound Type</option>
+                        <option value="" disabled selected>Select Sound Type</option>
                         <option>Environment</option>
                         <option>Ambient</option>
                         <option>Music</option>

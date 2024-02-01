@@ -3,9 +3,9 @@ import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
 import FriendRequests from './FriendRequests.jsx'
 import { useDispatch, useSelector } from "react-redux";
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { BsFillGearFill } from "react-icons/bs";
+import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import axios from 'axios';
 
@@ -45,9 +45,9 @@ export default function AccountNav() {
 //Friendslist
 
         let friendsListMapped = friendslist.map((friend) => {
-            return <h4>{friend.user.username}</h4>
+            return <div className='friendname'>{friend.user.username} <BsThreeDots /></div>
         });
-console.log(friendslist)
+
 //Logout
         const logoutUser = async () => {
             const { data } = await axios.post('/api/auth/logout');
@@ -115,7 +115,7 @@ console.log(friendslist)
             </div>
 
             <div className="">
-            {!! user ? (<FriendRequests
+            { user ? (<FriendRequests
                 user = {user}
                 myRequests = {myRequests}
                 myFriends = {myFriends}
