@@ -126,9 +126,6 @@ const RoomHeader = () => {
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
-    if (soundOne) {
-        console.log(audio1.current.currentTime);
-    };
 
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
     soundOne ? audio1.current.playbackRate = fxOne ? fxOne.speed : 1 : null;
@@ -138,6 +135,7 @@ const RoomHeader = () => {
     soundThree ? audio3.current.playbackRate = fxThree ? fxThree.speed : 1 : null;
     soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null;
     soundFour ? audio4.current.playbackRate = fxFour ? fxFour.speed : 1 : null;
+    console.log(audio1);
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
@@ -299,9 +297,9 @@ const RoomHeader = () => {
                             {mySoundscapes}
                         </select>
                         <button 
-                        name="soundscape-delete"
-                        onClick={(e)=> handleDeleteSoundscape(soundscapeId)}>
-                            Delete</button>
+                            name="soundscape-delete"
+                            onClick={()=> handleDeleteSoundscape(soundscapeId)}
+                        >Delete</button>
                     </div>
                     :
                     <></>
@@ -324,11 +322,19 @@ const RoomHeader = () => {
                 </div>
                 <div>
                     {user ?
+                    params ?
+                    <button
+                    className="live-room-btn"
+                    onClick={() => {
+                        navigate(`/`);
+                    }}
+                    >Close your<br/>live room</button>
+                    :
                     <button
                         className="live-room-btn"
                         onClick={() => {
                             socket.emit("join_room", user.username);
-                            navigate(`/${user.username}/room`)
+                            navigate(`/${user.username}/room`);
                         }}
                     >Open a<br/>live room</button>
                     :
@@ -344,7 +350,7 @@ const RoomHeader = () => {
             </div>
             <RoomBackground />
         </div>
-    )
-}
+    );
+};
 
 export default RoomHeader
