@@ -33,8 +33,8 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
 
-    if (params) {
-        useEffect(() => {
+    useEffect(() => {
+        if (params) {
             socket.emit("broadcast_sound", {
                 room: params,
                 soundOne: soundOne,
@@ -46,9 +46,11 @@ const RoomHeader = () => {
                 soundFour: soundFour,
                 fxFour: fxFour,
             });
-        }, [broadcastOne])
-    
-        useEffect(() => {
+        };
+    }, [broadcastOne]);
+
+    useEffect(() => {
+        if (params) {
             socket.emit("broadcast_playstate", {
                 room: params,
                 isPlaying: isPlaying,
@@ -57,9 +59,11 @@ const RoomHeader = () => {
                 time3: audio3.current.currentTime,
                 time4: audio4.current.currentTime
             });
-        }, [broadcastTwo])
-    
-        useEffect(() => {
+        };
+    }, [broadcastTwo]);
+
+    useEffect(() => {
+        if (params) {
             socket.on("receive_sound", (data) => {
                 console.log(data);
                 setSoundOne(data.soundOne);
@@ -88,10 +92,10 @@ const RoomHeader = () => {
                     audio2.current.pause();
                     audio3.current.pause();
                     audio4.current.pause();
-                }
+                };
             });
-        }, [socket]);
-    };
+        };
+    }, [socket]);
 
     useEffect(() => {
         if (isPlaying) {

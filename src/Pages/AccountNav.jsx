@@ -34,10 +34,9 @@ export default function AccountNav() {
     };
 
     let friendsList = friends.map((friend) => {
-        return  <span>
-                    <h4 key={friend.username}>{friend.username}</h4>
+        return  <span key={friend.username}>
+                    <h4>{friend.username}</h4>
                     <button
-                        key={friend.username}
                         onClick={() => {
                             socket.emit("join_room", friend.username);
                             navigate(`/${friend.username}/room`)
