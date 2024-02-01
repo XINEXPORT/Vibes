@@ -12,9 +12,3 @@
     color:grey;
     font-size: small;
 }
-.chatroom{
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}

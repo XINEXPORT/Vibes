@@ -124,21 +124,22 @@ export default function AccountNav() {
             />) : (
                 <></>
             )}
-           
             </div>
 
+            
             <div className='friends-list'>
                 <h4>Friends - {friendsListMapped.length}</h4>
                 <div className="friends">
-                {friendsListMapped}
-            </div>
-
+                    {friendsListMapped}
+                </div>
+                  
+                  
             <div className = "chatbox">
-                <Chatroom
+            <h1 className= "chatroom-title">Chatroom</h1>
+            { user ? (<Chatroom
                 user = {user}
-                />
+                />) : (<></>)}
             </div>
-                
             </div>
         </main>
     );
