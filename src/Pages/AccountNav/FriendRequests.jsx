@@ -31,34 +31,32 @@ console.log(myFriends)
     };
 
     let requests = <></>
-
     if(friendRequestResponse){
-       
-    requests = friendRequestResponse.map((request)=>{
+        requests = friendRequestResponse.map((request)=>{
             return(
-            <div key = {request.user.userId}
+                <div key = {request.user.userId}
                  className = "accept">
-                <p>{request.user.username}</p>
-                <button onClick = {()=>handleAcceptFriend
-                    (request.user.userId, true)}>Accept Friend </button>
-                 <button onClick = {()=>handleAcceptFriend
-                    (request.user.userId, false)}>Decline Friend </button>
+                    <p>{request.user.username}</p>
+                    <button onClick = {() => handleAcceptFriend
+                        (request.user.userId, true)}
+                    >Accept Friend</button>
+                    <button onClick = {() => handleAcceptFriend
+                        (request.user.userId, false)}
+                    >Decline Friend</button>
                 </div>
-)
+            );
         });
-        
-        console.log(requests)
-    
-    }
+    };
 
     return  (
-    <div className = 'friend-requests'>
-        <h4>Friend Requests</h4>
+        <div className = 'friend-requests'>
+            <h4>Friend Requests</h4>
             <div className = "requestname">
-             </div>
                 {requests}
             </div>
-)}
+        </div>
+    );
+};
 
 
 
