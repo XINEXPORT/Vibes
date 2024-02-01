@@ -33,6 +33,7 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
+    console.log(params, user)
     
     useEffect(()=>{
         if (!user){
@@ -340,12 +341,15 @@ const RoomHeader = () => {
                 <div>
                     {user ?
                     params ?
+                    params.username === user.username ?
                     <button
                     className="live-room-btn"
                     onClick={() => {
                         navigate(`/`);
                     }}
                     >Close your<br/>live room</button>
+                    :
+                    <></>
                     :
                     <button
                         className="live-room-btn"

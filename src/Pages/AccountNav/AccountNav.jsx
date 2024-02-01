@@ -9,6 +9,9 @@ import { useState } from 'react';
 import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import axios from 'axios';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 export default function AccountNav() {
     const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
@@ -46,7 +49,15 @@ export default function AccountNav() {
 //Friendslist
 
         let friendsListMapped = friendslist.map((friend) => {
-            return <div className='friendname'>{friend.user.username} <BsThreeDots /></div>
+            return <div className='friendname'>{friend.user.username}
+                        <button
+                            onClick={() => {
+                                socket.emit("join_room", friend.user.username);
+                                navigate(`/${friend.user.username}/room`)
+                            }}
+                        >Join</button>
+                        <BsThreeDots />
+                    </div>
         });
 
 //Logout
