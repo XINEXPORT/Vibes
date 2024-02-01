@@ -25,7 +25,7 @@ const SoundEditor = ({
     setSoundFour,
     setFxFour,
     setBroadcastOne,
-    broadcastOne
+    broadcastOne,
     }) => {
 
     const dispatch = useDispatch();
