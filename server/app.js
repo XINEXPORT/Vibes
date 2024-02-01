@@ -79,20 +79,24 @@ io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
 
-//sends the message to all the users on the server
-socket.on('message', (data) => {
-  socket.broadcast.emit('messageResponse', data);
-});
+  //sends the message to all the users on the server
+  socket.on('message', (data) => {
+    socket.broadcast.emit('messageResponse', data);
+  });
 
-socket.on ('broadcast_playstate', (data) =>{
-  socket.broadcast.emit('receive_playstate', data);
-});
+  socket.on("join_room", (data) => {
+    socket.join(data);
+  });
 
-socket.on ('broadcast_sound', (data) =>{
-  socket.broadcast.emit('receive_sound', data);
-});
+  socket.on ('broadcast_playstate', (data) =>{
+    socket.to(data.room).emit('receive_playstate', data);
+  });
 
-socket.on('disconnect', () => {
-  console.log('❌: A user disconnected');
-});
+  socket.on ('broadcast_sound', (data) =>{
+    socket.to(data.room).emit('receive_sound', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('❌: A user disconnected');
+  });
 });

@@ -6,6 +6,9 @@ import { useState, useEffect } from 'react';
 import { BsFillGearFill } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import axios from 'axios';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 export default function AccountNav() {
     const { mySounds, myFavs, myFriends, userSearch } = useLoaderData();
@@ -31,7 +34,16 @@ export default function AccountNav() {
     };
 
     let friendsList = friends.map((friend) => {
-        return <h4>{friend.username}</h4>
+        return  <span>
+                    <h4 key={friend.username}>{friend.username}</h4>
+                    <button
+                        key={friend.username}
+                        onClick={() => {
+                            socket.emit("join_room", friend.username);
+                            navigate(`/${friend.username}/room`)
+                        }}
+                    >Join</button>
+                </span>
     });
 
     const logoutUser = async () => {
@@ -101,7 +113,7 @@ export default function AccountNav() {
             <div className='friends-list'>
                 <h4>Friends - {friends.length}</h4>
                 <div className="friends">
-                {friendsList}
+                    {friendsList}
                 </div>
                 
             </div>
