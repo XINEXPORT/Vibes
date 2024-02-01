@@ -10,7 +10,6 @@ const FriendRequests =({ myFriends, myRequests, user, setFriendsList})=>{
     useEffect((
 
     )=>{setFriendRequestResponse(myRequests)},[myRequests, myFriends])
-console.log(myFriends)
     let userId 
     let username
 
