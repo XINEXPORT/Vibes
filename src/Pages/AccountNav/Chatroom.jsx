@@ -16,6 +16,7 @@ const Chatroom = ({user}) =>{
         socket.emit("sendMessage", messageArr)
         setMessages(messageArr)
         setInput("")
+        console.log(messageArr)
     }
 
     useEffect(()=>{
@@ -24,14 +25,22 @@ const Chatroom = ({user}) =>{
         })
     },[socket])
 
+    useEffect(()=>{
+        socket.on("userhasjoined", (data)=>{
+            let messageArr = [...messages, {message: `${data} has joined the room` , id: "server", user:"Server"}]
+            setMessages(messageArr)
+        })
+    },[socket]);
+    console.log(messages)
+
     return(
         <div>
         <div id = "message-box">
             {messages.map(({message, id, user})=>{
-                console.log(message)
+                console.log(user)
                 return(
                     <div className= 'message-wrapper'>
-                        <p className = "">{message}</p>
+                        <p>{message}</p>
                         <p className = "user">{user}</p>
                     </div>
                 )

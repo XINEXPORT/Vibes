@@ -83,6 +83,8 @@ io.on('connection', (socket) => {
   socket.on("join_room", (data) => {
     console.log(`user has joined ${data}`);
     socket.join(data.roomName);
+    socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+
   });
 
   socket.on("join_info", (data) => {
