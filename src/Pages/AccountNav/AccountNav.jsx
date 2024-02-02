@@ -55,7 +55,12 @@ export default function AccountNav() {
                                 navigate(`/${friend.user.username}/room`);
                             }}
                         >Join</button>
-                        <BsThreeDots />
+                        <button><BsThreeDots 
+                        onClick={async()=>{
+                            let {data} = await axios.delete(`/api/deletefriend/${friend.user.userId}`)
+                            setFriendslist(data.myFriends)
+                        }}
+                        /></button>
                     </div>
         });
 

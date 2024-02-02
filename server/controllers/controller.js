@@ -334,9 +334,27 @@ const deleteFriend = async(req,res)=>{
         where: {
             userId: friendId,
             friendId: userId
+        }     
+    });
+    
+    await FriendsList.destroy({
+        where:{
+            userId: userId,
+            friendId: friendId
+        }
+    })
+
+    const friends = await FriendsList.findAll({
+        where: {
+            friendId: userId
+        },
+        include: {
+            model: User,
+            attributes: ["username", "userId"]
         }
     });
-    res.status(200).json({success: true});
+    console.log(friends)
+    res.status(200).json({myFriends:friends});
 }
 
 //Upload Audio
