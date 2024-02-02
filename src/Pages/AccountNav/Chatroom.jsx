@@ -31,7 +31,7 @@ const Chatroom = ({user}) =>{
             setMessages(messageArr)
         })
     },[socket]);
-    console.log(messages)
+    
 
     return(
         <div>
@@ -39,6 +39,7 @@ const Chatroom = ({user}) =>{
             {messages.map(({message, id, user})=>{
                 console.log(user)
                 return(
+                    
                     <div className= 'message-wrapper'>
                         <p>{message}</p>
                         <p className = "user">{user}</p>

@@ -21,7 +21,8 @@ import {
     postFavSounds,
     getFav,
     deleteFav,
-    deleteSoundscape
+    deleteSoundscape,
+    deleteFriend
  } from './controllers/controller.js';
 
 const app = express();
@@ -60,6 +61,7 @@ app.post('/api/favs', postFavSounds);
 app.get('/api/getfav', getFav);
 app.delete('/api/deletefav', deleteFav);
 app.delete('/api/deletesoundscape/:id', deleteSoundscape);
+app.delete('/api/deletefriend/:id', deleteFriend);
 app.post('/api/sounds', upload, addAudio);
 
 
@@ -81,9 +83,10 @@ io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
   socket.on("join_room", (data) => {
-    console.log(`user has joined ${data}`)
+    // console.log(`user has joined ${data}`)
     socket.join(data.roomName);
     socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+    console.log(data.userJoin)
 
   });
 

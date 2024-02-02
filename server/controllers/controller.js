@@ -325,6 +325,20 @@ const deleteSoundscape = async(req, res) => {
     res.status(200).json({success: true});
 };
 
+const deleteFriend = async(req,res)=>{
+    console.log(req.params, '<--------- this is req')
+    const { userId } = req.session.user;
+    const friendId = req.params.id
+
+    await FriendsList.destroy({
+        where: {
+            userId: friendId,
+            friendId: userId
+        }
+    });
+    res.status(200).json({success: true});
+}
+
 //Upload Audio
 const addAudio = async (req,res) => {
 
@@ -378,5 +392,6 @@ export {
     postFavSounds,
     getFav,
     deleteFav,
-    deleteSoundscape
+    deleteSoundscape,
+    deleteFriend
 };
