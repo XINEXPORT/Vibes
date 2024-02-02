@@ -44,6 +44,7 @@ const router = createBrowserRouter(
                 element={<RoomHeader />}
                 loader={async({ params }) => {
                     const {data} = await axios.get(`/api/sounds`);
+                    socket.emit("join_room", params.username);
                     return {
                         sounds: data.sounds,
                         favs: data.favs,
