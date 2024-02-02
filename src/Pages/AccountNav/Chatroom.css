@@ -1,6 +1,7 @@
 #message-box{
     max-height: 500px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .input-box{
     padding: 5px;
@@ -11,4 +12,9 @@
     justify-content: flex-end;
     color:grey;
     font-size: small;
+}
+.message-wrapper {
+    width: 250px;
+    word-break: normal;
+    height: 100px;
 }

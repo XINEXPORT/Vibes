@@ -28,10 +28,10 @@ const Chatroom = ({user}) =>{
         <div>
         <div id = "message-box">
             {messages.map(({message, id, user})=>{
-                console.log(message)
+                console.log(user)
                 return(
                     <div className= 'message-wrapper'>
-                        <p className = "">{message}</p>
+                        <p>{message}</p>
                         <p className = "user">{user}</p>
                     </div>
                 )

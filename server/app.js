@@ -82,13 +82,13 @@ io.on('connection', (socket) => {
 
 
 //sends the message to all the users on the server
-socket.on ("sendMessage", (data) =>{
-  socket.broadcast.emit("receiveMessage", data)
-})
+  socket.on ("sendMessage", (data) =>{
+    socket.broadcast.emit("receiveMessage", data)
+  })
 
-socket.on('message', (data) => {
-  socket.broadcast.emit('messageResponse', data);
-});
+  socket.on('message', (data) => {
+    socket.broadcast.emit('messageResponse', data);
+  });
 
   socket.on("join_room", (data) => {
     socket.join(data);
