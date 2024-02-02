@@ -14,7 +14,7 @@ const socket = socketIO.connect('http://localhost:8000');
 const RoomHeader = () => {
     const {sounds, favs, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
-    if (params) {
+    if (params && user) {
         socket.emit("join_room", {
             roomName: params.username,
             userJoin: user.username
