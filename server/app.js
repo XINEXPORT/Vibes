@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
 
   socket.on("join_room", (data) => {
     console.log(`user has joined ${data}`)
-    socket.join(data);
+    socket.join(data.roomName);
   });
 
 //sends the message to all the users on the server

@@ -12,9 +12,15 @@ import socketIO from 'socket.io-client';
 const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () => {
-    const navigate = useNavigate();
-    const user = useSelector(state => state.login.user);
     const {sounds, favs, params} = useLoaderData();
+    const user = useSelector(state => state.login.user);
+    if (params) {
+        socket.emit("join_room", {
+            roomName: params.username,
+            userJoin: user.username
+        });
+    };
+    const navigate = useNavigate();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
     const [fxOne, setFxOne] = useState(null);
