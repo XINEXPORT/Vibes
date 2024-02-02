@@ -8,6 +8,9 @@ import App from './App.jsx';
 import Room from './Pages/Room/RoomBackground.jsx';
 import Settings from './Pages/AccountNav/Settings.jsx';
 import RoomHeader from './Pages/Room/RoomHeader.jsx';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 const router = createBrowserRouter(
     createRoutesFromElements(

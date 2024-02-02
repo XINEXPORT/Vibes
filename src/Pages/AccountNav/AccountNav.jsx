@@ -52,8 +52,7 @@ export default function AccountNav() {
             return <div className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
-                                socket.emit("join_room", friend.user.username);
-                                navigate(`/${friend.user.username}/room`)
+                                navigate(`/${friend.user.username}/room`);
                             }}
                         >Join</button>
                         <BsThreeDots />

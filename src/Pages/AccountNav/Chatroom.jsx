@@ -16,6 +16,7 @@ const Chatroom = ({user}) =>{
         socket.emit("sendMessage", messageArr)
         setMessages(messageArr)
         setInput("")
+        console.log(messageArr)
     }
 
     useEffect(()=>{
@@ -23,6 +24,14 @@ const Chatroom = ({user}) =>{
             setMessages(data)
         })
     },[socket])
+
+    useEffect(()=>{
+        socket.on("userhasjoined", (data)=>{
+            let messageArr = [...messages, {message: `${data} has joined the room` , id: "server", user:"Server"}]
+            setMessages(messageArr)
+        })
+    },[socket]);
+    console.log(messages)
 
     return(
         <div>
