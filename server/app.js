@@ -81,8 +81,16 @@ io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
   socket.on("join_room", (data) => {
-    console.log(`user has joined ${data}`)
+    console.log(`user has joined ${data}`);
     socket.join(data.roomName);
+  });
+
+  socket.on("join_info", (data) => {
+    socket.to(data.room).emit("info_request", {data: socket.id});
+  });
+
+  socket.on("send_info", (data) => {
+    // socket.to(data.id).emit("accept_info", )
   });
 
 //sends the message to all the users on the server

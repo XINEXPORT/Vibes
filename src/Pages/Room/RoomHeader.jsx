@@ -116,6 +116,12 @@ const RoomHeader = () => {
                 audio4.current.pause();
             };
         });
+            socket.on("info_request", ({ data }) => {
+                console.log(data);
+                if (params.username === user.username) {
+                    socket.emit("send_info", data);
+                };
+            });
     }, [socket]);
 
     useEffect(() => {
@@ -192,6 +198,7 @@ const RoomHeader = () => {
         setFxTwo(null);
         setFxThree(null);
         setFxFour(null);
+        setBroadcastOne(!broadcastOne);
     };
 
     const setSoundscape = (ID) => {
@@ -206,10 +213,12 @@ const RoomHeader = () => {
                         volume: soundscape.sounds[0].soundscapeSound.volume,
                         speed: soundscape.sounds[0].soundscapeSound.speed
                     });
+                    setBroadcastOne(!broadcastOne);
                 };
             } else {
                 setSoundOne(null);
                 setFxOne(null);
+                setBroadcastOne(!broadcastOne);
             };
             if (soundscape.sounds[1]) {
                 if (soundscape.sounds[1] !== soundTwo) {
@@ -218,10 +227,12 @@ const RoomHeader = () => {
                         volume: soundscape.sounds[1].soundscapeSound.volume,
                         speed: soundscape.sounds[1].soundscapeSound.speed
                     });
+                    setBroadcastOne(!broadcastOne);
                 };
             } else {
                 setSoundTwo(null);
                 setFxTwo(null);
+                setBroadcastOne(!broadcastOne);
             };
             if (soundscape.sounds[2]) {
                 if (soundscape.sounds[2] !== soundThree) {
@@ -230,10 +241,12 @@ const RoomHeader = () => {
                         volume: soundscape.sounds[2].soundscapeSound.volume,
                         speed: soundscape.sounds[2].soundscapeSound.speed
                     });
+                    setBroadcastOne(!broadcastOne);
                 };
             } else {
                 setSoundThree(null);
                 setFxThree(null);
+                setBroadcastOne(!broadcastOne);
             };
             if (soundscape.sounds[3]) {
                 if (soundscape.sounds[3] !== soundThree) {
@@ -242,10 +255,12 @@ const RoomHeader = () => {
                         volume: soundscape.sounds[3].soundscapeSound.volume,
                         speed: soundscape.sounds[3].soundscapeSound.speed
                     });
+                    setBroadcastOne(!broadcastOne);
                 };
             } else {
                 setSoundFour(null);
                 setFxFour(null);
+                setBroadcastOne(!broadcastOne);
             };
         };
     };
