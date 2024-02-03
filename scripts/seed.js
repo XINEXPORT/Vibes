@@ -150,6 +150,11 @@ const oceanwaves = await Sound.create({
     name: 'Ocean 1',
     type: 'Environment',
 })
+const birds = await Sound.create({
+    sound: './public/audio//environmental/Birds.wav',
+    name: 'Birds 1',
+    type: 'Environment',
+})
 //Ambient Sound
 const cafe = await Sound.create({
     sound: './public/audio/ambient/coffee-shop-ambience-1.mp3',
@@ -169,6 +174,31 @@ const playground = await Sound.create({
 const room = await Sound.create({
     sound: './public/audio/ambient/room-ambience-1.mp3',
     name: 'Room 1',
+    type: 'Ambient', 
+})
+const washingdishes = await Sound.create({
+    sound: './public/audio/ambient/WashingDishes.wav',
+    name: 'Doing the dishes',
+    type: 'Ambient', 
+})
+const faucetdrip = await Sound.create({
+    sound: './public/audio/ambient/FaucetDrip.wav',
+    name: 'Dripping Faucet',
+    type: 'Ambient', 
+})
+const feedbacknoise = await Sound.create({
+    sound: './public/audio/ambient/fxfeedback.mp3',
+    name: 'FX Feedback',
+    type: 'Ambient', 
+})
+const morse = await Sound.create({
+    sound: './public/audio/ambient/morse.mp3',
+    name: 'Morse Code',
+    type: 'Ambient', 
+})
+const applause = await Sound.create({
+    sound: './public/audio/ambient/applause.wav',
+    name: 'Crowd Applause',
     type: 'Ambient', 
 })
 //Music Sound
@@ -192,7 +222,24 @@ const music4 = await Sound.create({
     name: 'House of Woodcock',
     type: 'Music', 
 })
+const music5 = await Sound.create({
+    sound: './public/audio/music/Noxin-MetalicSeaCreature.mp3',
+    name: 'Metallic Sea Creature',
+    type: 'Music', 
+})
+const music6 = await Sound.create({
+    sound: './public/audio/music/Noxin-UrsaMinor.mp3',
+    name: 'Ursa Minor',
+    type: 'Music', 
+})
+const music7 = await Sound.create({
+    sound: './public/audio/music/pianoloop.wav',
+    name: 'Piano Loop',
+    type: 'Music', 
+})
 
+
+//Soundscapes
 const guySoundscape1 = await guyFieti.createSoundscape({
     name: 'Flavortown 1',
     isPrivate: false
