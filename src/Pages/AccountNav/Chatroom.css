@@ -1,5 +1,6 @@
 #message-box{
-    max-height: 500px;
+    height: 300px;
+    max-height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -15,6 +16,5 @@
 }
 .message-wrapper {
     width: 250px;
-    word-break: normal;
-    height: 100px;
+    word-break: break-all;
 }
