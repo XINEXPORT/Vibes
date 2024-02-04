@@ -16,6 +16,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
     const [code, setCode] = useState(null);
+    const [success, setSuccess] = useState('');
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -31,6 +32,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     
         try {
             let { data } = await axios.post(`/api/sounds`, formData)
+            setSuccess('Success!');
             console.log(data);
         } catch (error) {
             console.error("Error uploading audio:", error);
@@ -109,6 +111,12 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                  />
                 </Form.Group>
                 </Form>
+
+                {success && (
+                     <div className="alert alert-success">
+                            <strong>Success!</strong> {success}
+                        </div>
+                )} 
 
                 <button className = "save-btn" onClick={handleSaveClick}>Save</button>
 
