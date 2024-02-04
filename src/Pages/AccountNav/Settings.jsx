@@ -32,7 +32,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     
         try {
             let { data } = await axios.post(`/api/sounds`, formData)
-            setSuccess('Success!');
+            setSuccess(<></>);
             console.log(data);
         } catch (error) {
             console.error("Error uploading audio:", error);
