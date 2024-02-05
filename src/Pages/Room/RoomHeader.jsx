@@ -451,7 +451,7 @@ const RoomHeader = () => {
                     <button
                         className="live-room-btn"
                         onClick={() => {
-                            navigate(`/${user.username}/room`);
+                            navigate(`/${user.username}`);
                         }}
                     >Open a<br/>live room</button>
                     :

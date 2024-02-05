@@ -56,26 +56,28 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
         });
     };
 
-    return(
-        <div className = "modalContainer">
+    return (
+        <div className="modalContainer">
+            <label className="title">User Settings</label>
             <div className='account-info'>
-                <label className="title">User Settings</label>
                 <label className="username">Username</label>
                 <div className="form">{username}</div>
                 <label className="email">Email</label>
                 <div className="form">{email}</div>
             </div>
-            <div className='soundcape-settings'>
+            <div className='soundscape-settings'>
                 <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
                     <option value="" disabled selected>Select your soundscape</option>
                     {mySounds}
                 </select>
-                <button onClick={async() => {
-                    await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                }}>Delete</button>
-                <button onClick={async() => {
-                    
-                }}>Get soundscape code</button>
+                <span>
+                    <button onClick={async() => {
+                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                    }}>Delete</button>
+                    <button onClick={async() => {
+                        
+                    }}>Get soundscape code</button>
+                </span>
             </div>
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >

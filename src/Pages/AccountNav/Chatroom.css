@@ -1,29 +1,37 @@
-#message-box{
-    max-height: 140px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
 .message-flex{
-    height: 100%;
+    height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.input-box{
-    padding: 5px;
-    border-radius: .5rem;
+.message-box{
+    height: 138PX;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .send-msg-div{
     display: flex;
+    height: 36PX;
+}
+.input-box{
+    width: 60%;
+    padding: 5px;
+    border-radius: .5rem;
+}
+.send-msg-div button{
+    width: 40%;
 }
 .user{
     display: flex;
-    justify-content: flex-end;
     color:grey;
     font-size: small;
 }
+.message{
+    margin-right: 38px;
+}
 .message-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: top;
     width: 200px;
