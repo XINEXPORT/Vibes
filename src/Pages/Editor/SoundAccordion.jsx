@@ -110,7 +110,7 @@ const SoundAccordion = ({
                     </section>
           ))} 
          </section> 
-         <section style={{color:"black" , width:300}}>
+         <section className = "fx" style={{color:"black" , width:300}}>
             <h1>FX</h1>
             <label>Volume:</label>
             <div class="rangeWarp">

@@ -27,10 +27,10 @@ const LoginPage = () => {
                 dispatch({type: 'login', payload: data.user});
                 dispatch({type: 'modal-off'});
             } else{
-                alert('invalid data');
+                alert('Username and Password Not Found');
             }
             } else {
-                alert('need both username and password');
+                alert('Both Username and Password Required');
             };
         };
 
@@ -48,7 +48,7 @@ const LoginPage = () => {
                     alert('invalid data')
                 }
             } else{
-                alert('both username, email, & password required')
+                alert('Both Username, Email, and Password Required')
             }
         }
 

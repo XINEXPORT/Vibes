@@ -229,7 +229,9 @@ const RoomHeader = () => {
                 audio3.current.pause();
                 audio4.current.pause();
             };
-        };
+        } else{
+            alert("Please select a sound");
+        }
     };
     console.log(isPlaying);
 
@@ -316,8 +318,8 @@ const RoomHeader = () => {
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
-        if (soundscapeName) {
-            console.log(fxOne)
+        if (soundscapeName && (soundOne|| soundTwo|| soundThree|| soundFour)) {
+           console.log("hit")
             const newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,
@@ -343,7 +345,12 @@ const RoomHeader = () => {
             await axios.post('/api/favs', newSoundscape);
             return;
         } else {
-            alert('You must enter a name to save your soundscape.');
+            if(soundscapeName){
+                alert("Please select atleast one sound")
+            }else{
+                alert('You must enter a name to save your soundscape.');
+            }
+            
         };
     };
 
@@ -356,10 +363,10 @@ const RoomHeader = () => {
        
     };
 
-    //Delete a soundscape
-    const handleDeleteSoundscape = async (soundscapeId)=>{
-        const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
-    }
+    // //Delete a soundscape
+    // const handleDeleteSoundscape = async (soundscapeId)=>{
+    //     const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
+    // }
 
     return(
         <div className="Header">
@@ -404,10 +411,10 @@ const RoomHeader = () => {
                             <option value={null}>Soundscapes</option>
                             {mySoundscapes}
                         </select>
-                        <button 
+                        {/* <button 
                             name="soundscape-delete"
                             onClick={()=> handleDeleteSoundscape(soundscapeId)}
-                        >Delete</button>
+                        >Delete</button> */}
                     </div>
                     :
                     <></>

@@ -1,7 +1,7 @@
 import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {  Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import axios from 'axios'
 
 //how to display my created soundscapes
@@ -16,6 +16,8 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
     const [code, setCode] = useState(null);
+    const [success, setSuccess] = useState('');
+    const [deleteSuccess, setDeleteSuccess] = useState('');
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -31,11 +33,20 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     
         try {
             let { data } = await axios.post(`/api/sounds`, formData)
+            setSuccess(<></>);
+            setName('')
+            setType('')
+            setAudio(null)
             console.log(data);
         } catch (error) {
             console.error("Error uploading audio:", error);
         }
         };
+
+        const handleDeleteClick = async () => {
+            await axios.delete(`/api/deletesoundscape/${toDelete}`);
+            setDeleteSuccess('Deletion successful!')
+        }
 
 
     let mySounds = <></>;
@@ -101,8 +112,17 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 />
                 </Form.Group>
                 </Form>
-
-                <button className="save-btn" onClick={handleSaveClick}>Save</button>
+                {success && (
+                     <div className="alert alert-success">
+                            <strong>Success!</strong> {success}
+                        </div>
+                )}
+                {deleteSuccess &&(
+                    <div className="alert alert-success">
+                        <strong>Deletion Successful!</strong> {success}
+                    </div>
+                )}
+                <button className = "save-btn" onClick={handleSaveClick}>Save</button>
             </div>
         </div>
     )
