@@ -101,7 +101,6 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 />
                 </Form.Group>
                 </Form>
-
                 <button className="save-btn" onClick={handleSaveClick}>Save</button>
             </div>
         </div>
