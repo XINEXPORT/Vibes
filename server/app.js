@@ -94,8 +94,18 @@ io.on('connection', (socket) => {
     }
     console.log(socket.rooms)
     
-    console.log(data.userJoin)
+  
+    if (data.roomName !== data.userJoin) {
+      socket.to(data.roomName).emit("info_request", {
+        id: socket.id,
+        host: data.roomName
+      });
+    };
+  });
 
+  socket.on("send_info", (data) => {
+    console.log(data)
+    socket.to(data.user).emit("accept_info", data);
   });
 
 //sends the message to all the users on the server
