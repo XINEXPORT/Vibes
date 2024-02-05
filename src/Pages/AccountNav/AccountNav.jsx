@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
+import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
 import socketIO from 'socket.io-client';
 
@@ -33,17 +34,17 @@ export default function AccountNav() {
         dispatch({type: 'modal-on'});
     };
 
-    const setFriendsListHandler = (newFriendsList)=>{
-    setFriendslist(newFriendsList)
-        }
+    const setFriendsListHandler = (newFriendsList) => {
+        setFriendslist(newFriendsList);
+    };
 
-        useEffect(()=>{
-            if (myFriends){
-                setFriendslist(myFriends)
-            } else{
-                setFriendslist([])
-            }
-        },[myFriends])
+    useEffect(() => {
+        if (myFriends) {
+            setFriendslist(myFriends);
+        } else {
+            setFriendslist([]);
+        };
+    }, [myFriends]);
 
 
 //Friendslist
@@ -76,84 +77,88 @@ export default function AccountNav() {
 
     return (
         <main className="account-nav">
-            
             <div className="account">
-
-                <h2>{user ? user.username : 'Guest'}</h2>
-                <button 
-                    className="settings-btn" 
-                    onClick={() => setModalState(!modalState)}>
-                    <BsFillGearFill 
-                    className='cog'/>
-                </button>
-                
-                {modalState ?
-                <Settings
-                    favs={favs}
-                    toDelete={toDelete}
-                    setToDelete={setToDelete}
-                    userId = {user.userId}
-                    username = {user.username}
-                    email = {user.email}
-                    modalState = {modalState}
-                    setModalState = {setModalState}
+                <div className='username'>
+                    <h2>{user ? user.username : 'Guest'}</h2>
+                </div>
+                <div className='logout-and-settings'>
+                    <button
+                        className='logout-btn'
+                        onClick={() => logoutUser()}>
+                        <IoMdLogOut
+                            className='exit-door'
+                        />
+                    </button>
+                    <button 
+                        className="settings-btn"
+                        onClick={() => setModalState(!modalState)}>
+                        <BsFillGearFill 
+                            className='cog'
+                        />
+                    </button>
+                </div>
+            </div>
+            {modalState ?
+            <Settings
+                favs={favs}
+                toDelete={toDelete}
+                setToDelete={setToDelete}
+                userId = {user.userId}
+                username = {user.username}
+                email = {user.email}
+                modalState = {modalState}
+                setModalState = {setModalState}
+            />
+            :
+            <div className='friends-div'>
+                <div className="add-friend">
+                    <button className="add-friend-btn" 
+                            onClick={setFriendRequestModalState}>
+                            Add friends
+                    </button>
+                    {friendRequestModalState ?
+                    <AddFriendModal
+                        userId = {user.userId}
+                        username = {user.username}
+                        searchInput  = {searchInput}
+                        setSearchInput = {setSearchInput}
+                        friendReqList = {friendReqList}
+                        setFriendReqList = {setFriendReqList}
+                        userSearch = {userSearch}
+                        friendRequestModalState = {friendRequestModalState} 
+                        setFriendRequestModalState = {setFriendRequestModalState}
+                    />
+                    :
+                    <></>
+                    }
+                </div>
+                <div className="">
+                    { user && myRequests[0] ? (<FriendRequests
+                        user = {user}
+                        myRequests = {myRequests}
+                        myFriends = {myFriends}
+                        setFriendsList = {setFriendsListHandler}
+                    />) : (
+                        <></>
+                    )}
+                </div>
+                <div className='friends-list'>
+                    <h4>Friends - {friendsListMapped.length}</h4>
+                    <div className="friends">
+                        {friendsListMapped}
+                    </div>
+                </div>
+            </div>
+            }
+            <div className="chatbox">
+                <h1 className="chatroom-title">Chatroom</h1>
+                {user ?
+                <Chatroom
+                    user={user}
                 />
                 :
                 <></>
                 }
-                <button onClick={() => {
-                    logoutUser();
-                }}>Logout</button>
-
-            </div>
-            <div className="add-friend">
-                <button className="add-friend-btn" 
-                        onClick={setFriendRequestModalState}>
-                        Add friends
-                </button>
-
-                {friendRequestModalState ?
-                <AddFriendModal
-                    userId = {user.userId}
-                    username = {user.username}
-                    searchInput  = {searchInput}
-                    setSearchInput = {setSearchInput}
-                    friendReqList = {friendReqList}
-                    setFriendReqList = {setFriendReqList}
-                    userSearch = {userSearch}
-                    friendRequestModalState = {friendRequestModalState} 
-                    setFriendRequestModalState = {setFriendRequestModalState}
-                    />
-                    :
-                    <></>
-                }
-            </div>
-
-            <div className="">
-            { user ? (<FriendRequests
-                user = {user}
-                myRequests = {myRequests}
-                myFriends = {myFriends}
-                setFriendsList = {setFriendsListHandler}
-            />) : (
-                <></>
-            )}
-            </div>
-
-            
-            <div className='friends-list'>
-                <h4>Friends - {friendsListMapped.length}</h4>
-                <div className="friends">
-                    {friendsListMapped}
-                </div>
-                  
-                  
-            <div className = "chatbox">
-            <h1 className= "chatroom-title">Chatroom</h1>
-            { user ? (<Chatroom
-                user = {user}
-                />) : (<></>)}
-            </div>
             </div>
         </main>
     );
