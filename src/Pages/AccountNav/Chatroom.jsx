@@ -38,7 +38,7 @@ const Chatroom = ({user}) =>{
         <div className='message-flex'>
             <div ref={messageField} className="message-box">
                 {messages.map(({message, id, user})=>{
-                    console.log(user)
+                   
                     return (
                         <div className='message-wrapper'>
                             <p className="user">{user}</p>

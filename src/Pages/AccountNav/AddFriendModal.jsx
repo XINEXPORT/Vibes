@@ -9,19 +9,17 @@ const AddFriendModal = ({
                         friendRequestModalState,
                         setFriendRequestModalState
                     })=> {
-// console.log(userSearch)
+const [users, setUsers]=useState(userSearch)
 const [friend, setFriend]=useState(null)
 const [input, setInput] = useState("");
-
 useEffect(()=>{
-    return ()=>{
-        const results = userSearch.filter((user)=>{
+    const updateList = async ()=>{
+        let results = users.filter((user)=>{
             const {username} = user
-            console.log(username)
             return username.includes(input)
-        
-        })
-      
+
+        }) 
+
       const searchField = results.map((user)=>{
         console.log(username)
             return(    
@@ -32,18 +30,24 @@ useEffect(()=>{
             )
         })
         setFriend(searchField) 
+       
+        
     }
-   
-},[input])
+    updateList(input)
+},[users,input])
 
    
+
 const handleFriendRequest = async (requesteeId) => {
     console.log("hit")
 
-        const {data} = await axios.post(`/api/request`, {
+        await axios.post(`/api/request`, {
             requesteeId: requesteeId
         });
-       
+        let {data} = await axios.get('/api/findfriends')
+        console.log(data)
+        setUsers(data.userSearch)
+
 };
 
     return (
@@ -53,7 +57,7 @@ const handleFriendRequest = async (requesteeId) => {
         </div>
         <div className = "modal">
             <div className = "friendsearch">
-                <input placeholder = "search friend" onChange = {(e)=>setInput(e.target.value)}/>
+                <input value = {input} placeholder = "search friend" onChange = {(e)=> setInput (e.target.value)}/>
             </div>
         {friend}
         </div>
