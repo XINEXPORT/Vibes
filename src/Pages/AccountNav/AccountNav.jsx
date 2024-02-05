@@ -54,7 +54,9 @@ export default function AccountNav() {
             return <div className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
-                                navigate(`/${friend.user.username}/room`);
+
+                                
+                                navigate(`/${friend.user.username}`);
                             }}
                         >Join</button>
                         <button><BsThreeDots 
