@@ -8,7 +8,6 @@ const Chatroom = ({user}) =>{
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState([])
 
-    console.log(user)
 
     const sendMessage = () => {
         let messageArr = [...messages, {message: input, id: socket.id, user:user.username}]
