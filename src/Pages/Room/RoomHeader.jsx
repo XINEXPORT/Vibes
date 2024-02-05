@@ -175,7 +175,9 @@ const RoomHeader = () => {
                 audio3.current.pause();
                 audio4.current.pause();
             };
-        };
+        } else{
+            alert("Please select a sound");
+        }
     };
 
     const handleReset = () => {

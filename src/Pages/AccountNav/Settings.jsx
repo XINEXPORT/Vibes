@@ -1,7 +1,7 @@
 import './Settings.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {  Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import axios from 'axios'
 
 //how to display my created soundscapes
