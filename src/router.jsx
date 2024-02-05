@@ -43,7 +43,7 @@ const router = createBrowserRouter(
                 }}
             />
             <Route
-                path="/:username/room"
+                path="/:username"
                 element={<RoomHeader />}
                 loader={async({ params }) => {
                     const {data} = await axios.get(`/api/sounds`);
