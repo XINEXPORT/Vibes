@@ -340,10 +340,10 @@ const RoomHeader = () => {
                             <option value={null}>Soundscapes</option>
                             {mySoundscapes}
                         </select>
-                        <button 
+                        {/* <button 
                             name="soundscape-delete"
                             onClick={()=> handleDeleteSoundscape(soundscapeId)}
-                        >Delete</button>
+                        >Delete</button> */}
                     </div>
                     :
                     <></>
