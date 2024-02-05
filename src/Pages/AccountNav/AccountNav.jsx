@@ -29,6 +29,7 @@ export default function AccountNav() {
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
     const [friendslist, setFriendslist] = useState([]);
+    const [joinFailed, setJoinFailed] = useState(false);
 
 
     if (!user) {
@@ -53,7 +54,6 @@ export default function AccountNav() {
             return <div className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
-                                
                                 navigate(`/${friend.user.username}/room`);
                             }}
                         >Join</button>
@@ -74,6 +74,17 @@ export default function AccountNav() {
             navigate("/");
             };
         };
+
+//joinfail
+        useEffect(()=>{
+            socket.on('joinfailed', ()=>{
+                setJoinFailed(true);
+            })
+            console.log(socket)
+            return () => {
+                socket.off('joinfailed');
+            }
+        },[socket])
 
 
     return (
@@ -149,6 +160,7 @@ export default function AccountNav() {
                         {friendsListMapped}
                     </div>
                 </div>
+                {joinFailed && <p>Room is not available. Please try again.</p>}
             </div>
             }
             <div className="chatbox">

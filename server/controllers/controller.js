@@ -51,7 +51,14 @@ async function findFriends(req, res) {
                     {
                         userId: {
                             [Sequelize.Op.notIn]: [
-                                Sequelize.literal(`SELECT friend_id FROM friends_lists WHERE user_id = ${userId}`)
+                                Sequelize.literal(`(SELECT friend_id FROM friends_lists WHERE user_id = ${userId})`)
+                                
+                            ]
+                        }
+                    },{
+                        userId:{
+                            [Sequelize.Op.notIn]:[
+                                Sequelize.literal(`(SELECT requestee_id FROM friend_requests WHERE user_id = ${userId})`)
                             ]
                         }
                     },
@@ -230,36 +237,6 @@ const getSounds = async (req, res) => {
     });
 };
 
-// This is how soundscape data should come in to be saved as a favorite soundscape:
-// let selectedSounds = {
-//     name: 'my favorite soundscape',
-//     isPrivate: false,
-//     userId: 1,
-//     sounds: {
-//         sound1: {
-//             sound: {
-//                 soundId: 1,
-//                 sound: 'file-path',
-//                 name: 'name',
-//             },
-//             fx: {
-//                 volume: 100
-//             }
-//         },
-//         sound2: {
-//             sound: {},
-//             fx: {}
-//         },
-//         sound3: {
-//             sound: {},
-//             fx: {}
-//         },
-//         sound4: {
-//             sound: {},
-//             fx: {}
-//         },
-//     }
-// }
 
 // Post favorite sounds
 const postFavSounds = async(req, res) => {
