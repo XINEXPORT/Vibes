@@ -14,6 +14,7 @@ import socketIO from 'socket.io-client';
 const socket = socketIO.connect('http://localhost:8000');
 
 export default function AccountNav() {
+    console.log(socket)
     const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -47,11 +48,11 @@ export default function AccountNav() {
 
 
 //Friendslist
-
         let friendsListMapped = friendslist.map((friend) => {
             return <div className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
+                                
                                 navigate(`/${friend.user.username}/room`);
                             }}
                         >Join</button>

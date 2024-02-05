@@ -83,9 +83,17 @@ io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
   socket.on("join_room", (data) => {
-    // console.log(`user has joined ${data}`)
-    socket.join(data.roomName);
-    socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+    if(socket.rooms.has(data.roomName)){
+      socket.join(data.roomName);
+      socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+    } else if(data.roomName === data.userJoin){
+      socket.join(data.roomName);
+      socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+    } else{
+      socket.to(socket.id).emit("joinfailed")
+    }
+    console.log(socket.rooms)
+    
     console.log(data.userJoin)
 
   });
