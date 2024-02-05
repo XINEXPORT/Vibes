@@ -17,6 +17,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [name, setName] = useState(null);
     const [code, setCode] = useState(null);
     const [success, setSuccess] = useState('');
+    const [deleteSuccess, setDeleteSuccess] = useState('');
 
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
@@ -33,11 +34,19 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
         try {
             let { data } = await axios.post(`/api/sounds`, formData)
             setSuccess(<></>);
+            setName('')
+            setType('')
+            setAudio(null)
             console.log(data);
         } catch (error) {
             console.error("Error uploading audio:", error);
         }
         };
+
+        const handleDeleteClick = async () => {
+            await axios.delete(`/api/deletesoundscape/${toDelete}`);
+            setDeleteSuccess('Deletion successful!')
+        }
 
 
     let mySounds = <></>;
@@ -64,11 +73,10 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     <option value="" disabled selected>Select your soundscape</option>
                         {mySounds}
                     </select>
+                    
+                    <button onClick={handleDeleteClick}>Delete</button>
+
                     <button onClick={async() => {
-                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                    }}>Delete</button>
-                    <button onClick={async() => {
-                        
                     }}>Get soundscape code</button>
                 </div>
                 {
@@ -117,6 +125,12 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                             <strong>Success!</strong> {success}
                         </div>
                 )} 
+
+                {deleteSuccess &&(
+                    <div className="alert alert-success">
+                    <strong>Deletion Successful!</strong> {success}
+                </div>
+                )}
 
                 <button className = "save-btn" onClick={handleSaveClick}>Save</button>
 
