@@ -249,6 +249,10 @@ const RoomHeader = () => {
         setFxTwo(null);
         setFxThree(null);
         setFxFour(null);
+        audio1.current.src = null;
+        audio2.current.src = null;
+        audio3.current.src = null;
+        audio4.current.src = null;
         setBroadcastOne(!broadcastOne);
     };
 
