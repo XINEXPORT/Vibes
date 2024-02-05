@@ -113,13 +113,14 @@ const SoundAccordion = ({
          <section style={{color:"black" , width:300}}>
             <h1>FX</h1>
             <label>Volume:</label>
-            <div>
+            <div class="rangeWarp">
             <input 
                     type="range" 
                     min="0" 
                     max="100"
-                    value={volume} 
+                    value={fx ? fx.volume : volume} 
                     className="slider"
+                    id="ticks"
                     onChange ={(e)=>{
                         setVolume(e.target.value);
                         const fxValues = {...fx};

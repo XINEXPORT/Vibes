@@ -14,12 +14,6 @@ const socket = socketIO.connect('http://localhost:8000');
 const RoomHeader = () => {
     const {sounds, favs, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
-    if (params && user) {
-        socket.emit("join_room", {
-            roomName: params.username,
-            userJoin: user.username
-        });
-    };
     const navigate = useNavigate();
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
@@ -39,7 +33,17 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
+    console.log(soundOne);
     console.log(params, user);
+
+    useEffect(() => {
+        if (params && user) {
+            socket.emit("join_room", {
+                roomName: params.username,
+                userJoin: user.username
+            });
+        };
+    }, [params]);
     
     useEffect(()=>{
         if (!user){
@@ -85,7 +89,30 @@ const RoomHeader = () => {
     }, [broadcastTwo]);
 
     useEffect(() => {
-        console.log('hit')
+        socket.on("info_request", ({ id, host }) => {
+            if (host === user.username) {
+                console.log(user.username);
+                socket.emit("send_info", {
+                    user: id,
+                    isPlaying: isPlaying,
+                    time1: audio1.current.currentTime,
+                    time2: audio2.current.currentTime,
+                    time3: audio3.current.currentTime,
+                    time4: audio4.current.currentTime,
+                    soundOne: soundOne,
+                    fxOne: fxOne,
+                    soundTwo: soundTwo,
+                    fxTwo: fxTwo,
+                    soundThree: soundThree,
+                    fxThree: fxThree,
+                    soundFour: soundFour,
+                    fxFour: fxFour,
+                });
+            };
+        });
+    }, [socket, soundOne, soundTwo, soundThree, soundFour, fxOne, fxTwo, fxThree, fxFour, isPlaying]);
+
+    useEffect(() => {
         socket.on("receive_sound", (data) => {
             console.log(data);
             setSoundOne(data.soundOne);
@@ -98,12 +125,12 @@ const RoomHeader = () => {
             setFxFour(data.fxFour);
         });
         socket.on("receive_playstate", (data) => {
-            console.log(data)
+            console.log(data);
             setIsPlaying(data.isPlaying);
-            audio1.current.currentTime = data.time1,
-            audio2.current.currentTime = data.time2,
-            audio3.current.currentTime = data.time3,
-            audio4.current.currentTime = data.time4
+            audio1.current.currentTime = data.time1;
+            audio2.current.currentTime = data.time2;
+            audio3.current.currentTime = data.time3;
+            audio4.current.currentTime = data.time4;
             if (data.isPlaying) {
                 audio1.current.play();
                 audio2.current.play();
@@ -116,13 +143,35 @@ const RoomHeader = () => {
                 audio4.current.pause();
             };
         });
-            socket.on("info_request", ({ data }) => {
-                console.log(data);
-                if (params.username === user.username) {
-                    socket.emit("send_info", data);
-                };
-            });
+        socket.on("accept_info", (data) => {
+            console.log(data);
+            setIsPlaying(data.isPlaying);
+            setSoundOne(data.soundOne);
+            setFxOne(data.fxOne);
+            setSoundTwo(data.soundTwo);
+            setFxTwo(data.fxTwo);
+            setSoundThree(data.soundThree);
+            setFxThree(data.fxThree);
+            setSoundFour(data.soundFour);
+            setFxFour(data.fxFour);
+            audio1.current.currentTime = data.time1;
+            audio2.current.currentTime = data.time2;
+            audio3.current.currentTime = data.time3;
+            audio4.current.currentTime = data.time4;
+            if (data.isPlaying) {
+                audio1.current.play();
+                audio2.current.play();
+                audio3.current.play();
+                audio4.current.play();
+            } else {
+                audio1.current.pause();
+                audio2.current.pause();
+                audio3.current.pause();
+                audio4.current.pause();
+            };
+        });
     }, [socket]);
+    console.log(soundOne);
 
     useEffect(() => {
         if (isPlaying) {
@@ -162,7 +211,6 @@ const RoomHeader = () => {
     soundThree ? audio3.current.playbackRate = fxThree ? fxThree.speed : 1 : null;
     soundFour ? audio4.current.volume = fxFour ? fxFour.volume / 100 : .5 : null;
     soundFour ? audio4.current.playbackRate = fxFour ? fxFour.speed : 1 : null;
-    console.log(audio1);
 
     const playPause = () => {
         if (soundOne || soundTwo || soundThree || soundFour) {
@@ -183,6 +231,7 @@ const RoomHeader = () => {
             };
         };
     };
+    console.log(isPlaying);
 
     const handleReset = () => {
         audio1.current.pause();

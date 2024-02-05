@@ -34,26 +34,28 @@ const Chatroom = ({user}) =>{
     console.log(messages)
 
     return(
-        <div>
-        <div id = "message-box">
-            {messages.map(({message, id, user})=>{
-                console.log(user)
-                return(
-                    <div className= 'message-wrapper'>
-                        <p>{message}</p>
-                        <p className = "user">{user}</p>
-                    </div>
-                )
-        })}
-        </div>
-        <input 
-            className= "input-box"
-            type = "text" 
-            value = {input} 
-            placeholder = "type message..."
-            onChange = {(e) => setInput(e.target.value)}
-        ></input>
-        <button onClick={sendMessage}> Send Message</button>
+        <div className='message-flex'>
+            <div id="message-box">
+                {messages.map(({message, id, user})=>{
+                    console.log(user)
+                    return (
+                        <div className='message-wrapper'>
+                            <p>{message}</p>
+                            <p className="user">{user}</p>
+                        </div>
+                    )
+            })}
+            </div>
+            <div className='send-msg-div'>
+                <input
+                    className="input-box"
+                    type="text" 
+                    value={input} 
+                    placeholder="type message..."
+                    onChange={(e) => setInput(e.target.value)}
+                />
+                <button onClick={sendMessage}> Send Message</button>
+            </div>
         </div>
     )
 }

@@ -2,6 +2,7 @@
     position: fixed;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     box-sizing: border-box;
     right: 0;
     height: 100vh;
@@ -13,19 +14,24 @@
 
 .account {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding-top: 8px;
+    padding: 8px 0px 10px 20px;
     height: 8%;
-    padding-bottom: 10px;
     border-bottom: 1px solid black;
 }
 
-.account h2 {
+.username h2 {
     font-size: 28px;
     font-weight: 600;
     letter-spacing: 2px;
+}
+
+.logout-and-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .settings-btn {
@@ -35,7 +41,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    align-self: flex-end;
 }
 .settings-btn :hover {
     background: transparent;
@@ -45,6 +50,27 @@
     font-size: 20px;
 }
 
+.logout-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logout-btn :hover {
+    background: transparent;
+    color: yellow;
+}
+.exit-door {
+    font-size: 24px;
+}
+
+.friends-div {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .friends-list {
     margin-top: 10px;
     height: 85%;
@@ -54,13 +80,7 @@
 }
 .add-friend {
     height: 7%;
-    z-index:4;
-}
-.add-friend-btn {
-
-}
-.friends {
-
+    z-index: 4;
 }
 .friendname{
     display: flex;
@@ -68,13 +88,12 @@
     padding-right: 3px;
 }
 .chatbox{
+    height: 30%;
     display: flex;
     flex-direction: column;
     padding: 5px;
-    margin-top: 150px;
     padding-bottom: 20px;
     background-color: white;
-    
 }
 .chatroom-title{
     font-weight: bold;

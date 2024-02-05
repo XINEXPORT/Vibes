@@ -46,53 +46,45 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     };
 
     return(
-        <div className = "modalBackground"> 
-        <div>
-            <div className = "modalContainer">
-                <div className = "modalContainer-btn"
-                onClick={()=>setModalState(false)}> X 
-                </div>
-                <label className = "title">User Settings</label>         
-                <label className = "username">Username</label>
-                <div className = "form">{username}</div>
-                <label className = "email">Email</label>
-                <div className = "form">{email}</div>
-                <div>
-                    <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
+        <div className = "modalContainer">
+            <div className='account-info'>
+                <label className="title">User Settings</label>
+                <label className="username">Username</label>
+                <div className="form">{username}</div>
+                <label className="email">Email</label>
+                <div className="form">{email}</div>
+            </div>
+            <div className='soundcape-settings'>
+                <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
                     <option value="" disabled selected>Select your soundscape</option>
-                        {mySounds}
-                    </select>
-                    <button onClick={async() => {
-                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                    }}>Delete</button>
-                    <button onClick={async() => {
-                        
-                    }}>Get soundscape code</button>
-                </div>
-                {
-                <div>
-
-                </div>
-                }
-              
-                <Form method = "POST" encType = 'multipart/form-data' className = "upload" >
+                    {mySounds}
+                </select>
+                <button onClick={async() => {
+                    await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                }}>Delete</button>
+                <button onClick={async() => {
+                    
+                }}>Get soundscape code</button>
+            </div>
+            <div className='upload-soundscape'>
+                <Form method="POST" encType='multipart/form-data' className="upload" >
                 <Form.Group controlId="fileName" className="mb-3">
-                <Form.Label className = "upload-sounds">Upload Sounds</Form.Label>
+                <Form.Label className="upload-sounds">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
                     <Form.Label> Sound Name </Form.Label>
                     <Form.Control
-                    type = "text"
-                    value = {name}
-                    onChange = {(e) => setName(e.target.value)}
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="type" className="mb-3">
-                   
+                
                     <select className="form-control" 
                             id="exampleFormControlSelect1"
-                            value = {type}
+                            value={type}
                             onChange={(e)=>setType(e.target.value)}
                             >
                         <option value="" disabled selected>Select Sound Type</option>
@@ -104,15 +96,13 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
                 <Form.Control 
                     type="file" 
-                    name= "audio" 
-                    onChange= {handleAudioUpload}
-                 />
+                    name="audio" 
+                    onChange={handleAudioUpload}
+                />
                 </Form.Group>
                 </Form>
 
-                <button className = "save-btn" onClick={handleSaveClick}>Save</button>
-
-            </div>
+                <button className="save-btn" onClick={handleSaveClick}>Save</button>
             </div>
         </div>
     )
