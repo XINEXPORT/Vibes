@@ -125,7 +125,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 <button className = "save-btn" onClick={handleSaveClick}>Save</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Settings
+export default Settings;
