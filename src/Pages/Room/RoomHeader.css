@@ -8,7 +8,7 @@
 }
 .header-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: fixed;
     box-sizing: border-box;
     top:0;
@@ -54,11 +54,6 @@
     width:60px;
     color: black;
 }
-.fav-soundscape{
-    display: inline;
-    padding: 10px;
-    flex-direction: center;
-}
 .soundscape{
     padding: 20px;
 }
@@ -75,4 +70,46 @@
     margin: 5px;
     color: #00ff77cc;
     padding: 10px;
+    width: 300px;
+}
+.panel{
+    display: flex;
+    flex-direction: column;
+}
+.live-room{
+    display: inline-block;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: red;
+    width: 30px;
+    height: 30px;
+    animation: live 2s infinite;
+}
+.live-room p{
+    display: inline-block;
+    text-align: center;
+    color: red;
+    font-family: arial;
+    font-weight: bold;
+    position: relative;
+    left: 5px;
+    top: -4px;
+}
+.not-live-room p{
+    display: inline-block;
+    text-align: center;
+    color: red;
+    font-family: arial;
+    font-weight: bold;
+    position: relative;
+    left: 5px;
+    top: -4px;
+}
+@keyframes live{
+    0%, 100% {
+        background: none;
+    }
+    50% {
+        background: red;
+    }
 }

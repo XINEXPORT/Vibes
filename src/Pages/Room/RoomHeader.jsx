@@ -389,7 +389,7 @@ const RoomHeader = () => {
     return(
         <div className="Header">
             <div className='header-wrapper'>
-                <div>
+    
                 <SoundEditor 
                 sounds={sounds}
                 selectedSounds={selectedSounds}
@@ -415,9 +415,9 @@ const RoomHeader = () => {
                 activeIndex = {activeIndex}
                 setActiveIndex = {setActiveIndex}
                 />
-                </div>
+  
 
-                <div className='select/save-div'>
+                <div className='panel'>
                     {favs ?
                     <div className="save-soundscape-div">
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
@@ -435,10 +435,10 @@ const RoomHeader = () => {
                     }
                     <div className='save-soundscape-div'>
                         <input className="save-soundscape-div" type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
-                        <select className="save-soundscape-div"name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
+                        {/* <select className="save-soundscape-div"name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
                             <option value={true}>Private</option>
                             <option value={false}>Public</option>
-                        </select>
+                        </select> */}
                         <button className='save-soundscape-div' onClick={() => {
                             saveSounds();
                         }}>Save Soundscape</button>
@@ -459,21 +459,22 @@ const RoomHeader = () => {
                     {user ?
                     params ?
                     params.username === user.username ?
-                    <button
-                    className="live-room-btn"
+                    <div
+                    className="live-room"
                     onClick={() => {
                         socket.emit('leave_room', {room:user.username})
                     }}
-                    >Close your<br/>live room</button>
+                    ><p>Close your<br/>live room</p>
+                    </div>
                     :
                     <></>
                     :
-                    <button
-                        className="live-room-btn"
-                        onClick={() => {
+                    <div className = "not-live-room"
+                         onClick={() => {
                             navigate(`/${user.username}`);
                         }}
-                    >Open a<br/>live room</button>
+                    ><p>Open a live room</p>
+                    </div>
                     :
                     <></>
                     }
