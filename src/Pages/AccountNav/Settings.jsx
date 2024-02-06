@@ -89,6 +89,8 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     <></>
                     }
                 </span>
+                <input type="text" />
+                <button></button>
             </div>
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >

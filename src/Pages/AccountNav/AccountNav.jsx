@@ -15,7 +15,7 @@ import socketIO from 'socket.io-client';
 const socket = socketIO.connect('http://localhost:8000');
 
 export default function AccountNav() {
-    console.log(socket)
+    console.log(socket);
     const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -145,14 +145,17 @@ export default function AccountNav() {
                     }
                 </div>
                 <div className="">
-                    { user && myRequests[0] ? (<FriendRequests
+                    {user && myRequests ? myRequests[0] ? <FriendRequests
                         user = {user}
                         myRequests = {myRequests}
                         myFriends = {myFriends}
                         setFriendsList = {setFriendsListHandler}
-                    />) : (
-                        <></>
-                    )}
+                    />
+                    :
+                    <></>
+                    :
+                    <></>
+                    }
                 </div>
                 <div className='friends-list'>
                     <h4>Friends - {friendsListMapped.length}</h4>
