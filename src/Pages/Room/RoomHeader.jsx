@@ -391,6 +391,7 @@ const RoomHeader = () => {
             <div className='header-wrapper'>
     
                 <SoundEditor 
+                isPlaying={isPlaying}
                 sounds={sounds}
                 selectedSounds={selectedSounds}
                 setSelectedSounds={setSelectedSounds}
