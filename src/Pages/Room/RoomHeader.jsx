@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
+import { RxReset } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import socketIO from 'socket.io-client';
 
@@ -34,13 +35,15 @@ const RoomHeader = () => {
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
     console.log(soundOne);
-    console.log(params, user);
+    console.log(params);
 
     useEffect(() => {
         if (params && user) {
+            console.log(socket.id)
             socket.emit("join_room", {
                 roomName: params.username,
-                userJoin: user.username
+                userJoin: user.username,
+                id: socket.id
             });
         };
     }, [params]);
@@ -170,6 +173,15 @@ const RoomHeader = () => {
                 audio4.current.pause();
             };
         });
+        socket.on('go_home', ()=>{
+            console.log("hit")
+            navigate('/')
+        })
+
+            socket.on('joinfailed', ()=>{
+                navigate(`/`)
+            })
+
     }, [socket]);
     console.log(soundOne);
 
@@ -402,11 +414,7 @@ const RoomHeader = () => {
                 setActiveIndex = {setActiveIndex}
                 />
                 </div>
-                <div>
-                    <button
-                        onClick={() => handleReset()}
-                    >Reset</button>
-                </div>
+
                 <div className='select/save-div'>
                     {favs ?
                     <div className="save-soundscape-div">
@@ -429,11 +437,17 @@ const RoomHeader = () => {
                             <option value={true}>Private</option>
                             <option value={false}>Public</option>
                         </select>
-                        <button className='save-soundscape-btn' onClick={() => {
+                        <button className='save-soundscape-div' onClick={() => {
                             saveSounds();
                         }}>Save Soundscape</button>
                     </div>
                 </div>
+
+                <div>
+                <RxReset id = "reset-btn"
+                        onClick={() => handleReset()}/>
+                </div>
+                
                 <div className="play">
                     <button id="play-btn" onClick={() => playPause()}>
                     {isPlaying? <CiPause1 /> : <CiPlay1 />}
@@ -446,7 +460,7 @@ const RoomHeader = () => {
                     <button
                     className="live-room-btn"
                     onClick={() => {
-                        navigate(`/`);
+                        socket.emit('leave_room', {room:user.username})
                     }}
                     >Close your<br/>live room</button>
                     :
