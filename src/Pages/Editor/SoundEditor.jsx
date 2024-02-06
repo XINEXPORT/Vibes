@@ -36,26 +36,10 @@ const SoundEditor = ({
     return (
         <section id="editor">
         <div className = "sound-btns">
-            {soundOne ?
-            <button onClick = {()=>setActiveIndex(1)}>{soundOne.name}</button>
-            :
-            <button onClick = {()=>setActiveIndex(1)}>Sound1</button>
-            }
-            {soundTwo ?
-            <button onClick = {()=>setActiveIndex(2)}>{soundTwo.name}</button>
-            :
-            <button onClick = {()=>setActiveIndex(2)}>Sound2</button>
-            }
-            {soundThree ?
-            <button onClick = {()=>setActiveIndex(3)}>{soundThree.name}</button>
-            :
-            <button onClick = {()=>setActiveIndex(3)}>Sound3</button>
-            }
-            {soundFour ?
-            <button onClick = {()=>setActiveIndex(4)}>{soundFour.name}</button>
-            :
-            <button onClick = {()=>setActiveIndex(4)}>Sound4</button>
-            }
+            <button className={activeIndex === 1 ? 'btn-active' : ''} onClick={() => activeIndex === 1 ? setActiveIndex(null) : setActiveIndex(1)}>{soundOne ? soundOne.name : 'Empty'}</button>
+            <button className={activeIndex === 2 ? 'btn-active' : ''} onClick={() => activeIndex === 2 ? setActiveIndex(null) : setActiveIndex(2)}>{soundTwo ? soundTwo.name : 'Empty'}</button>
+            <button className={activeIndex === 3 ? 'btn-active' : ''} onClick={() => activeIndex === 3 ? setActiveIndex(null) : setActiveIndex(3)}>{soundThree ? soundThree.name : 'Empty'}</button>
+            <button className={activeIndex === 4 ? 'btn-active' : ''} onClick={() => activeIndex === 4 ? setActiveIndex(null) : setActiveIndex(4)}>{soundFour ? soundFour.name : 'Empty'}</button>
         </div>
                 <SoundAccordion 
                     hidden={activeIndex === null} 

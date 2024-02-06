@@ -77,9 +77,9 @@ const SoundAccordion = ({
         <div id="accordion" className = {hidden ? "hide" : "show"}>
             <section className='sound-accordion'>
                 {sounds.map((sound, soundIndex) => (
-                    <section key = {soundIndex}>
+                    <section key={soundIndex}>
                     <div 
-                        id = {soundIndex}
+                        id={soundIndex}
                         key={soundIndex} 
                         className= "accordion-tab" 
                         onClick={()=> {
@@ -89,7 +89,7 @@ const SoundAccordion = ({
                         {sound.type}
                     </div>
                     <div 
-                    className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
+                    className={soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
                         return (
                             <span className="sound-details" key={soundObj.soundId}>
@@ -112,13 +112,13 @@ const SoundAccordion = ({
           ))} 
          </section>
          <section className="fx">
-         <IoClose className="close-accordion" onClick={()=>setActiveIndex(null)}/>
+         <IoClose className="close-accordion" onClick={() => setActiveIndex(null)}/>
             <button onClick={() => {
                 setSound(null);
                 setFx(null);
                 setVolume(50);
                 setSpeed(1);
-            }}>Void sound</button>
+            }}>Void Sound</button>
             <h1>FX</h1>
             <label>Volume:</label>
             <div class="rangeWarp">
@@ -136,33 +136,28 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
             />
-            </div>
-            <div>
-
+            <p>{volume}</p>
             </div>
             <label>Playback Speed:</label>
-            <select
-                name="playback-speed"
-                id="playback-speed"
-                onChange={(e) => {
-                    setSpeed(e.target.value);
-                    const fxValues = {...fx};
-                    setFx({...fxValues, speed: Number(e.target.value)});
-                    setBroadcastOne(!broadcastOne);
-                }}
-            >
-                <option selected={speed === 0.25 ? 'selected' : ''} value={0.25}>0.25</option>
-                <option selected={speed === 0.5 ? 'selected' : ''} value={0.5}>0.5</option>
-                <option selected={speed === 0.75 ? 'selected' : ''} value={0.75}>0.75</option>
-                <option selected={speed === 1 ? 'selected' : ''} value={1}>Normal</option>
-                <option selected={speed === 1.25 ? 'selected' : ''} value={1.25}>1.25</option>
-                <option selected={speed === 1.5 ? 'selected' : ''} value={1.5}>1.5</option>
-                <option selected={speed === 1.75 ? 'selected' : ''} value={1.75}>1.75</option>
-                <option selected={speed === 2 ? 'selected' : ''} value={2}>2</option>
-            </select>
-
+            <div>
+                <input
+                    type="range"
+                    min="1"
+                    max="7"
+                    step="0.04"
+                    value={fx ? fx.speed * 4 : speed * 4}
+                    className="slider"
+                    id="ticks2"
+                    onChange={(e) => {
+                        setSpeed(e.target.value / 4);
+                        const fxValues = {...fx};
+                        setFx({...fxValues, speed: Number(e.target.value / 4)});
+                        setBroadcastOne(!broadcastOne);
+                    }}
+                />
+                <p>{speed}</p>
+            </div>
          </section>
-         
      </div>
     );
 }
