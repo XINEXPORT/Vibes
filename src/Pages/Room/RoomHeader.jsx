@@ -176,11 +176,13 @@ const RoomHeader = () => {
         socket.on('go_home', ()=>{
             console.log("hit")
             navigate('/')
+            alert (`The host has left the room`)
         })
 
-            socket.on('joinfailed', ()=>{
-                navigate(`/`)
-            })
+        socket.on('joinfailed', ()=>{
+            navigate(`/`)
+            alert (`The host has not opened the room`)
+        })
 
     }, [socket]);
     console.log(soundOne);
