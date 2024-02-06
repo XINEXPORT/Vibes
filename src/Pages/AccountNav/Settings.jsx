@@ -66,21 +66,27 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 <label className="email">Email</label>
                 <div className="form">{email}</div>
             </div>
-            <div className='soundscape-settings'>
-                <select name="soundscape-deleter" onChange={(e) => setToDelete(e.target.value)}>
-                    <option value="" disabled selected>Select your soundscape</option>
+           
+                <select 
+                     className='soundscape-dropdown'
+                     name="soundscape-deleter" 
+                     onChange={(e) => setToDelete(e.target.value)}>
+                        <option 
+                        value="" 
+                        disabled selected>Select your soundscape
+                        </option>
                     {mySounds}
                 </select>
-                <span>
+                <span className = "settings-span">
                     <button onClick={async() => {
                         const { data } = await axios.delete(`/api/deletesoundscape/${toDelete}`);
                         setFavorites(data.newFavs);
                     }}>Delete</button>
-                    <button onClick={async() => {
+                    <button 
+                    onClick={async() => {
                         const { data: { soundCode } } = await axios.post('/api/getfav', {
                             id: toDelete
                         });
-                        console.log(soundCode);
                         setCode(soundCode);
                     }}>Get soundscape code</button>
                 </span>
@@ -91,8 +97,10 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     <></>
                     }
                 </span>
-                <span>
+                <span className = "settings-span">
                     <input
+                        placeholder = "enter soundscape code"
+                        className = "soundscape-input"
                         type="text"
                         onChange={(e) => setCodeEnter(e.target.value)}
                     />
@@ -100,15 +108,16 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                         await axios.post('/api/accessfav', {code: codeEnter});
                     }}>Get Soundscape</button>
                 </span>
-            </div>
+            
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >
                 <Form.Group controlId="fileName" className="mb-3">
-                <Form.Label className="upload-sounds">Upload Sounds</Form.Label>
+                <Form.Label className="upload-sounds upload-text">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
-                    <Form.Label> Sound Name </Form.Label>
+                    <Form.Label className ="upload-text"> Sound Name </Form.Label>
                     <Form.Control
+                    className = "mysound-name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -117,12 +126,14 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
                 <Form.Group controlId="type" className="mb-3">
                 
-                    <select className="form-control" 
+                    <select className = "sound-type"
                             id="exampleFormControlSelect1"
                             value={type}
                             onChange={(e)=>setType(e.target.value)}
                             >
-                        <option value="" disabled selected>Select Sound Type</option>
+                        <option 
+                            value="" 
+                            disabled selected>Select Sound Type</option>
                         <option>Environment</option>
                         <option>Ambient</option>
                         <option>Music</option>
