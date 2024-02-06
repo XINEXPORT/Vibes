@@ -110,9 +110,15 @@ const SoundAccordion = ({
                        </div>
                     </section>
           ))} 
-         </section> 
-         <section className = "fx" >
-         <IoClose className = "close-accordion" onClick={()=>setActiveIndex(null)}/>
+         </section>
+         <section className="fx">
+         <IoClose className="close-accordion" onClick={()=>setActiveIndex(null)}/>
+            <button onClick={() => {
+                setSound(null);
+                setFx(null);
+                setVolume(50);
+                setSpeed(1);
+            }}>Void sound</button>
             <h1>FX</h1>
             <label>Volume:</label>
             <div class="rangeWarp">
