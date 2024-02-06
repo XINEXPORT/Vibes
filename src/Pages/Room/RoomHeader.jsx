@@ -337,7 +337,7 @@ const RoomHeader = () => {
 
     // Function for saving soundscapes:
     const saveSounds = async() => {
-        if (soundscapeName && (soundOne|| soundTwo|| soundThree|| soundFour)) {
+        if (soundscapeName && (soundOne || soundTwo || soundThree || soundFour)) {
            console.log("hit")
             const newSoundscape = {
                 name: soundscapeName,
@@ -364,12 +364,11 @@ const RoomHeader = () => {
             await axios.post('/api/favs', newSoundscape);
             return;
         } else {
-            if(soundscapeName){
-                alert("Please select atleast one sound")
-            }else{
+            if (soundscapeName) {
+                alert("Please select atleast one sound");
+            } else {
                 alert('You must enter a name to save your soundscape.');
-            }
-            
+            };
         };
     };
 
@@ -392,6 +391,7 @@ const RoomHeader = () => {
             <div className='header-wrapper'>
     
                 <SoundEditor 
+                isPlaying={isPlaying}
                 sounds={sounds}
                 selectedSounds={selectedSounds}
                 setSelectedSounds={setSelectedSounds}
