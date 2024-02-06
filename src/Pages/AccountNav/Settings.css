@@ -34,7 +34,6 @@
 .soundscape-settings {
     display: flex;
     flex-direction: column;
-    
 }
 .upload-soundscape {
     width: 100%;

@@ -177,7 +177,7 @@ const RoomHeader = () => {
         socket.on('go_home', ()=>{
             console.log("hit")
             navigate('/')
-            alert (`The host has left the room`)
+            // alert (`The host has left the room`)
         })
 
         socket.on('joinfailed', ()=>{
