@@ -90,6 +90,9 @@ Soundscape.init(
         isPrivate: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        soundCode: {
+            type: DataTypes.STRING(25)
         }
     },
     {
@@ -117,7 +120,7 @@ SoundscapeSound.init(
         },
         speed: {
             type: DataTypes.FLOAT
-        }
+        },
     },
     {
         modelName: 'soundscapeSound',
