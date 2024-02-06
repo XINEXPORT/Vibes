@@ -254,7 +254,7 @@ const postFavSounds = async(req, res) => {
     console.log(result);
 
     if (req.session.user) {
-        const user = req.session.user
+        const user = req.session.user;
         const newSoundscape = await Soundscape.create({
             userId: user.userId,
             name: name,
@@ -300,9 +300,51 @@ const getFav = async(req, res) => {
     res.status(200).json({soundCode: mySoundscape.soundCode});
 };
 
+const accessFav = async(req, res) => {
+    const { userId } = req.session.user;
+    const { code } = req.body;
+    console.log(code, '<--------- this is code')
+    const myNewSound = await Soundscape.findOne({
+        where: {soundCode: code},
+        include: {model: Sound}
+    });
+    console.log(myNewSound);
+    const mynewSoundscape = await Soundscape.create({
+        userId: userId,
+        name: myNewSound.name,
+        isPrivate: myNewSound.isPrivate,
+        soundCode: myNewSound.soundCode
+    });
+    const soundSave2 = async(sound) => {
+        if (sound.sound) {
+            await SoundscapeSound.create({
+                soundscapeId: mynewSoundscape.soundscapeId,
+                soundId: sound.soundId,
+                volume: Number(sound.soundscapeSound.volume),
+                speed: Number(sound.soundscapeSound.speed)
+            });
+        } else {
+            return;
+        };
+    };
+    if (myNewSound.sounds[0]) {
+        soundSave2(myNewSound.sounds[0]);
+    };
+    if (myNewSound.sounds[1]) {
+        soundSave2(myNewSound.sounds[1]);
+    };
+    if (myNewSound.sounds[2]) {
+        soundSave2(myNewSound.sounds[2]);
+    };
+    if (myNewSound.sounds[3]) {
+        soundSave2(myNewSound.sounds[3]);
+    };
+    res.status(200).json({success: true});
+};
+
 const deleteFav = async(req, res) => {
 
-}
+};
 
 const deleteSoundscape = async(req, res) => {
     console.log(req.params, '<--------- this is req')
@@ -401,6 +443,7 @@ export {
     getSounds,
     postFavSounds,
     getFav,
+    accessFav,
     deleteFav,
     deleteSoundscape,
     deleteFriend

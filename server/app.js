@@ -20,6 +20,7 @@ import {
     getSounds,
     postFavSounds,
     getFav,
+    accessFav,
     deleteFav,
     deleteSoundscape,
     deleteFriend
@@ -59,6 +60,7 @@ app.get('/api/sounds', getSounds);
 
 app.post('/api/favs', postFavSounds);
 app.post('/api/getfav', getFav);
+app.post('/api/accessfav', accessFav);
 app.delete('/api/deletefav', deleteFav);
 app.delete('/api/deletesoundscape/:id', deleteSoundscape);
 app.delete('/api/deletefriend/:id', deleteFriend);
