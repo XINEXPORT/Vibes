@@ -242,12 +242,24 @@ const getSounds = async (req, res) => {
 const postFavSounds = async(req, res) => {
     console.log(req.body, "<----------- this is req.body");
     const { name, isPrivate, selectedSounds: { sound1, sound2, sound3, sound4 } } = req.body;
+    const characters = '0123456789abcdef';
+    const genSoundCode = () => {
+        let result = '';
+        for (let i = 0; i < 20; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        };
+        return result;
+    };
+    const result = genSoundCode();
+    console.log(result);
+
     if (req.session.user) {
         const user = req.session.user
         const newSoundscape = await Soundscape.create({
             userId: user.userId,
             name: name,
-            isPrivate: isPrivate
+            isPrivate: isPrivate,
+            soundCode: result
         });
         
         const soundSave = async(sound) => {
@@ -281,9 +293,12 @@ const postFavSounds = async(req, res) => {
 };
 
 const getFav = async(req, res) => {
-    const { userId } = req.session.user;
-    console.log(req.body)
-}
+    const { id } = req.body;
+    let mySoundscape = await Soundscape.findOne({
+        where: {soundscapeId: id}
+    });
+    res.status(200).json({soundCode: mySoundscape.soundCode});
+};
 
 const deleteFav = async(req, res) => {
 
