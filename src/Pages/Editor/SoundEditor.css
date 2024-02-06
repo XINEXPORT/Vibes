@@ -13,8 +13,15 @@
     height: 100px;
     width: 100px;
     border-radius: 50%;
-}
+    background-color: black;
+    color: white;
+    transform-origin: center center;
+    animation: spin 4s linear infinite;
 
+}
+@keyFrames spin {
+  100%{transform:rotate(360deg);}
+}
 .slider {
     -webkit-appearance: none;
     width: 100%;
