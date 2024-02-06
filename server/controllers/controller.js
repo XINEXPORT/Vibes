@@ -347,7 +347,7 @@ const deleteFav = async(req, res) => {
 };
 
 const deleteSoundscape = async(req, res) => {
-    console.log(req.params, '<--------- this is req')
+    console.log(req.params, '<--------- this is req');
 
     const soundscapeId = req.params.id;
 
