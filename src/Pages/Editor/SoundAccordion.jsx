@@ -77,9 +77,9 @@ const SoundAccordion = ({
         <div id="accordion" className = {hidden ? "hide" : "show"}>
             <section className='sound-accordion'>
                 {sounds.map((sound, soundIndex) => (
-                    <section key = {soundIndex}>
+                    <section key={soundIndex}>
                     <div 
-                        id = {soundIndex}
+                        id={soundIndex}
                         key={soundIndex} 
                         className= "accordion-tab" 
                         onClick={()=> {
@@ -89,7 +89,7 @@ const SoundAccordion = ({
                         {sound.type}
                     </div>
                     <div 
-                    className = {soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
+                    className={soundIndex === visible ? "accordion-drop show-details" : "accordion-drop hide-details"}>
                     {sound.sounds.map((soundObj)=>{
                         return (
                             <span className="sound-details" key={soundObj.soundId}>
@@ -112,13 +112,13 @@ const SoundAccordion = ({
           ))} 
          </section>
          <section className="fx">
-         <IoClose className="close-accordion" onClick={()=>setActiveIndex(null)}/>
+         <IoClose className="close-accordion" onClick={() => setActiveIndex(null)}/>
             <button onClick={() => {
                 setSound(null);
                 setFx(null);
                 setVolume(50);
                 setSpeed(1);
-            }}>Void sound</button>
+            }}>Void Sound</button>
             <h1>FX</h1>
             <label>Volume:</label>
             <div class="rangeWarp">
