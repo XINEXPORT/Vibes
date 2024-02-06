@@ -3,8 +3,6 @@ import Sketch from 'react-p5';
 
 const Room = (props) => {
     let particles = [];
-    let mic;
-  
     const num = 1000;
     const noiseScale = 0.01;
   
