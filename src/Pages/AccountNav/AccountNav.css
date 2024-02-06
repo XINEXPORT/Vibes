@@ -8,7 +8,7 @@
     height: 100vh;
     width: 16vw;
     border-left: 2px solid black;
-    background-color: #AEC6CF;
+    background-color: grey;
     z-index: 2;
 }
 
@@ -94,6 +94,7 @@
     padding: 5px;
     padding-bottom: 5px;
     background-color: white;
+    
 }
 .chatroom-title{
     font-weight: bold;
