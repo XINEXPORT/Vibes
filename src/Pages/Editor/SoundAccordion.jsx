@@ -1,6 +1,7 @@
 import './SoundAccordion.css'
 import { useState, useEffect } from 'react';
 import socketIO from 'socket.io-client';
+import { IoClose } from "react-icons/io5";
 
 const socket = socketIO.connect('http://localhost:8000');
 
@@ -92,7 +93,7 @@ const SoundAccordion = ({
                     {sound.sounds.map((soundObj)=>{
                         return (
                             <span className="sound-details" key={soundObj.soundId}>
-                                <div onClick={() => {
+                                <div className = "sound-name"onClick={() => {
                                     setSound(soundObj);
                                     setFx({
                                         volume: Number(volume),
@@ -110,7 +111,8 @@ const SoundAccordion = ({
                     </section>
           ))} 
          </section> 
-         <section className = "fx" style={{color:"black" , width:300}}>
+         <section className = "fx" >
+         <IoClose className = "close-accordion" onClick={()=>setActiveIndex(null)}/>
             <h1>FX</h1>
             <label>Volume:</label>
             <div class="rangeWarp">
@@ -152,9 +154,8 @@ const SoundAccordion = ({
                 <option selected={speed === 1.75 ? 'selected' : ''} value={1.75}>1.75</option>
                 <option selected={speed === 2 ? 'selected' : ''} value={2}>2</option>
             </select>
-         </section>
 
-         <div className = "close-accordion" onClick={()=>setActiveIndex(null)}>X</div>
+         </section>
          
      </div>
     );

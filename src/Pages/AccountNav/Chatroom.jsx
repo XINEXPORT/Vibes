@@ -1,46 +1,48 @@
 import './Chatroom.css'
 import io from 'socket.io-client'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 const socket = io.connect ('http://localhost:8000')
 
 const Chatroom = ({user}) =>{
-    const [input, setInput] = useState("")
-    const [messages, setMessages] = useState([])
+    const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([]);
 
+    const messageField = useRef(null);
 
     const sendMessage = () => {
-        let messageArr = [...messages, {message: input, id: socket.id, user:user.username}]
-        console.log(user)
-        socket.emit("sendMessage", messageArr)
-        setMessages(messageArr)
-        setInput("")
-        console.log(messageArr)
+        let messageArr = [...messages, {message: input, id: socket.id, user:user.username}];
+        console.log(user);
+        socket.emit("sendMessage", messageArr);
+        setMessages(messageArr);
+        messageField.current.scrollTop = messageField.current.scrollHeight;
+        setInput("");
+        console.log(messageArr);
     }
 
     useEffect(()=>{
         socket.on("receiveMessage", (data) => {
-            setMessages(data)
-        })
-    },[socket])
+            setMessages(data);
+        });
+    },[socket]);
 
     useEffect(()=>{
         socket.on("userhasjoined", (data)=>{
-            let messageArr = [...messages, {message: `${data} has joined the room` , id: "server", user:"Server"}]
-            setMessages(messageArr)
-        })
+            let messageArr = [...messages, {message: `${data} has joined the room`, id: "server", user: "Server"}];
+            setMessages(messageArr);
+        });
     },[socket]);
     
 
     return(
         <div className='message-flex'>
-            <div id="message-box">
+            <div ref={messageField} className="message-box">
                 {messages.map(({message, id, user})=>{
                    
                     return (
                         <div className='message-wrapper'>
-                            <p>{message}</p>
                             <p className="user">{user}</p>
+                            <p className='message'>{message}</p>
                         </div>
                     )
             })}
@@ -53,7 +55,7 @@ const Chatroom = ({user}) =>{
                     placeholder="type message..."
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button onClick={sendMessage}> Send Message</button>
+                <button onClick={sendMessage}>Send Message</button>
             </div>
         </div>
     )

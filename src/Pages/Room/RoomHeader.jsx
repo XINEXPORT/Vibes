@@ -249,6 +249,10 @@ const RoomHeader = () => {
         setFxTwo(null);
         setFxThree(null);
         setFxFour(null);
+        audio1.current.src = null;
+        audio2.current.src = null;
+        audio3.current.src = null;
+        audio4.current.src = null;
         setBroadcastOne(!broadcastOne);
     };
 
@@ -405,10 +409,10 @@ const RoomHeader = () => {
                 </div>
                 <div className='select/save-div'>
                     {favs ?
-                    <div className="fav-soundscape">
+                    <div className="save-soundscape-div">
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
-                        <select name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
-                            <option value={null}>Soundscapes</option>
+                        <select className="save-soundscape-div" name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
+                            <option className="save-soundscape-div" value={null}>Soundscapes</option>
                             {mySoundscapes}
                         </select>
                         {/* <button 
@@ -420,8 +424,8 @@ const RoomHeader = () => {
                     <></>
                     }
                     <div className='save-soundscape-div'>
-                        <input type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
-                        <select name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
+                        <input className="save-soundscape-div" type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
+                        <select className="save-soundscape-div"name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
                             <option value={true}>Private</option>
                             <option value={false}>Public</option>
                         </select>
@@ -451,7 +455,7 @@ const RoomHeader = () => {
                     <button
                         className="live-room-btn"
                         onClick={() => {
-                            navigate(`/${user.username}/room`);
+                            navigate(`/${user.username}`);
                         }}
                     >Open a<br/>live room</button>
                     :

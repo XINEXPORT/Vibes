@@ -4,7 +4,9 @@
     border-bottom: 5px solid black;
     border-left: 5px solid black;
     border-right: 5px solid black;
-    background-color: #AEC6CF;
+    background-color: grey;
+    box-shadow: inset 0 20px 40px 10px #000000,
+                inset 0 -10px 40px -5px #000000;
 }
 #accordion.hide{
     max-height:0px;
@@ -20,7 +22,11 @@
     justify-content: flex-start;
     transition: .5s;
     max-height: 490px;
-    /* overflow-y: scroll; */
+}
+.sound-name:hover{
+    color: black;
+    box-shadow: 0 5px 15px rgba(246,210,88);
+    transition: 1s;
 }
 .hide .sound-accordion{
     height: 0;
@@ -36,10 +42,12 @@
     border-top: 10px solid black;
     border-left: 5px solid black;
     border-right: 5px solid black;
-    background-color: #AEC6CF;
+    background-color: grey;
     cursor: pointer;
     height: 40px;
-    transition: 2s;
+    transition: 1s;
+    box-shadow: inset 0 10px 40px 5px #000000,
+                inset 0 -15px 10px -15px #000000;
 }
 .accordion-tab:hover{
     background-color: #f6d258;
@@ -56,6 +64,8 @@
     flex-direction: column;    
     border-left: 5px solid black;
     border-right: 5px solid black;
+    box-shadow: inset 0 10px 40px 5px #000000,
+    inset 0 -15px 10px -15px #000000;
     transition: 1s;
     max-height: 300px;
     overflow-y: scroll;
@@ -65,13 +75,22 @@
     overflow: hidden;
 }
 .accordion-drop.show-details{
-    background-color: #AEC6CF;
+    background-color: grey;
 }
 .close-accordion{
     display: flex;
-    font-size: 20px;
-    justify-content: flex-end;
+    font-size: 30px;
     padding: 5px;
 }
 .close-accordion:hover{
     color: #f6d258;
+}
+.fx{
+    border-left: 10px solid black;
+    border-right: 10px solid black;
+    border-top: 10px solid black;
+    color: black;
+    width: 300px;
+    padding-right: 20px;
+    color: #f6d258;
+}
