@@ -446,6 +446,7 @@ const RoomHeader = () => {
                     </div>
                 </div>
 
+                <div className = "btn-container">
                 <div>
                 <RxReset id = "reset-btn"
                         onClick={() => handleReset()}/>
@@ -478,7 +479,9 @@ const RoomHeader = () => {
                     </div>
                     :
                     <></>
+                    
                     }
+                </div>
                 </div>
                 <div>
                     <audio ref={audio1} src={soundOne ? `../${soundOne.sound}` : null} loop />

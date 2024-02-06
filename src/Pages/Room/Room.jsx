@@ -15,7 +15,7 @@ const Room = (props) => {
   
       p5.draw = () => {
         p5.background(0, 8);
-        p5.stroke(0, 240, 255);
+        p5.stroke(246,210,88);
   
         for (let i = 0; i < num; i++) {
           let part = particles[i];

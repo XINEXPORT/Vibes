@@ -28,6 +28,11 @@
     border-bottom: 2px solid black;
     z-index: 3;
 }
+.btn-container{
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
 .play{
     display: flex;
     align-items: center;
