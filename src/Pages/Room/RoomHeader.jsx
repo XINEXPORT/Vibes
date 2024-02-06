@@ -378,13 +378,13 @@ const RoomHeader = () => {
             const { name, soundscapeId } = soundscape;
             return <option key={soundscapeId} value={soundscapeId}>{name}</option>
         });
-       
     };
 
     // //Delete a soundscape
     // const handleDeleteSoundscape = async (soundscapeId)=>{
     //     const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
     // }
+    console.log(audio2);
 
     return(
         <div className="Header">

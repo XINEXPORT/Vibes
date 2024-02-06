@@ -136,6 +136,7 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
             />
+            <p>{volume}</p>
             </div>
             <label>Playback Speed:</label>
             <div>
@@ -143,7 +144,7 @@ const SoundAccordion = ({
                     type="range"
                     min="1"
                     max="7"
-                    step="0.1"
+                    step="0.04"
                     value={fx ? fx.speed * 4 : speed * 4}
                     className="slider"
                     id="ticks2"
@@ -154,6 +155,7 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
                 />
+                <p>{speed}</p>
             </div>
          </section>
      </div>
