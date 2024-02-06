@@ -16,6 +16,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
     const [code, setCode] = useState(null);
+    const [codeEnter, setCodeEnter] = useState('');
     const [success, setSuccess] = useState('');
     const [deleteSuccess, setDeleteSuccess] = useState('');
 
@@ -89,8 +90,15 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     <></>
                     }
                 </span>
-                <input type="text" />
-                <button></button>
+                <span>
+                    <input
+                        type="text"
+                        onChange={(e) => setCodeEnter(e.target.value)}
+                    />
+                    <button onClick={async() => {
+                        await axios.post('/api/accessfav', {code: codeEnter});
+                    }}>Get Soundscape</button>
+                </span>
             </div>
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >
