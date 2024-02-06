@@ -12,6 +12,7 @@ import axios from 'axios'
 
 const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState, setModalState}) => {
     const user = useSelector(state => state.login.user);
+    const [favorites, setFavorites] = useState(favs);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
@@ -46,13 +47,12 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
 
         const handleDeleteClick = async () => {
             await axios.delete(`/api/deletesoundscape/${toDelete}`);
-            setDeleteSuccess('Deletion successful!')
-        }
-
+            setDeleteSuccess('Deletion successful!');
+        };
 
     let mySounds = <></>;
-    if (favs&&favs.length > 0) {
-        mySounds = favs.map((soundscape) => {
+    if (favorites) {
+        mySounds = favorites.map((soundscape) => {
             return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
         });
     };
@@ -73,13 +73,14 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 </select>
                 <span>
                     <button onClick={async() => {
-                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                        const { data } = await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                        setFavorites(data.newFavs);
                     }}>Delete</button>
                     <button onClick={async() => {
                         const { data: { soundCode } } = await axios.post('/api/getfav', {
                             id: toDelete
                         });
-                        console.log(soundCode)
+                        console.log(soundCode);
                         setCode(soundCode);
                     }}>Get soundscape code</button>
                 </span>

@@ -34,7 +34,7 @@ const router = createBrowserRouter(
                 index
                 element={<RoomHeader />}
                 loader={async() => {
-                    const {data} = await axios.get(`/api/sounds`);
+                    const { data } = await axios.get(`/api/sounds`);
                     return {
                         sounds: data.sounds,
                         favs: data.favs,
@@ -46,7 +46,7 @@ const router = createBrowserRouter(
                 path="/:username"
                 element={<RoomHeader />}
                 loader={async({ params }) => {
-                    const {data} = await axios.get(`/api/sounds`);
+                    const { data } = await axios.get(`/api/sounds`);
                     return {
                         sounds: data.sounds,
                         favs: data.favs,
