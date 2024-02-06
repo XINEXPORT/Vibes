@@ -83,14 +83,16 @@ io.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
   socket.on("join_room", (data) => {
-    if(socket.rooms.has(data.roomName)){
+    
+    if(io.sockets.adapter.rooms.has(data.roomName)){
       socket.join(data.roomName);
       socket.to(data.roomName).emit("userhasjoined", data.userJoin);
     } else if(data.roomName === data.userJoin){
       socket.join(data.roomName);
       socket.to(data.roomName).emit("userhasjoined", data.userJoin);
     } else{
-      socket.to(socket.id).emit("joinfailed")
+      console.log(data.id)
+      io.to(data.id).emit("joinfailed")
     }
     console.log(socket.rooms)
     
@@ -130,4 +132,14 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('❌: A user disconnected');
   });
+
+  socket.on('leave_room', (data)=>{
+    
+    io.to(data.room).emit('go_home')
+    console.log(socket.rooms)
+  io.in(data.room).socketsLeave(data.room);
+    // io.sockets.clients(data.room).forEach(function(s){
+    //   s.leave(data.room);
+  // });
+  })
 });

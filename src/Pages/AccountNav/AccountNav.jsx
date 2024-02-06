@@ -76,15 +76,6 @@ export default function AccountNav() {
         };
 
 //joinfail
-        useEffect(()=>{
-            socket.on('joinfailed', ()=>{
-                setJoinFailed(true);
-            })
-            console.log(socket)
-            return () => {
-                socket.off('joinfailed');
-            }
-        },[socket])
 
 
     return (
