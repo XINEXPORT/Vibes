@@ -54,6 +54,10 @@ export default function AccountNav() {
             return <div className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> dbe1094381ed986d4671d718dc1dfc328a199bf0
                                 
                                 navigate(`/${friend.user.username}`);
                             }}
