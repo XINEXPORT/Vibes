@@ -75,8 +75,19 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                         await axios.delete(`/api/deletesoundscape/${toDelete}`);
                     }}>Delete</button>
                     <button onClick={async() => {
-                        
+                        const { data: { soundCode } } = await axios.post('/api/getfav', {
+                            id: toDelete
+                        });
+                        console.log(soundCode)
+                        setCode(soundCode);
                     }}>Get soundscape code</button>
+                </span>
+                <span>
+                    {code ?
+                    <p>{code}</p>
+                    :
+                    <></>
+                    }
                 </span>
             </div>
             <div className='upload-soundscape'>
