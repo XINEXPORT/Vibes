@@ -356,7 +356,10 @@ const deleteSoundscape = async(req, res) => {
             soundscapeId: soundscapeId
         }
     });
-    res.status(200).json({success: true});
+    const newFavs = await Soundscape.findAll({
+        where: {userId: req.session.user.userId}
+    });
+    res.status(200).json({newFavs: newFavs});
 };
 
 const deleteFriend = async(req,res)=>{
