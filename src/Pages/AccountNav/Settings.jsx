@@ -10,9 +10,8 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState, setModalState}) => {
+const Settings = ({ userId, username, email, mySounds, setMySounds, toDelete, setToDelete, modalState, setModalState}) => {
     const user = useSelector(state => state.login.user);
-    const [favorites, setFavorites] = useState(favs);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
@@ -50,9 +49,9 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
             setDeleteSuccess('Deletion successful!');
         };
 
-    let mySounds = <></>;
-    if (favorites) {
-        mySounds = favorites.map((soundscape) => {
+    let soundscapes = <></>;
+    if (mySounds) {
+        soundscapes = mySounds.map((soundscape) => {
             return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
         });
     };
@@ -75,12 +74,13 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                         value="" 
                         disabled selected>Select your soundscape
                         </option>
-                    {mySounds}
+                    {soundscapes}
                 </select>
                 <span className = "settings-span">
                     <button onClick={async() => {
-                        const { data } = await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                        setFavorites(data.newFavs);
+                        await axios.delete(`/api/deletesoundscape/${toDelete}`);
+                        const { data } = await axios.get('/api/sounds');
+                        setMySounds(data.favs);
                     }}>Delete</button>
                     <button 
                     onClick={async() => {

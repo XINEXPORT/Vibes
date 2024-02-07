@@ -17,6 +17,7 @@ const RoomHeader = () => {
     const {sounds, favs, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
     const navigate = useNavigate();
+    const [mySounds, setMySounds] = useState(favs ? favs : null);
     const [selectedId, setSelectedId] = useState(null);
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
@@ -272,7 +273,7 @@ const RoomHeader = () => {
     };
 
     const setSoundscape = (ID) => {
-        const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
+        const [ soundscape ] = mySounds.filter((SC) => SC.soundscapeId === +ID);
         setSoundscapeId(+ID);
 
         if (soundscape && soundscape.sounds) {
@@ -362,11 +363,13 @@ const RoomHeader = () => {
                 }
             };
             if (update) {
-                const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +selectedId);
+                const [ soundscape ] = mySounds.filter((SC) => SC.soundscapeId === +selectedId);
                 const { soundCode } = soundscape;
                 newSoundscape = {...newSoundscape, selectedId: selectedId, soundCode: soundCode};
             };
             await axios.post('/api/favs', newSoundscape);
+            const { data } = await axios.get('/api/sounds');
+            setMySounds(data.favs);
             return;
         } else {
             if (soundscapeName) {
@@ -378,8 +381,8 @@ const RoomHeader = () => {
     };
 
     let mySoundscapes;
-    if (favs) {
-        mySoundscapes = favs.map((soundscape) => {
+    if (mySounds) {
+        mySoundscapes = mySounds.map((soundscape) => {
             const { name, soundscapeId } = soundscape;
             return <option key={soundscapeId} value={soundscapeId}>{name}</option>
         });
@@ -424,7 +427,7 @@ const RoomHeader = () => {
   
 
                 <div className='panel'>
-                    {favs ?
+                    {mySounds ?
                     <div className="save-soundscape-div">
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
                         <select className="save-soundscape-div" name="soundscape" onChange={(e) => {
@@ -484,8 +487,8 @@ const RoomHeader = () => {
                         <div
                             className="live-room"
                             onClick={() => {
-                            socket.emit('leave_room', {room:user.username})
-                        }}
+                                socket.emit('leave_room', {room:user.username})
+                            }}
                         ><p>Close your live room</p>
                         </div>
                         :
@@ -520,4 +523,4 @@ const RoomHeader = () => {
     );
 };
 
-export default RoomHeader
+export default RoomHeader;

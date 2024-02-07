@@ -16,15 +16,15 @@ const socket = socketIO.connect('http://localhost:8000');
 
 export default function AccountNav() {
     console.log(socket);
-    const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
+    const { sound, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
     const [friendRequestModalState, setFriendRequestModalState] = useState(false);
-    const [sounds, setSounds] = useState(mySounds ? mySounds : null);
-    const [favs, setFavs] = useState(myFavs ? myFavs : null);
+    const [sounds, setSounds] = useState(sound ? sound : null);
+    const [mySounds, setMySounds] = useState(myFavs ? myFavs : null);
     const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
@@ -103,7 +103,8 @@ export default function AccountNav() {
             </div>
             {modalState ?
             <Settings
-                favs={favs}
+                mySounds={mySounds}
+                setMySounds={setMySounds}
                 toDelete={toDelete}
                 setToDelete={setToDelete}
                 userId = {user.userId}

@@ -315,8 +315,10 @@ const accessFav = async(req, res) => {
     const { userId } = req.session.user;
     const { code } = req.body;
     const alreadyAccessed = await Soundscape.findOne({
-        userId: userId,
-        soundCode: code
+        where: {
+            userId: userId,
+            soundCode: code
+        }
     });
     if (!alreadyAccessed) {
         const myNewSound = await Soundscape.findOne({

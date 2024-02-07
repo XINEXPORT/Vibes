@@ -22,7 +22,7 @@ const router = createBrowserRouter(
                 const { data: { myFriends, myRequests } } = await axios.get('/api/friends');
                 const { data: { userSearch } } = await axios.get('/api/findfriends');
                 return {
-                    mySounds: sounds,
+                    sound: sounds,
                     myFavs: favs,
                     myFriends: myFriends,
                     myRequests: myRequests,
