@@ -482,14 +482,20 @@ const RoomHeader = () => {
                         params ?
                         params.username === user.username ?
                         <div
-                        className="live-room"
-                        onClick={() => {
+                            className="live-room"
+                            onClick={() => {
                             socket.emit('leave_room', {room:user.username})
                         }}
-                        ><p>Close your<br/>live room</p>
+                        ><p>Close your live room</p>
                         </div>
                         :
-                        <></>
+                        <div
+                            className='live-room'
+                            onClick={() => {
+                                navigate('/');
+                            }}
+                        ><p>Leave Room</p>
+                        </div>
                         :
                         <div className = "not-live-room"
                             onClick={() => {
