@@ -26,6 +26,16 @@
     align-items: center;
     padding: 8px 0px 10px 20px;
     min-height: 10%;
+    background: white;
+    background-image: linear-gradient(180deg,
+    rgb(10, 10, 10)3%, 
+    rgb(51, 50, 50)20%,
+    rgb(77, 75, 75)30%,
+    rgba(104, 104, 104, 0.25)46% 50%,
+    rgb(109, 108, 108)60%,
+    rgb(65, 65, 65)70%,
+    rgb(44, 43, 43)80%,
+    rgb(9, 9, 9));
 }
 
 .username h2 {
@@ -55,7 +65,8 @@
 }
 .settings-btn :hover {
     background: transparent;
-    color: yellow;
+    color: #f6d258;
+    transition: .8s;
 }
 .cog {
     font-size: 20px;
@@ -72,7 +83,8 @@
 }
 .logout-btn :hover {
     background: transparent;
-    color: yellow;
+    color: #f6d258;
+    transition: .8s;
 }
 .exit-door {
     font-size: 24px;
@@ -95,7 +107,17 @@
     z-index: 4;
 }
 .add-friend-btn{
+    display: flex;
+    padding: 6px;
+    border-radius: .5em;
+    background: linear-gradient( 
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
     cursor: pointer;
+}
+.friends-label{
 }
 .friendname{
     display: flex;
@@ -123,7 +145,14 @@
     margin-bottom: 20px;
     color: black;
 }
-.join-btn{
+.join-btn, .trash-btn{
     display: flex;
     justify-content: right;
+    padding: 6px;
+    border-radius: .5em;
+    background: linear-gradient( 
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
 }
