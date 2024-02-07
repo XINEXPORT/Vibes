@@ -99,10 +99,10 @@ const RoomHeader = () => {
                 socket.emit("send_info", {
                     user: id,
                     isPlaying: isPlaying,
-                    time1: audio1.current.currentTime,
-                    time2: audio2.current.currentTime,
-                    time3: audio3.current.currentTime,
-                    time4: audio4.current.currentTime,
+                    time1: (audio1.current.currentTime + 0.22),
+                    time2: (audio2.current.currentTime + 0.22),
+                    time3: (audio3.current.currentTime + 0.22),
+                    time4: (audio4.current.currentTime + 0.22),
                     soundOne: soundOne,
                     fxOne: fxOne,
                     soundTwo: soundTwo,
@@ -276,6 +276,7 @@ const RoomHeader = () => {
         setSoundscapeId(+ID);
 
         if (soundscape && soundscape.sounds) {
+            setSoundscapeName(soundscape.name);
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {
                     setSoundOne(soundscape.sounds[0]);
@@ -466,41 +467,40 @@ const RoomHeader = () => {
                 </div>
 
                 <div className = "btn-container">
-                <div>
-                <RxReset id = "reset-btn"
-                        onClick={() => handleReset()}/>
-                </div>
-                
-                <div className="play">
-                    <button id="play-btn" onClick={() => playPause()}>
-                    {isPlaying? <CiPause1 /> : <CiPlay1 />}
-                    </button>
-                </div>
-                <div>
-                    {user ?
-                    params ?
-                    params.username === user.username ?
-                    <div
-                    className="live-room"
-                    onClick={() => {
-                        socket.emit('leave_room', {room:user.username})
-                    }}
-                    ><p>Close your<br/>live room</p>
+                    <div>
+                    <RxReset id = "reset-btn"
+                            onClick={() => handleReset()}/>
                     </div>
-                    :
-                    <></>
-                    :
-                    <div className = "not-live-room"
-                         onClick={() => {
-                            navigate(`/${user.username}`);
-                        }}
-                    ><p>Open a live room</p>
-                    </div>
-                    :
-                    <></>
                     
-                    }
-                </div>
+                    <div className="play">
+                        <button id="play-btn" onClick={() => playPause()}>
+                        {isPlaying ? <CiPause1 /> : <CiPlay1 />}
+                        </button>
+                    </div>
+                    <div>
+                        {user ?
+                        params ?
+                        params.username === user.username ?
+                        <div
+                        className="live-room"
+                        onClick={() => {
+                            socket.emit('leave_room', {room:user.username})
+                        }}
+                        ><p>Close your<br/>live room</p>
+                        </div>
+                        :
+                        <></>
+                        :
+                        <div className = "not-live-room"
+                            onClick={() => {
+                                navigate(`/${user.username}`);
+                            }}
+                        ><p>Open a live room</p>
+                        </div>
+                        :
+                        <></>
+                        }
+                    </div>
                 </div>
                 <div>
                     <audio ref={audio1} src={soundOne ? `../${soundOne.sound}` : null} loop />
