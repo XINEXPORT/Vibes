@@ -15,8 +15,14 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #AEC6CF;;
-    border: 3px solid black;
+    background: radial-gradient(
+        117% 194% at 50% 52%,
+        rgba(255, 255, 255, 1) 15%,
+        rgba(62, 62, 62, 1) 50%,
+        rgba(0, 0, 0, 1) 90%
+      );
+      background-blend-mode: normal;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
     border-radius: 25px;
     width: 20vw;
     height: 65vh;

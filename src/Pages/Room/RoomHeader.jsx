@@ -387,6 +387,7 @@ const RoomHeader = () => {
     // }
     console.log(audio2);
 
+
     return(
         <div className="Header">
             <div className='header-wrapper'>
@@ -490,7 +491,9 @@ const RoomHeader = () => {
                     <audio ref={audio4} src={soundFour ? `../${soundFour.sound}` : null} loop />
                 </div>
             </div>
-            <Room />
+            <Room 
+            soundOne = {soundOne}
+            />
         </div>
     );
 };

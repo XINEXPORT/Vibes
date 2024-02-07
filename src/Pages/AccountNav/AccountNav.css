@@ -40,6 +40,7 @@
     justify-content: space-between;
     align-items: center;
     color: white;
+    cursor: pointer;
 }
 
 .settings-btn {
@@ -50,6 +51,7 @@
     align-items: center;
     justify-content: center;
     color: white;
+    cursor: pointer;
 }
 .settings-btn :hover {
     background: transparent;
@@ -66,6 +68,7 @@
     align-items: center;
     justify-content: center;
     color: white;
+    cursor: pointer;
 }
 .logout-btn :hover {
     background: transparent;
@@ -74,7 +77,6 @@
 .exit-door {
     font-size: 24px;
 }
-
 .friends-div {
     height: 60%;
     display: flex;
@@ -92,6 +94,9 @@
     height: 7%;
     z-index: 4;
 }
+.add-friend-btn{
+    cursor: pointer;
+}
 .friendname{
     display: flex;
     justify-content: space-between;
@@ -103,8 +108,7 @@
     flex-direction: column;
     padding: 5px;
     padding-bottom: 5px;
-    background-color: white;
-    
+    background-color: white;  
 }
 .chatroom-title{
     font-weight: bold;
