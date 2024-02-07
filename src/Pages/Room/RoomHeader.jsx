@@ -447,6 +447,7 @@ const RoomHeader = () => {
                     :
                     <></>
                     }
+                    <div className = "panel">
                     <div className='save-soundscape-div'>
                         <input className="save-soundscape-div" type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
                         {/* <select className="save-soundscape-div"name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
@@ -464,6 +465,7 @@ const RoomHeader = () => {
                             saveSounds(false);
                         }}>{selectedId ? 'Save New' : 'Save Soundscape'}</button>
                     </div>
+                </div>
                 </div>
 
                 <div className = "btn-container">

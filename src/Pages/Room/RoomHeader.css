@@ -4,7 +4,8 @@
     height: 100vh;
     width: 84vw;
     overflow-x: hidden;
-    color: #D1C258;
+    color: white;
+    font-weight: bold;
 }
 .header-wrapper {
     display: flex;
@@ -103,7 +104,10 @@
     margin: 5px;
     color: #00ff77cc;
     padding: 10px;
-    width: 300px;
+    width: 350px;
+}
+.save-soundscape-div button{
+    cursor:pointer;
 }
 .panel{
     display: flex;
@@ -169,4 +173,19 @@
     50% {
         background-size: 200%;
     }
+}
+.panel{
+    margin-top:-8px;
+    height: 200px;
+    /* border-left: 2px solid black;
+    border-right: 2px solid black; */
+    /* border-bottom: 2px solid black; */
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-image: linear-gradient(180deg,
+    rgb(120, 118, 118)40%,
+    rgb(65, 65, 65)50%,
+    rgb(47, 47, 47)60%,
+    rgb(44, 43, 43)70%,
+    rgb(9, 9, 9));
 }

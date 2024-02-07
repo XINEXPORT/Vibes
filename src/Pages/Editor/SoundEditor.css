@@ -18,6 +18,10 @@
     transform-origin: center center;
     cursor: pointer;
 }
+.sound-btns button:hover{
+  color: #f6d258;
+  transition: .8s;
+}
 #label {
   fill: white;
   z-index: index 6;

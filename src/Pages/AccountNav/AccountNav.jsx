@@ -51,11 +51,14 @@ export default function AccountNav({socket}) {
         let friendsListMapped = friendslist.map((friend) => {
             return <div key={friend.user.username} className='friendname'>{friend.user.username}
                         <button
+                            className = "join-btn"
                             onClick={() => {
                                 navigate(`/${friend.user.username}`);
                             }}
                         >Join</button>
-                        <button><MdDelete 
+                        <button
+                        className = "trash-btn"
+                        ><MdDelete 
                         onClick={async()=>{
                             let {data} = await axios.delete(`/api/deletefriend/${friend.user.userId}`)
                             setFriendslist(data.myFriends)
@@ -147,7 +150,7 @@ export default function AccountNav({socket}) {
                     }
                 </div>
                 <div className='friends-list'>
-                    <h4>Friends - {friendsListMapped.length}</h4>
+                    <h4 className = "friends-label">Friends - {friendsListMapped.length}</h4>
                     <div className="friends">
                         {friendsListMapped}
                     </div>
