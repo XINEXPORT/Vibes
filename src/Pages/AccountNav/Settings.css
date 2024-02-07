@@ -60,3 +60,13 @@ align-items:center;
     flex-direction: column;
     align-items: center;
 }
+.delete-btn, .getsoundscape-btn, .getsoundscapecode-btn, .save-btn{
+    padding: 5px;
+    border-radius: .5em;
+    background: linear-gradient(
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
+}

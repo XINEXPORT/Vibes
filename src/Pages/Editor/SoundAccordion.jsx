@@ -113,7 +113,9 @@ const SoundAccordion = ({
          </section>
          <section className="fx">
          <IoClose className="close-accordion" onClick={() => setActiveIndex(null)}/>
-            <button onClick={() => {
+            <button 
+            className = "void-btn"
+            onClick={() => {
                 setSound(null);
                 setFx(null);
                 setVolume(50);

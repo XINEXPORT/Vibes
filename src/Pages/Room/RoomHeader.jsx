@@ -1,6 +1,7 @@
 import './RoomHeader.css';
 import RoomBackground from './RoomBackground.jsx';
 import Room from './Room.jsx';
+import Visualizer from './Visualizer.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
@@ -510,9 +511,9 @@ const RoomHeader = () => {
                     <audio ref={audio4} src={soundFour ? `../${soundFour.sound}` : null} loop />
                 </div>
             </div>
-            <Room 
-            soundOne = {soundOne}
-            />
+            <Room />
+            <Visualizer
+            soundOne = {soundOne}/>
         </div>
     );
 };

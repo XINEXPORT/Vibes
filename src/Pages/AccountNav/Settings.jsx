@@ -78,11 +78,14 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                     {mySounds}
                 </select>
                 <span className = "settings-span">
-                    <button onClick={async() => {
+                    <button 
+                    className = "delete-btn"
+                    onClick={async() => {
                         const { data } = await axios.delete(`/api/deletesoundscape/${toDelete}`);
                         setFavorites(data.newFavs);
                     }}>Delete</button>
                     <button 
+                    className = "getsoundscapecode-btn"
                     onClick={async() => {
                         const { data: { soundCode } } = await axios.post('/api/getfav', {
                             id: toDelete
@@ -104,7 +107,9 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                         type="text"
                         onChange={(e) => setCodeEnter(e.target.value)}
                     />
-                    <button onClick={async() => {
+                    <button 
+                    className = "getsoundscape-btn"
+                    onClick={async() => {
                         await axios.post('/api/accessfav', {code: codeEnter});
                     }}>Get Soundscape</button>
                 </span>
