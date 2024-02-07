@@ -103,18 +103,25 @@
     padding-right: 3px;
 }
 .chatbox{
-    height: 30%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     padding: 5px;
     padding-bottom: 5px;
-    background-color: white;  
+    background: radial-gradient(
+        232% 294% at 50% 50%,
+        rgba(255, 255, 255, 1) 12%,
+        rgba(0, 0, 0, 1) 84%
+      );
+      background-blend-mode: normal;
+  background-blend-mode: normal;
 }
 .chatroom-title{
     font-weight: bold;
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    color: black;
 }
 .join-btn{
     display: flex;
