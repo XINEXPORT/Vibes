@@ -121,7 +121,7 @@ const SoundAccordion = ({
             }}>Void Sound</button>
             <h1>FX</h1>
             <label>Volume:</label>
-            <div class="rangeWarp">
+            <div className="rangeWarp">
             <input 
                     type="range" 
                     min="0" 
