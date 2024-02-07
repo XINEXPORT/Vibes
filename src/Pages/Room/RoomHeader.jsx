@@ -428,8 +428,8 @@ const RoomHeader = () => {
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
                         <select className="save-soundscape-div" name="soundscape" onChange={(e) => {
                             if (e.target.value === 'Soundscapes') {
-                                setSelectedId(null);
                                 setSoundscape(null);
+                                setSelectedId(null);
                             } else {
                                 setSoundscape(e.target.value);
                                 setSelectedId(e.target.value);
