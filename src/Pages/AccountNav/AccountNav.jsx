@@ -6,7 +6,8 @@ import Chatroom from './Chatroom.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
+import { BsFillGearFill} from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 import { useLoaderData, useNavigate } from "react-router";
 import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
@@ -54,7 +55,7 @@ export default function AccountNav({socket}) {
                                 navigate(`/${friend.user.username}`);
                             }}
                         >Join</button>
-                        <button><BsThreeDots 
+                        <button><MdDelete 
                         onClick={async()=>{
                             let {data} = await axios.delete(`/api/deletefriend/${friend.user.userId}`)
                             setFriendslist(data.myFriends)

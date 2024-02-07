@@ -7,6 +7,7 @@ const Chatroom = ({user,socket}) =>{
     const [messages, setMessages] = useState([]);
     const params = useParams()
     console.log(socket.id)
+    console.log(messages)
     const messageField = useRef(null);
 
     const sendMessage = () => {
@@ -14,7 +15,7 @@ const Chatroom = ({user,socket}) =>{
         socket.emit("sendMessage", {messages:messageArr,room:params.username});
         setInput("");
     }
-
+console.log(socket)
     useEffect(()=>{
         console.log("hit")
         socket.on("receiveMessage", (data) => {
@@ -25,11 +26,11 @@ const Chatroom = ({user,socket}) =>{
             messageField.current.scrollTop = messageField.current.scrollHeight;
             setMessages(data.messages);
         });
-  
        
     },[socket,params]);
 
     return(
+        <div className= 'chatcontainer'>
         <div className='message-flex'>
             <div ref={messageField} className="message-box">
                 {messages.map(({message, id, user})=>{
@@ -42,18 +43,19 @@ const Chatroom = ({user,socket}) =>{
                     )
             })}
             </div>
-            <div className='send-msg-div'>
-                <input
-                    className="input-box"
-                    type="text" 
-                    value={input} 
-                    placeholder="type message..."
-                    disabled={params.username ? false : true}
-                    onChange={(e) => setInput(e.target.value)}
-                />
-                <button disabled={params.username ? false : true} onClick={sendMessage}>Send Message</button>
-            </div>
         </div>
+        <div className='send-msg-div'>
+        <input
+            className="input-box"
+            type="text" 
+            value={input} 
+            placeholder="type message..."
+            disabled={params.username ? false : true}
+            onChange={(e) => setInput(e.target.value)}
+        />
+        <button disabled={params.username ? false : true} onClick={sendMessage}>Send Message</button>
+    </div>
+    </div>
     )
 }
 
