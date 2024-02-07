@@ -99,7 +99,7 @@
 }
 .friendname{
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     padding-right: 3px;
 }
 .chatbox{
@@ -115,4 +115,8 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+}
+.join-btn{
+    display: flex;
+    justify-content: right;
 }

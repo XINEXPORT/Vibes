@@ -114,9 +114,9 @@
     justify-content: center;
     align-items: center; 
     margin: 0 auto;
-    background: radial-gradient(circle, red 20%, black 80%);
+    background: radial-gradient(circle, red 30%, black 80%);
     background-position: center;
-    border-radius: .5em;
+    border-radius: 8rem;
     border: 2px solid;
     border-color: grey black black grey ;
     height:70px;
@@ -139,9 +139,10 @@
     align-items: center; 
     height:70px;
     width:150px;
-    border-radius: .5em;
+    border-radius: 8rem;
     border: 2px solid;
     border-color: grey black black grey ;
+    cursor: pointer;
     background: conic-gradient(
         #ff6666, #ff4d4d, #ff3333, #ff1a1a,
         #ff1a1a, #ff3333, #ff4d4d, #ff6666,
@@ -151,7 +152,7 @@
         #ff1a1a, #ff3333, #ff4d4d, #ff6666,
         #ff6666, #ff4d4d, #ff3333, #ff1a1a,
         #ff6666);
-    cursor: pointer;
+    
 }
 .not-live-room:active{
     border-color: black grey grey black

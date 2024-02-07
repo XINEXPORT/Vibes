@@ -16,9 +16,14 @@
     background-color: black;
     color: white;
     transform-origin: center center;
-    animation: spin 4s linear infinite;
-    box-shadow:    0 0 5px blue;
     cursor: pointer;
+}
+#label {
+  fill: white;
+  z-index: index 6;
+}
+.btn-playing{
+  animation: spin 4s linear infinite;
 }
 @keyFrames spin {
   100%{transform:rotate(360deg);}
