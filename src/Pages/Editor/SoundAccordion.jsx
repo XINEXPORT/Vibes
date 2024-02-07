@@ -131,7 +131,11 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
             />
+<<<<<<< HEAD
             <p className = "labels-in-fx">{volume}</p>
+=======
+            <p>{fx ? fx.volume : volume}</p>
+>>>>>>> 247a51b08322203a11c31bb9290d9456f40f4ba6
             </div>
             <label className = "labels-in-fx">Playback Speed:</label>
             <div>
@@ -150,7 +154,11 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
                 />
+<<<<<<< HEAD
                 <p className='labels-in-fx'>{speed}</p>
+=======
+                <p>{fx ? fx.speed : speed}</p>
+>>>>>>> 247a51b08322203a11c31bb9290d9456f40f4ba6
             </div>
             <button 
             className = "void-btn"
