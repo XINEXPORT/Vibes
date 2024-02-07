@@ -1,38 +1,33 @@
 import './Chatroom.css'
-import io from 'socket.io-client'
 import {useState, useEffect, useRef} from 'react'
+import { useParams } from 'react-router-dom'
 
-const socket = io.connect ('http://localhost:8000')
-
-const Chatroom = ({user}) =>{
+const Chatroom = ({user,socket}) =>{
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
-
+    const params = useParams()
+    console.log(socket.id)
     const messageField = useRef(null);
 
     const sendMessage = () => {
         let messageArr = [...messages, {message: input, id: socket.id, user:user.username}];
-        console.log(user);
-        socket.emit("sendMessage", messageArr);
-        setMessages(messageArr);
-        messageField.current.scrollTop = messageField.current.scrollHeight;
+        socket.emit("sendMessage", {messages:messageArr,room:params.username});
         setInput("");
-        console.log(messageArr);
     }
 
     useEffect(()=>{
+        console.log("hit")
         socket.on("receiveMessage", (data) => {
+            messageField.current.scrollTop = messageField.current.scrollHeight;
             setMessages(data);
         });
-    },[socket]);
-
-    useEffect(()=>{
         socket.on("userhasjoined", (data)=>{
-            let messageArr = [...messages, {message: `${data} has joined the room`, id: "server", user: "Server"}];
-            setMessages(messageArr);
+            messageField.current.scrollTop = messageField.current.scrollHeight;
+            setMessages(data.messages);
         });
-    },[socket]);
-    
+  
+       
+    },[socket,params]);
 
     return(
         <div className='message-flex'>
@@ -53,9 +48,10 @@ const Chatroom = ({user}) =>{
                     type="text" 
                     value={input} 
                     placeholder="type message..."
+                    disabled={params.username ? false : true}
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button onClick={sendMessage}>Send Message</button>
+                <button disabled={params.username ? false : true} onClick={sendMessage}>Send Message</button>
             </div>
         </div>
     )

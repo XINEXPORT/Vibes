@@ -10,11 +10,8 @@ import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
-import socketIO from 'socket.io-client';
 
-const socket = socketIO.connect('http://localhost:8000');
-
-export default function AccountNav() {
+export default function AccountNav({socket}) {
     console.log(socket);
     const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
     const dispatch = useDispatch();
@@ -162,6 +159,7 @@ export default function AccountNav() {
                 {user ?
                 <Chatroom
                     user={user}
+                    socket={socket}
                 />
                 :
                 <></>

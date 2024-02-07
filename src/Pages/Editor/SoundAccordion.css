@@ -94,3 +94,13 @@
     padding-right: 20px;
     color: #f6d258;
 }
+.void-btn{
+    padding: 5px;
+    border-radius: .5em;
+    background: linear-gradient(
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
+}

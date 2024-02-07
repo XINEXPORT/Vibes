@@ -76,6 +76,7 @@ app.post('/api/auth/logout', logout);
 app.post('/api/auth/register', register);
 
 const server = ViteExpress.listen(app, port, () => console.log(`Server is listening on http://localhost:${port}`));
+const messages = {}
 
 const io = new Server( server , {
   cors: {
@@ -90,10 +91,12 @@ io.on('connection', (socket) => {
     
     if(io.sockets.adapter.rooms.has(data.roomName)){
       socket.join(data.roomName);
-      socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+      messages[data.roomName]=[...messages[data.roomName],{message: `${data.userJoin} has joined the room`, id: "server", user: "Server"}]
+      io.in(data.roomName).emit("userhasjoined", {user:data.userJoin,messages:messages[data.roomName]});
     } else if(data.roomName === data.userJoin){
       socket.join(data.roomName);
-      socket.to(data.roomName).emit("userhasjoined", data.userJoin);
+      messages[data.roomName]=[{message: `${data.userJoin} has joined the room`, id: "server", user: "Server"}]
+      io.in(data.roomName).emit("userhasjoined", {user:data.userJoin,messages:messages[data.roomName]});
     } else{
       console.log(data.id)
       io.to(data.id).emit("joinfailed")
@@ -116,7 +119,10 @@ io.on('connection', (socket) => {
 
 //sends the message to all the users on the server
   socket.on("sendMessage", (data) => {
-    socket.broadcast.emit("receiveMessage", data);
+    messages[data.room]=data.messages
+    console.log(data.room)
+    console.log(messages[data.room])
+    io.in(data.room).emit("receiveMessage", messages[data.room]);
   });
 
   socket.on('message', (data) => {
@@ -138,7 +144,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('leave_room', (data)=>{
-    
+    delete messages[data.room]
     io.to(data.room).emit('go_home')
     console.log(socket.rooms)
   io.in(data.room).socketsLeave(data.room);
