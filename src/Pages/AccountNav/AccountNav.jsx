@@ -51,7 +51,7 @@ export default function AccountNav() {
 
 //Friendslist
         let friendsListMapped = friendslist.map((friend) => {
-            return <div className='friendname'>{friend.user.username}
+            return <div key={friend.user.username} className='friendname'>{friend.user.username}
                         <button
                             onClick={() => {
                                 navigate(`/${friend.user.username}`);

@@ -19,6 +19,7 @@ import {
     addAudio,
     getSounds,
     postFavSounds,
+    repostFavSounds,
     getFav,
     accessFav,
     deleteFav,
@@ -59,6 +60,7 @@ app.get('/api/user', getUsers);
 app.get('/api/sounds', getSounds);
 
 app.post('/api/favs', postFavSounds);
+app.post('/api/updatefavs', repostFavSounds);
 app.post('/api/getfav', getFav);
 app.post('/api/accessfav', accessFav);
 app.delete('/api/deletefav', deleteFav);

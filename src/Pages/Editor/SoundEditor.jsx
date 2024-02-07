@@ -5,6 +5,7 @@ import './SoundEditor.css';
 
 
 const SoundEditor = ({
+    isPlaying,
     sounds,
     setSelectedSounds,
     selectedSounds,
@@ -26,27 +27,61 @@ const SoundEditor = ({
     setFxFour,
     setBroadcastOne,
     broadcastOne,
-    activeIndex, 
+    activeIndex,
     setActiveIndex
     }) => {
-
     const dispatch = useDispatch();
     const modal = useSelector(state => state.editorOne.modal);
 
     return (
         <section id="editor">
         <div className = "sound-btns">
-            <button className={activeIndex === 1 ? 'btn-active' : ''} onClick={() => activeIndex === 1 ? setActiveIndex(null) : setActiveIndex(1)}>{soundOne ? soundOne.name : 'Empty'}</button>
-            <button className={activeIndex === 2 ? 'btn-active' : ''} onClick={() => activeIndex === 2 ? setActiveIndex(null) : setActiveIndex(2)}>{soundTwo ? soundTwo.name : 'Empty'}</button>
-            <button className={activeIndex === 3 ? 'btn-active' : ''} onClick={() => activeIndex === 3 ? setActiveIndex(null) : setActiveIndex(3)}>{soundThree ? soundThree.name : 'Empty'}</button>
-            <button className={activeIndex === 4 ? 'btn-active' : ''} onClick={() => activeIndex === 4 ? setActiveIndex(null) : setActiveIndex(4)}>{soundFour ? soundFour.name : 'Empty'}</button>
+            {isPlaying ?
+            <>
+                <button
+                    className={activeIndex === 1 ? 'btn-active btn-playing' : 'btn-playing'}
+                    onClick={() => activeIndex === 1 ? setActiveIndex(null) : setActiveIndex(1)}
+                >{soundOne ? soundOne.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 2 ? 'btn-active btn-playing' : 'btn-playing'}
+                    onClick={() => activeIndex === 2 ? setActiveIndex(null) : setActiveIndex(2)}
+                >{soundTwo ? soundTwo.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 3 ? 'btn-active btn-playing' : 'btn-playing'}
+                    onClick={() => activeIndex === 3 ? setActiveIndex(null) : setActiveIndex(3)}
+                >{soundThree ? soundThree.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 4 ? 'btn-active btn-playing' : 'btn-playing'}
+                    onClick={() => activeIndex === 4 ? setActiveIndex(null) : setActiveIndex(4)}
+                >{soundFour ? soundFour.name : 'Empty'}</button>
+            </>
+            :
+            <>
+                <button
+                    className={activeIndex === 1 ? 'btn-active' : ''}
+                    onClick={() => activeIndex === 1 ? setActiveIndex(null) : setActiveIndex(1)}
+                >{soundOne ? soundOne.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 2 ? 'btn-active' : ''}
+                    onClick={() => activeIndex === 2 ? setActiveIndex(null) : setActiveIndex(2)}
+                >{soundTwo ? soundTwo.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 3 ? 'btn-active' : ''}
+                    onClick={() => activeIndex === 3 ? setActiveIndex(null) : setActiveIndex(3)}
+                >{soundThree ? soundThree.name : 'Empty'}</button>
+                <button
+                    className={activeIndex === 4 ? 'btn-active' : ''}
+                    onClick={() => activeIndex === 4 ? setActiveIndex(null) : setActiveIndex(4)}
+                >{soundFour ? soundFour.name : 'Empty'}</button>
+            </>
+            }
         </div>
                 <SoundAccordion 
-                    hidden={activeIndex === null} 
-                    sounds={sounds} 
-                    activeIndex={activeIndex} 
+                    hidden={activeIndex === null}
+                    sounds={sounds}
+                    activeIndex={activeIndex}
                     setActiveIndex = {setActiveIndex}
-                    selectedSounds={selectedSounds} 
+                    selectedSounds={selectedSounds}
                     setSelectedSounds={setSelectedSounds}
                     soundOne={soundOne}
                     fxOne={fxOne}

@@ -17,6 +17,7 @@ const RoomHeader = () => {
     const {sounds, favs, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
     const navigate = useNavigate();
+    const [selectedId, setSelectedId] = useState(null);
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
     const [fxOne, setFxOne] = useState(null);
@@ -35,8 +36,7 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
-    console.log(soundOne);
-    console.log(params);
+    console.log(selectedId);
 
     useEffect(() => {
         if (params && user) {
@@ -273,9 +273,9 @@ const RoomHeader = () => {
 
     const setSoundscape = (ID) => {
         const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
-        setSoundscapeId(+ID)
+        setSoundscapeId(+ID);
 
-        if (soundscape.sounds) {
+        if (soundscape && soundscape.sounds) {
             if (soundscape.sounds[0]) {
                 if (soundscape.sounds[0] !== soundOne) {
                     setSoundOne(soundscape.sounds[0]);
@@ -336,10 +336,9 @@ const RoomHeader = () => {
     };
 
     // Function for saving soundscapes:
-    const saveSounds = async() => {
-        if (soundscapeName && (soundOne|| soundTwo|| soundThree|| soundFour)) {
-           console.log("hit")
-            const newSoundscape = {
+    const saveSounds = async(update) => {
+        if (soundscapeName && (soundOne || soundTwo || soundThree || soundFour)) {
+            let newSoundscape = {
                 name: soundscapeName,
                 isPrivate: isPrivate,
                 selectedSounds: {
@@ -361,15 +360,19 @@ const RoomHeader = () => {
                     }
                 }
             };
+            if (update) {
+                const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +selectedId);
+                const { soundCode } = soundscape;
+                newSoundscape = {...newSoundscape, selectedId: selectedId, soundCode: soundCode};
+            };
             await axios.post('/api/favs', newSoundscape);
             return;
         } else {
-            if(soundscapeName){
-                alert("Please select atleast one sound")
-            }else{
+            if (soundscapeName) {
+                alert("Please select atleast one sound");
+            } else {
                 alert('You must enter a name to save your soundscape.');
-            }
-            
+            };
         };
     };
 
@@ -385,7 +388,7 @@ const RoomHeader = () => {
     // const handleDeleteSoundscape = async (soundscapeId)=>{
     //     const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
     // }
-    console.log(audio2);
+    console.log(selectedId);
 
 
     return(
@@ -393,6 +396,7 @@ const RoomHeader = () => {
             <div className='header-wrapper'>
     
                 <SoundEditor 
+                isPlaying={isPlaying}
                 sounds={sounds}
                 selectedSounds={selectedSounds}
                 setSelectedSounds={setSelectedSounds}
@@ -423,7 +427,15 @@ const RoomHeader = () => {
                     {favs ?
                     <div className="save-soundscape-div">
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
-                        <select className="save-soundscape-div" name="soundscape" onChange={(e) => setSoundscape(e.target.value)}>
+                        <select className="save-soundscape-div" name="soundscape" onChange={(e) => {
+                            if (e.target.value === 'Soundscapes') {
+                                setSelectedId(null);
+                                setSoundscape(null);
+                            } else {
+                                setSoundscape(e.target.value);
+                                setSelectedId(e.target.value);
+                            }
+                            }}>
                             <option className="save-soundscape-div" value={null}>Soundscapes</option>
                             {mySoundscapes}
                         </select>
@@ -441,9 +453,16 @@ const RoomHeader = () => {
                             <option value={true}>Private</option>
                             <option value={false}>Public</option>
                         </select> */}
-                        <button className='save-soundscape-div' onClick={() => {
-                            saveSounds();
-                        }}>Save Soundscape</button>
+                        {selectedId ?
+                        <button className={selectedId ? 'save-soundscape-div both-btns' : 'save-soundscape-div'} onClick={() => {
+                            saveSounds(true);
+                        }}>Save Edits</button>
+                        :
+                        <></>
+                        }
+                        <button className={selectedId ? 'save-soundscape-div both-btns' : 'save-soundscape-div'} onClick={() => {
+                            saveSounds(false);
+                        }}>{selectedId ? 'Save New' : 'Save Soundscape'}</button>
                     </div>
                 </div>
 

@@ -242,6 +242,7 @@ const getSounds = async (req, res) => {
 const postFavSounds = async(req, res) => {
     console.log(req.body, "<----------- this is req.body");
     const { name, isPrivate, selectedSounds: { sound1, sound2, sound3, sound4 } } = req.body;
+
     const characters = '0123456789abcdef';
     const genSoundCode = () => {
         let result = '';
@@ -286,10 +287,20 @@ const postFavSounds = async(req, res) => {
         if (sound4.sound) {
             soundSave(sound4);
         };
+        if (req.body.selectedId) {
+            await Soundscape.destroy({
+                where: {soundscapeId: req.body.selectedId}
+            });
+            newSoundscape.soundCode = req.body.soundCode;
+            newSoundscape.save();
+        };
         res.status(200).json({success: true});
     } else {
         res.status(401).json({error: 'Must be logged in to save a soundscape.'});
     };
+};
+
+const repostFavSounds = async(req, res) => {
 };
 
 const getFav = async(req, res) => {
@@ -303,43 +314,50 @@ const getFav = async(req, res) => {
 const accessFav = async(req, res) => {
     const { userId } = req.session.user;
     const { code } = req.body;
-    console.log(code, '<--------- this is code')
-    const myNewSound = await Soundscape.findOne({
-        where: {soundCode: code},
-        include: {model: Sound}
-    });
-    console.log(myNewSound);
-    const mynewSoundscape = await Soundscape.create({
+    const alreadyAccessed = await Soundscape.findOne({
         userId: userId,
-        name: myNewSound.name,
-        isPrivate: myNewSound.isPrivate,
-        soundCode: myNewSound.soundCode
+        soundCode: code
     });
-    const soundSave2 = async(sound) => {
-        if (sound.sound) {
-            await SoundscapeSound.create({
-                soundscapeId: mynewSoundscape.soundscapeId,
-                soundId: sound.soundId,
-                volume: Number(sound.soundscapeSound.volume),
-                speed: Number(sound.soundscapeSound.speed)
-            });
-        } else {
-            return;
+    if (!alreadyAccessed) {
+        const myNewSound = await Soundscape.findOne({
+            where: {soundCode: code},
+            include: {model: Sound}
+        });
+        console.log(myNewSound);
+        const mynewSoundscape = await Soundscape.create({
+            userId: userId,
+            name: myNewSound.name,
+            isPrivate: myNewSound.isPrivate,
+            soundCode: myNewSound.soundCode
+        });
+        const soundSave2 = async(sound) => {
+            if (sound.sound) {
+                await SoundscapeSound.create({
+                    soundscapeId: mynewSoundscape.soundscapeId,
+                    soundId: sound.soundId,
+                    volume: Number(sound.soundscapeSound.volume),
+                    speed: Number(sound.soundscapeSound.speed)
+                });
+            } else {
+                return;
+            };
         };
+        if (myNewSound.sounds[0]) {
+            soundSave2(myNewSound.sounds[0]);
+        };
+        if (myNewSound.sounds[1]) {
+            soundSave2(myNewSound.sounds[1]);
+        };
+        if (myNewSound.sounds[2]) {
+            soundSave2(myNewSound.sounds[2]);
+        };
+        if (myNewSound.sounds[3]) {
+            soundSave2(myNewSound.sounds[3]);
+        };
+        res.status(200).json({success: true});
+    } else {
+        res.status(200).json({error: 'You have already accessed this soundscape'});
     };
-    if (myNewSound.sounds[0]) {
-        soundSave2(myNewSound.sounds[0]);
-    };
-    if (myNewSound.sounds[1]) {
-        soundSave2(myNewSound.sounds[1]);
-    };
-    if (myNewSound.sounds[2]) {
-        soundSave2(myNewSound.sounds[2]);
-    };
-    if (myNewSound.sounds[3]) {
-        soundSave2(myNewSound.sounds[3]);
-    };
-    res.status(200).json({success: true});
 };
 
 const deleteFav = async(req, res) => {
@@ -347,7 +365,7 @@ const deleteFav = async(req, res) => {
 };
 
 const deleteSoundscape = async(req, res) => {
-    console.log(req.params, '<--------- this is req')
+    console.log(req.params, '<--------- this is req');
 
     const soundscapeId = req.params.id;
 
@@ -445,6 +463,7 @@ export {
     addAudio,
     getSounds,
     postFavSounds,
+    repostFavSounds,
     getFav,
     accessFav,
     deleteFav,
