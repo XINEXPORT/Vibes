@@ -428,10 +428,12 @@ const RoomHeader = () => {
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
                         <select className="save-soundscape-div" name="soundscape" onChange={(e) => {
                             if (e.target.value === 'Soundscapes') {
-                                e.target.value = null;
-                            };
-                            setSoundscape(e.target.value);
-                            setSelectedId(e.target.value);
+                                setSelectedId(null);
+                                setSoundscape(null);
+                            } else {
+                                setSoundscape(e.target.value);
+                                setSelectedId(e.target.value);
+                            }
                             }}>
                             <option className="save-soundscape-div" value={null}>Soundscapes</option>
                             {mySoundscapes}
@@ -451,13 +453,13 @@ const RoomHeader = () => {
                             <option value={false}>Public</option>
                         </select> */}
                         {selectedId ?
-                        <button className='save-soundscape-div' onClick={() => {
+                        <button className={selectedId ? 'save-soundscape-div both-btns' : 'save-soundscape-div'} onClick={() => {
                             saveSounds(true);
                         }}>Save Edits</button>
                         :
                         <></>
                         }
-                        <button className={selectedId ? 'save-soundscape-div' : 'save-soundscape-div only-btn'} onClick={() => {
+                        <button className={selectedId ? 'save-soundscape-div both-btns' : 'save-soundscape-div'} onClick={() => {
                             saveSounds(false);
                         }}>{selectedId ? 'Save New' : 'Save Soundscape'}</button>
                     </div>
