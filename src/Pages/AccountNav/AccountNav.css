@@ -7,18 +7,25 @@
     right: 0;
     height: 100vh;
     width: 16vw;
-    border-left: 2px solid black;
-    background-color: grey;
+    background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 1) 14%,
+                rgba(115, 115, 115, 1) 41%,
+                rgba(255, 255, 255, 1) 100%
+            );
+      background-blend-mode: soft-light;
+      box-shadow: 7px 0px 0px 0px rgba(0, 0, 0, 0.3);
+    background-blend-mode: soft-light;
+    box-shadow: 7px 0px 0px 0px rgba(0, 0, 0, 0.3);
     z-index: 2;
+    color: white;
 }
-
 .account {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 0px 10px 20px;
-    min-height: 8%;
-    border-bottom: 1px solid black;
+    min-height: 10%;
 }
 
 .username h2 {
@@ -32,6 +39,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    color: white;
 }
 
 .settings-btn {
@@ -41,6 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
 }
 .settings-btn :hover {
     background: transparent;
@@ -56,6 +65,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
 }
 .logout-btn :hover {
     background: transparent;

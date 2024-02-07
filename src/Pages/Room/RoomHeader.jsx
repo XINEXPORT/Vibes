@@ -177,7 +177,7 @@ const RoomHeader = () => {
         socket.on('go_home', ()=>{
             console.log("hit")
             navigate('/')
-            alert (`The host has left the room`)
+            // alert (`The host has left the room`)
         })
 
         socket.on('joinfailed', ()=>{
@@ -465,6 +465,7 @@ const RoomHeader = () => {
                     </div>
                 </div>
 
+                <div className = "btn-container">
                 <div>
                 <RxReset id = "reset-btn"
                         onClick={() => handleReset()}/>
@@ -497,7 +498,9 @@ const RoomHeader = () => {
                     </div>
                     :
                     <></>
+                    
                     }
+                </div>
                 </div>
                 <div>
                     <audio ref={audio1} src={soundOne ? `../${soundOne.sound}` : null} loop />
