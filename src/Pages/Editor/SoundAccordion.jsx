@@ -136,7 +136,7 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
             />
-            <p>{volume}</p>
+            <p>{fx ? fx.volume : volume}</p>
             </div>
             <label>Playback Speed:</label>
             <div>
@@ -155,7 +155,7 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
                 />
-                <p>{speed}</p>
+                <p>{fx ? fx.speed : speed}</p>
             </div>
          </section>
      </div>
