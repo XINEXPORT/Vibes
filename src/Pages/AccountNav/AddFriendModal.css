@@ -4,6 +4,7 @@
     width: 250px;
     border-radius: 12px;
     background-color: white;
+    color:black;
     box-shadow: black 0px 5px 15px;
     display: flex;
     flex-direction: column;
@@ -26,4 +27,15 @@
 }
 .closebtn:hover{
     color: #f6d258;
+}
+.add-decline-btn{
+    display: flex;
+    padding: 6px;
+    border-radius: .5em;
+    background: linear-gradient( 
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
+    cursor: pointer;
 }

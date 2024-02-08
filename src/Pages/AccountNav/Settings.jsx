@@ -63,9 +63,9 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
         <div className="modalContainer">
             <label className="title">User Settings</label>
             <div className='account-info'>
-                <label className="username">Username</label>
+                {/* <label className="username">Username</label> */}
                 <div className="form">{username}</div>
-                <label className="email">Email</label>
+                {/* <label className="email">Email</label> */}
                 <div className="form">{email}</div>
             </div>
            
@@ -115,7 +115,7 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >
                 <Form.Group controlId="fileName" className="mb-3">
-                <Form.Label className="upload-sounds upload-text">Upload Sounds</Form.Label>
+                <Form.Label className="upload-sounds-label">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
                     <Form.Label className ="upload-text"> Sound Name </Form.Label>

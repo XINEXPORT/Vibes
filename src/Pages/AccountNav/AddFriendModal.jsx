@@ -25,7 +25,7 @@ useEffect(()=>{
             return(    
             <div className= "friend-choice">
                 <p>{user.username}</p>
-                <button onClick = {()=>handleFriendRequest(user.userId)}> Add Friend </button>
+                <button className = "add-decline-btn"onClick = {()=>handleFriendRequest(user.userId)}> Add Friend </button>
             </div>
             )
         })
