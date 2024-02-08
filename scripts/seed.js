@@ -233,7 +233,7 @@ const music6 = await Sound.create({
     type: 'Music', 
 })
 const music7 = await Sound.create({
-    sound: '/audio/music/pianoloop.wav',
+    sound: 'public/audio/music/pianoloop.wav',
     name: 'Piano Loop',
     type: 'Music', 
 })
