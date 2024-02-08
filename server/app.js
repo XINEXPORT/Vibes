@@ -45,7 +45,7 @@ app.get('/api', (req, res) => {
   });
 
 //Audio Files Folder
-app.use('../public/audio', express.static('.public/audio'));
+app.use(express.static('public'));
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
