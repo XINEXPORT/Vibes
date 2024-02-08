@@ -526,10 +526,10 @@ const RoomHeader = () => {
                     </div>
                 </div>
                 <div>
-                    <audio ref={audio1} src={soundOne ? `../${soundOne.sound}` : null} loop />
-                    <audio ref={audio2} src={soundTwo ? `../${soundTwo.sound}` : null} loop />
-                    <audio ref={audio3} src={soundThree ? `../${soundThree.sound}` : null} loop />
-                    <audio ref={audio4} src={soundFour ? `../${soundFour.sound}` : null} loop />
+                    <audio ref={audio1} src={soundOne ? `${soundOne.sound}` : null} loop />
+                    <audio ref={audio2} src={soundTwo ? `${soundTwo.sound}` : null} loop />
+                    <audio ref={audio3} src={soundThree ? `${soundThree.sound}` : null} loop />
+                    <audio ref={audio4} src={soundFour ? `${soundFour.sound}` : null} loop />
                 </div>
             </div>
             <Room />
