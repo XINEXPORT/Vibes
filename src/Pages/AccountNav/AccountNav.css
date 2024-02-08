@@ -13,10 +13,8 @@
                 rgba(115, 115, 115, 1) 41%,
                 rgba(255, 255, 255, 1) 100%
             );
-      background-blend-mode: soft-light;
+      /* background-blend-mode: soft-light; */
       box-shadow: 7px 0px 0px 0px rgba(0, 0, 0, 0.3);
-    background-blend-mode: soft-light;
-    box-shadow: 7px 0px 0px 0px rgba(0, 0, 0, 0.3);
     z-index: 2;
     color: white;
 }
@@ -24,8 +22,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0px 10px 20px;
-    min-height: 10%;
+    box-sizing: border-box;
+    min-height: 120px;
     background: white;
     background-image: linear-gradient(180deg,
     rgb(10, 10, 10)3%, 
@@ -36,6 +34,7 @@
     rgb(65, 65, 65)70%,
     rgb(44, 43, 43)80%,
     rgb(9, 9, 9));
+    border-bottom: 2px solid black;
 }
 
 .username h2 {
