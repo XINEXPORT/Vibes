@@ -4,17 +4,15 @@ import Room from './Room.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { RxReset } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import socketIO from 'socket.io-client';
-
-const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () => {
     const dispatch = useDispatch();
+    const { socket } = useOutletContext();
     const {sounds, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
     const mySounds = useSelector(state => state.favorites.mySounds);

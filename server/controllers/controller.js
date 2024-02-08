@@ -233,7 +233,7 @@ const getSounds = async (req, res) => {
     res.status(200).json({
         success: true,
         sounds: sounds,
-        favs: favs
+        favs: favs ?? null
     });
 };
 
