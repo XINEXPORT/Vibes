@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "nodemon server/app.js -w server -w src",
     "dev": "nodemon server/app.js -w server -w src",
     "seed": "node scripts/seed.js",
     "build": "vite build",

@@ -55,3 +55,28 @@
     align-items: center;
     gap: 5px;
 }
+.input-boxes{
+    color: black;
+    border-top: 3px solid #808080;
+    border-left: 3px solid #808080;
+    border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-radius: .5rem;
+    box-shadow: 0px 0px 50px #C0C0C0 inset;
+    text-shadow: 0px 0px 20px #FFFFFF22;
+    margin: 5px;
+    padding: 5px;
+}
+.action-button{
+    font-size: large;
+    padding: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: .5em;
+    background: linear-gradient(
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #999999, #aaaaaa, #bbbbbb, #cccccc,
+        #cccccc, #bbbbbb, #aaaaaa, #999999,
+        #cccccc
+        );
+}
