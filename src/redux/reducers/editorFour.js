@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const { data: { favs } } = await axios.get('/api/sounds');
+const getSounds = async ()=>{
+    const { data: { favs } } = await axios.get('/api/sounds');
+    return favs
+}
 
 const initialState = {
-    mySounds: favs
+    mySounds: getSounds()
 };
 
 export default function editorOne(state = initialState, action) {

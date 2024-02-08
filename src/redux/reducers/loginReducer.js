@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const {data}= await axios.get('/api/auth/status');
+const getLoginStatus = async() =>{
+    const {data}= await axios.get('/api/auth/status');
+    return data
+}
 
 const initialState = {
-    loggedIn: data.loggedIn,
-    user: data.user,
+    loggedIn: getLoginStatus().loggedIn,
+    user: getLoginStatus().user,
     modal: 'none'
 };
 
