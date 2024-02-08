@@ -1,7 +1,7 @@
 import './AccountNav.css';
 import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
-import FriendRequests from './FriendRequests.jsx'
+import FriendRequests from './FriendRequests.jsx';
 import Chatroom from './Chatroom.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
@@ -10,27 +10,22 @@ import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
 import { useLoaderData, useNavigate } from "react-router";
 import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
-import socketIO from 'socket.io-client';
 
-const socket = socketIO.connect('http://localhost:8000');
-
-export default function AccountNav() {
-    console.log(socket);
-    const { sound, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
+export default function AccountNav({socket}) {
+    const { sound, myFriends, userSearch, myRequests } = useLoaderData();
+    const mySounds = useSelector(state => state.favorites.mySounds);
+    const user = useSelector(state => state.login.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
     const [friendRequestModalState, setFriendRequestModalState] = useState(false);
     const [sounds, setSounds] = useState(sound ? sound : null);
-    const [mySounds, setMySounds] = useState(myFavs ? myFavs : null);
-    const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
+    const [toDelete, setToDelete] = useState(mySounds ? mySounds[0] ? mySounds[0].soundscapeId : null : null);
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
     const [friendslist, setFriendslist] = useState([]);
     const [joinFailed, setJoinFailed] = useState(false);
-
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -104,7 +99,6 @@ export default function AccountNav() {
             {modalState ?
             <Settings
                 mySounds={mySounds}
-                setMySounds={setMySounds}
                 toDelete={toDelete}
                 setToDelete={setToDelete}
                 userId = {user.userId}
@@ -163,6 +157,7 @@ export default function AccountNav() {
                 {user ?
                 <Chatroom
                     user={user}
+                    socket={socket}
                 />
                 :
                 <></>

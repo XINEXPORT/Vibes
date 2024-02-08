@@ -16,8 +16,14 @@
     background-color: black;
     color: white;
     transform-origin: center center;
-    animation: spin 4s linear infinite;
-    box-shadow:    0 0 5px blue;
+    cursor: pointer;
+}
+#label {
+  fill: white;
+  z-index: index 6;
+}
+.btn-playing{
+  animation: spin 4s linear infinite;
 }
 @keyFrames spin {
   100%{transform:rotate(360deg);}
@@ -28,6 +34,7 @@
     height: 15px;
     border-radius: 5px;  
     background: #d3d3d3;
+    box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.5);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -40,14 +47,22 @@
     width: 25px;
     height: 25px;
     border-radius: 50%; 
-    background: #04AA6D;
     cursor: pointer;
+    background: conic-gradient(
+    #cccccc, #bbbbbb, #aaaaaa, #999999,
+    #999999, #aaaaaa, #bbbbbb, #cccccc,
+    #cccccc, #bbbbbb, #aaaaaa, #999999,
+    #999999, #aaaaaa, #bbbbbb, #cccccc,
+    #cccccc, #bbbbbb, #aaaaaa, #999999,
+    #999999, #aaaaaa, #bbbbbb, #cccccc,
+    #cccccc, #bbbbbb, #aaaaaa, #999999,
+    #cccccc
+    );
   }
   
   .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #04AA6D;
     cursor: pointer;
   }

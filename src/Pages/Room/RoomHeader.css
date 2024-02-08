@@ -68,6 +68,8 @@
     height:70px;
     width:70px;
     color: black;
+    border: 2px solid;
+    border-color: grey black black grey ;
     border-radius: .5em;
     cursor: pointer;
     box-shadow: inset 000 1px #eedc00;
@@ -81,6 +83,9 @@
 			#e3b600, #f4d000, #ffe400, #ebc600, 
 			#e3b600, #f6d500, #ffe900, #ffe90a, 
 			#edc800)
+}
+#reset-btn:active{
+    border-color: black grey grey black
 }
 .soundscape{
     padding: 20px;
@@ -109,11 +114,17 @@
     justify-content: center;
     align-items: center; 
     margin: 0 auto;
-    background: red;
-    border-radius: .5em;
+    background: radial-gradient(circle, red 30%, black 80%);
+    background-position: center;
+    border-radius: 8rem;
+    border: 2px solid;
+    border-color: grey black black grey ;
     height:70px;
     width:150px;
-    animation: live 2s infinite;
+    animation: live 3s ease-in-out infinite;
+}
+.live-room:active{
+    border-color: black grey grey black
 }
 .live-room p{
     display: inline-block;
@@ -121,9 +132,6 @@
     color: black;
     font-family: arial;
     font-weight: bold;
-    position: relative;
-    left: 5px;
-    top: -4px;
 }
 .not-live-room{
     display: flex;
@@ -131,7 +139,10 @@
     align-items: center; 
     height:70px;
     width:150px;
-    border-radius: .5em;
+    border-radius: 8rem;
+    border: 2px solid;
+    border-color: grey black black grey ;
+    cursor: pointer;
     background: conic-gradient(
         #ff6666, #ff4d4d, #ff3333, #ff1a1a,
         #ff1a1a, #ff3333, #ff4d4d, #ff6666,
@@ -141,23 +152,21 @@
         #ff1a1a, #ff3333, #ff4d4d, #ff6666,
         #ff6666, #ff4d4d, #ff3333, #ff1a1a,
         #ff6666);
-    cursor: pointer;
+    
+}
+.not-live-room:active{
+    border-color: black grey grey black
 }
 .not-live-room p{
-    display: inline-block;
-    text-align: center;
     color: black;
     font-family: arial;
     font-weight: bold;
-    position: relative;
-    left: 5px;
-    top: -4px;
 }
 @keyframes live{
     0%, 100% {
-        background: none;
+        background-size: 100%;
     }
     50% {
-        background: red;
+        background-size: 200%;
     }
 }

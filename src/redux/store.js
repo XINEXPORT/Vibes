@@ -11,7 +11,7 @@ const store =  configureStore({
         editorOne: editorOne,
         editorTwo: editorTwo,
         editorThree: editorThree,
-        editorFour: editorFour,
+        favorites: editorFour,
     }
 });
 

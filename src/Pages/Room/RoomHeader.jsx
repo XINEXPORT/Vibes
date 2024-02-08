@@ -8,16 +8,17 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { RxReset } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import socketIO from 'socket.io-client';
 
 const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () => {
-    const {sounds, favs, params} = useLoaderData();
+    const dispatch = useDispatch();
+    const {sounds, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
+    const mySounds = useSelector(state => state.favorites.mySounds);
     const navigate = useNavigate();
-    const [mySounds, setMySounds] = useState(favs ? favs : null);
     const [selectedId, setSelectedId] = useState(null);
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
     const [soundOne, setSoundOne] = useState(null);
@@ -37,7 +38,7 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
-    console.log(selectedId);
+    console.log(mySounds);
 
     useEffect(() => {
         if (params && user) {
@@ -368,8 +369,8 @@ const RoomHeader = () => {
                 newSoundscape = {...newSoundscape, selectedId: selectedId, soundCode: soundCode};
             };
             await axios.post('/api/favs', newSoundscape);
-            const { data } = await axios.get('/api/sounds');
-            setMySounds(data.favs);
+            const { data: { favs } } = await axios.get('/api/sounds');
+            dispatch({type: 'create', payload: favs});
             return;
         } else {
             if (soundscapeName) {
