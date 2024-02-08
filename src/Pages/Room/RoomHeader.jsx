@@ -36,8 +36,21 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
+    const getSounds = async() => {
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'login-get', payload: favs});
+    };
+    
+    const getLoginStatus = async() =>{
+        const {data}= await axios.get('/api/auth/status');
+        await getSounds()
+        return dispatch({type: "loginstatus", payload:data})
+    }
+    useEffect(()=>{
+        getLoginStatus()
+    },[])
+    
     console.log(mySounds);
-
     useEffect(() => {
         if (params && user) {
             console.log(socket.id)

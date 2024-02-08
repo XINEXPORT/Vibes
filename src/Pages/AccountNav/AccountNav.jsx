@@ -28,9 +28,23 @@ export default function AccountNav({socket}) {
     const [friendslist, setFriendslist] = useState([]);
     const [joinFailed, setJoinFailed] = useState(false);
 
-    if (!user) {
-        dispatch({type: 'modal-on'});
+    const getSounds = async() => {
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'login-get', payload: favs});
     };
+    const getLoginStatus = async() =>{
+        const {data}= await axios.get('/api/auth/status');
+        if(!data.user){
+            dispatch({type: 'modal-on'});
+        }
+        await getSounds();
+        return dispatch({type: "loginstatus", payload:data})
+    }
+    useEffect(()=>{
+        getLoginStatus()
+    },[])
+
+
 
     const setFriendsListHandler = (newFriendsList) => {
         setFriendslist(newFriendsList);
@@ -70,6 +84,7 @@ export default function AccountNav({socket}) {
             const { data } = await axios.post('/api/auth/logout');
             if (data.success) {
             dispatch({ type: 'logout' });
+            dispatch({type: 'modal-on'})
             navigate("/");
             };
         };

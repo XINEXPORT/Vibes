@@ -19,6 +19,7 @@ const LoginPage = () => {
     
     const getSounds = async() => {
         const { data: { favs } } = await axios.get('/api/sounds');
+        console.log(favs)
         dispatch({type: 'login-get', payload: favs});
     };
 
@@ -29,7 +30,7 @@ const LoginPage = () => {
                 password: logPassword
             });
             if(data.success){
-                getSounds();
+                await getSounds();
                 dispatch({type: 'login', payload: data.user});
                 dispatch({type: 'modal-off'});
             } else{
