@@ -1,8 +1,8 @@
-import React, {useState, useRef, useEffect} from 'react'
-import { AudioVisualizer } from 'react-audio-visualize';
+import React, {useState, useRef, useEffect} from 'react';
+// import { AudioVisualizer } from 'react-audio-visualize';
 import fs from 'fs';
 
-const Visualizer = ({soundOne}) =>{
+const Visualizer = ({soundOne}) => {
     const [blob, setBlob] = useState();
     const visualizerRef = useRef(null)
 

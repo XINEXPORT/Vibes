@@ -10,9 +10,9 @@ import axios from 'axios'
 //return needs to show a fragment or the modal code
 //return(openModal ? <> : <div>{soundscapes}</div>)
 
-const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalState, setModalState}) => {
+const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, modalState, setModalState}) => {
+    const dispatch = useDispatch();
     const user = useSelector(state => state.login.user);
-    const [favorites, setFavorites] = useState(favs);
     const [audio, setAudio] = useState(null);
     const [type, setType] = useState(null);
     const [name, setName] = useState(null);
@@ -22,37 +22,39 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
     const [deleteSuccess, setDeleteSuccess] = useState('');
 
     const handleAudioUpload = (e)=>{
+        const dispatch = useDispatch();
         const file = e.target.files[0];
         setAudio(file);
-      };
+    };
 
-      const handleSaveClick = async () => {
-        const formData = new FormData()
-        formData.append('userId', user.userId)
-        formData.append('audio', audio)
-        formData.append('name', name)
-        formData.append('type', type)
-    
-        try {
-            let { data } = await axios.post(`/api/sounds`, formData)
-            setSuccess(<></>);
-            setName('')
-            setType('')
-            setAudio(null)
-            console.log(data);
-        } catch (error) {
-            console.error("Error uploading audio:", error);
-        }
-        };
+    const handleSaveClick = async () => {
+    const formData = new FormData();
+    formData.append('userId', user.userId);
+    formData.append('audio', audio);
+    formData.append('name', name);
+    formData.append('type', type);
 
-        const handleDeleteClick = async () => {
-            await axios.delete(`/api/deletesoundscape/${toDelete}`);
-            setDeleteSuccess('Deletion successful!');
-        };
+    try {
+        let { data } = await axios.post(`/api/sounds`, formData);
+        setSuccess(<></>);
+        setName('');
+        setType('');
+        setAudio(null);
+        console.log(data);
+    } catch (error) {
+        console.error("Error uploading audio:", error);
+    }
+    };
 
-    let mySounds = <></>;
-    if (favorites) {
-        mySounds = favorites.map((soundscape) => {
+    const handleDeleteClick = async () => {
+        await axios.delete(`/api/deletesoundscape/${toDelete}`);
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'delete', payload: favs});
+    };
+
+    let soundscapes = <></>;
+    if (mySounds) {
+        soundscapes = mySounds.map((soundscape) => {
             return <option key={soundscape.soundscapeId} value={soundscape.soundscapeId}>{soundscape.name}</option>
         });
     };
@@ -67,24 +69,20 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                 <div className="form">{email}</div>
             </div>
            
-                <select 
-                     className='soundscape-dropdown'
-                     name="soundscape-deleter" 
-                     onChange={(e) => setToDelete(e.target.value)}>
-                        <option 
-                        value="" 
-                        disabled selected>Select your soundscape
-                        </option>
-                    {mySounds}
+                <select
+                    className='soundscape-dropdown'
+                    name="soundscape-deleter"
+                    onChange={(e) => setToDelete(e.target.value)}
+                >
+                    <option 
+                        value=""
+                        disabled selected
+                    >Select your soundscape</option>
+                    {soundscapes}
                 </select>
                 <span className = "settings-span">
-                    <button 
-                    className = "delete-btn"
-                    onClick={async() => {
-                        const { data } = await axios.delete(`/api/deletesoundscape/${toDelete}`);
-                        setFavorites(data.newFavs);
-                    }}>Delete</button>
-                    <button 
+                    <button onClick={() => handleDeleteClick()}>Delete</button>
+                    <button
                     className = "getsoundscapecode-btn"
                     onClick={async() => {
                         const { data: { soundCode } } = await axios.post('/api/getfav', {
@@ -107,7 +105,7 @@ const Settings = ({ userId, username, email, favs, toDelete, setToDelete, modalS
                         type="text"
                         onChange={(e) => setCodeEnter(e.target.value)}
                     />
-                    <button 
+                    <button
                     className = "getsoundscape-btn"
                     onClick={async() => {
                         await axios.post('/api/accessfav', {code: codeEnter});

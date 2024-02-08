@@ -1,8 +1,8 @@
-import {useSelector, useDispatch} from 'react-redux'
-import {useState} from 'react'
-import { useNavigate } from 'react-router'
-import axios from "axios"
-import './LoginPage.css'
+import {useSelector, useDispatch} from 'react-redux';
+import {useState} from 'react';
+import { useNavigate } from 'react-router';
+import axios from "axios";
+import './LoginPage.css';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -16,14 +16,20 @@ const LoginPage = () => {
     const [regUsername, setRegUsername] = useState('');
     const [regEmail, setRegEmail] = useState('');
     const [regPassword, setRegPassword] = useState('');
+    
+    const getSounds = async() => {
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'login-get', payload: favs});
+    };
 
-    const loginUser = async()=>{
+    const loginUser = async() => {
         if (logUsername && logPassword){
             const {data} =  await axios.post('/api/auth/login', {
                 username: logUsername,
                 password: logPassword
             });
             if(data.success){
+                getSounds();
                 dispatch({type: 'login', payload: data.user});
                 dispatch({type: 'modal-off'});
             } else{

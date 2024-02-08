@@ -1,20 +1,23 @@
 import './RoomHeader.css';
 import RoomBackground from './RoomBackground.jsx';
 import Room from './Room.jsx';
-import Visualizer from './Visualizer.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { RxReset } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () => {
-    const {socket} = useOutletContext()
-    const {sounds, favs, params} = useLoaderData();
+    const dispatch = useDispatch();
+    const {sounds, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
+    const mySounds = useSelector(state => state.favorites.mySounds);
     const navigate = useNavigate();
     const [selectedId, setSelectedId] = useState(null);
     const [selectedSounds, setSelectedSounds] = useState({sound1: null, sound2: null, sound3: null, sound4: null});
@@ -35,7 +38,7 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
-    console.log(selectedId);
+    console.log(mySounds);
 
     useEffect(() => {
         if (params && user) {
@@ -271,7 +274,7 @@ const RoomHeader = () => {
     };
 
     const setSoundscape = (ID) => {
-        const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +ID);
+        const [ soundscape ] = mySounds.filter((SC) => SC.soundscapeId === +ID);
         setSoundscapeId(+ID);
 
         if (soundscape && soundscape.sounds) {
@@ -361,11 +364,13 @@ const RoomHeader = () => {
                 }
             };
             if (update) {
-                const [ soundscape ] = favs.filter((SC) => SC.soundscapeId === +selectedId);
+                const [ soundscape ] = mySounds.filter((SC) => SC.soundscapeId === +selectedId);
                 const { soundCode } = soundscape;
                 newSoundscape = {...newSoundscape, selectedId: selectedId, soundCode: soundCode};
             };
             await axios.post('/api/favs', newSoundscape);
+            const { data: { favs } } = await axios.get('/api/sounds');
+            dispatch({type: 'create', payload: favs});
             return;
         } else {
             if (soundscapeName) {
@@ -377,8 +382,8 @@ const RoomHeader = () => {
     };
 
     let mySoundscapes;
-    if (favs) {
-        mySoundscapes = favs.map((soundscape) => {
+    if (mySounds) {
+        mySoundscapes = mySounds.map((soundscape) => {
             const { name, soundscapeId } = soundscape;
             return <option key={soundscapeId} value={soundscapeId}>{name}</option>
         });
@@ -389,7 +394,6 @@ const RoomHeader = () => {
     //     const soundscape = await axios.delete(`/api/deletesoundscape/${soundscapeId}` )
     // }
     console.log(selectedId);
-
 
     return(
         <div className="Header">
@@ -424,7 +428,7 @@ const RoomHeader = () => {
   
 
                 <div className='panel'>
-                    {favs ?
+                    {mySounds ?
                     <div className="save-soundscape-div">
                         <label htmlFor="favorite-soundscapes">My Favorite Soundscapes</label>
                         <select className="save-soundscape-div" name="soundscape" onChange={(e) => {
@@ -486,8 +490,8 @@ const RoomHeader = () => {
                         <div
                             className="live-room"
                             onClick={() => {
-                            socket.emit('leave_room', {room:user.username})
-                        }}
+                                socket.emit('leave_room', {room:user.username})
+                            }}
                         ><p>Close your live room</p>
                         </div>
                         :
@@ -518,10 +522,8 @@ const RoomHeader = () => {
                 </div>
             </div>
             <Room />
-            <Visualizer
-            soundOne = {soundOne}/>
         </div>
     );
 };
 
-export default RoomHeader
+export default RoomHeader;

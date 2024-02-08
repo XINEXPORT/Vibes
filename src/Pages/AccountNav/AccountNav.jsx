@@ -1,7 +1,7 @@
 import './AccountNav.css';
 import Settings from './Settings.jsx';
 import AddFriendModal from './AddFriendModal.jsx';
-import FriendRequests from './FriendRequests.jsx'
+import FriendRequests from './FriendRequests.jsx';
 import Chatroom from './Chatroom.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
@@ -13,22 +13,20 @@ import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
 
 export default function AccountNav({socket}) {
-    console.log(socket);
-    const { mySounds, myFavs, myFriends, userSearch, myRequests } = useLoaderData();
+    const { sound, myFriends, userSearch, myRequests } = useLoaderData();
+    const mySounds = useSelector(state => state.favorites.mySounds);
+    const user = useSelector(state => state.login.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(state => state.login.user);
 
     const [modalState, setModalState] = useState(false);
     const [friendRequestModalState, setFriendRequestModalState] = useState(false);
-    const [sounds, setSounds] = useState(mySounds ? mySounds : null);
-    const [favs, setFavs] = useState(myFavs ? myFavs : null);
-    const [toDelete, setToDelete] = useState(myFavs ? myFavs[0] ? myFavs[0].soundscapeId : null : null);
+    const [sounds, setSounds] = useState(sound ? sound : null);
+    const [toDelete, setToDelete] = useState(mySounds ? mySounds[0] ? mySounds[0].soundscapeId : null : null);
     const [searchInput, setSearchInput] = useState();
     const [friendReqList, setFriendReqList] = useState([]);
     const [friendslist, setFriendslist] = useState([]);
     const [joinFailed, setJoinFailed] = useState(false);
-
 
     if (!user) {
         dispatch({type: 'modal-on'});
@@ -104,7 +102,7 @@ export default function AccountNav({socket}) {
             </div>
             {modalState ?
             <Settings
-                favs={favs}
+                mySounds={mySounds}
                 toDelete={toDelete}
                 setToDelete={setToDelete}
                 userId = {user.userId}
