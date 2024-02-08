@@ -3,7 +3,7 @@ import url from "url";
 import util from 'util';
 import connectToDB from "./db.js";
 
-const db = await connectToDB(`postgresql:///vibes`);
+const db = await connectToDB(`postgres://vibes_user:lnARZNeVCJR72bjRzF2fautItUQAl8Zs@dpg-cn2h1lgl6cac739dn92g-a/vibes`);
 
 // Table initializations:
 class User extends Model {
