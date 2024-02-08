@@ -26,6 +26,7 @@
 .sound-details{
 }
 .sound-name{
+    padding:5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,6 +58,7 @@
 }
 .accordion-tab:hover{
     background-color: white;
+    color: #f6d258;
 }
 .hide .accordion-tab{
     opacity: 0;
