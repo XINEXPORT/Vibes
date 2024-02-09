@@ -5,6 +5,7 @@ import './SoundEditor.css';
 
 
 const SoundEditor = ({
+    playPause,
     isPlaying,
     sounds,
     setSelectedSounds,
@@ -79,6 +80,7 @@ const SoundEditor = ({
                 <SoundAccordion 
                     hidden={activeIndex === null}
                     sounds={sounds}
+                    playPause={playPause}
                     activeIndex={activeIndex}
                     setActiveIndex = {setActiveIndex}
                     selectedSounds={selectedSounds}

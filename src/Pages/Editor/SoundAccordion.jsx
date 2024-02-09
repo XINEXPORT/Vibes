@@ -7,6 +7,7 @@ const socket = socketIO.connect('http://localhost:8000');
 
 
 const SoundAccordion = ({
+    playPause,
     sounds,
     activeIndex,
     setActiveIndex,

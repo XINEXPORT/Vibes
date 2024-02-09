@@ -46,6 +46,18 @@ const RoomHeader = () => {
         await getSounds()
         return dispatch({type: "loginstatus", payload:data})
     }
+
+    useEffect(() => {
+        if (!soundOne && !soundTwo && !soundThree && !soundFour) {
+            setIsPlaying(false);
+            setBroadcastTwo(!broadcastTwo);
+            audio1.current.pause();
+            audio2.current.pause();
+            audio3.current.pause();
+            audio4.current.pause();
+        };
+    }, [soundOne, soundTwo, soundThree, soundFour]);
+
     useEffect(()=>{
         getLoginStatus()
     },[])
@@ -412,6 +424,7 @@ const RoomHeader = () => {
             <div className='header-wrapper'>
     
                 <SoundEditor 
+                playPause={playPause}
                 isPlaying={isPlaying}
                 sounds={sounds}
                 selectedSounds={selectedSounds}
