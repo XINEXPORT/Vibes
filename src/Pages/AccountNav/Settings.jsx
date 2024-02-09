@@ -22,7 +22,6 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
     const [deleteSuccess, setDeleteSuccess] = useState('');
 
     const handleAudioUpload = (e)=>{
-        const dispatch = useDispatch();
         const file = e.target.files[0];
         setAudio(file);
     };

@@ -416,6 +416,7 @@ const deleteFriend = async(req,res)=>{
 
 //Upload Audio
 const addAudio = async (req,res) => {
+    console.log(req.body, "<--------------- this is req.body")
 
     const sound = {
         sound: req.file.path,
@@ -426,7 +427,6 @@ const addAudio = async (req,res) => {
     const audio = await Sound.create(sound)
     res.status(200). send(audio)
     console.log(audio)
-
 }
 
 //Audio Controller
