@@ -19,6 +19,7 @@ const LoginPage = () => {
     
     const getSounds = async() => {
         const { data: { favs } } = await axios.get('/api/sounds');
+        console.log(favs)
         dispatch({type: 'login-get', payload: favs});
     };
 
@@ -29,7 +30,7 @@ const LoginPage = () => {
                 password: logPassword
             });
             if(data.success){
-                getSounds();
+                await getSounds();
                 dispatch({type: 'login', payload: data.user});
                 dispatch({type: 'modal-off'});
             } else{
@@ -64,18 +65,24 @@ const LoginPage = () => {
                     <section className = "login">
                         <h1 className = "title">Login</h1>
                         <label htmlFor = "log-username">Username:</label>
-                        <input type="text"
+                        <input 
+                            className = "input-boxes"
+                            type="text"
                             name = "log-username"
                             placeholder = "enter your username"
                             onChange = {(e)=> setLogUsername(e.target.value)}
                         />
                         <label htmlFor = "log-password">Password:</label>
-                        <input type="password"
+                        <input 
+                            className = "input-boxes"
+                            type="password"
                             name = "log-password"
                             placeholder = "enter your password"
                             onChange = {(e)=> setLogPassword(e.target.value)}
                         />
-                        <button onClick = {() => {
+                        <button 
+                            className = "action-button"
+                            onClick = {() => {
                             loginUser();
                             navigate('/');
                             }}>Login</button>
@@ -84,24 +91,32 @@ const LoginPage = () => {
                     <section className = "register">
                         <h1 className = "title">Register</h1>
                         <label htmlFor = "reg-username">Username:</label>
-                        <input type="text"
+                        <input 
+                            className = "input-boxes"
+                            type="text"
                             name = "reg-username"
                             placeholder = "enter your username"
                             onChange = {(e)=> setRegUsername(e.target.value)}
                         />
                         <label htmlFor = "reg-email">Email:</label>
-                        <input type="text"
+                        <input 
+                            className = "input-boxes"
+                            type="text"
                             name = "reg-email"
                             placeholder = "enter your email"
                             onChange = {(e)=> setRegEmail(e.target.value)}
                         />
                         <label htmlFor = "reg-password">Password:</label>
-                        <input type="password"
+                        <input 
+                            className = "input-boxes"
+                            type="password"
                             name = "reg-password"
                             placeholder = "enter your password"
                             onChange = {(e)=> setRegPassword(e.target.value)}
                         />
-                        <button onClick={() => {
+                        <button 
+                            className = "action-button"
+                            onClick={() => {
                             registerUser();
                             navigate('/');
                         }

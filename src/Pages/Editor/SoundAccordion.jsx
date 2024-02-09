@@ -113,16 +113,9 @@ const SoundAccordion = ({
          </section>
          <section className="fx">
          <IoClose className="close-accordion" onClick={() => setActiveIndex(null)}/>
-            <button 
-            className = "void-btn"
-            onClick={() => {
-                setSound(null);
-                setFx(null);
-                setVolume(50);
-                setSpeed(1);
-            }}>Void Sound</button>
-            <h1>FX</h1>
-            <label>Volume:</label>
+         <h1 className = "labels-in-fx">FX</h1>
+          
+            <label className = "labels-in-fx">Volume:</label>
             <div className="rangeWarp">
             <input 
                     type="range" 
@@ -138,9 +131,9 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
             />
-            <p>{fx ? fx.volume : volume}</p>
+            <p className = "labels-in-fx">{fx ? fx.volume : volume}</p>
             </div>
-            <label>Playback Speed:</label>
+            <label className = "labels-in-fx">Playback Speed:</label>
             <div>
                 <input
                     type="range"
@@ -157,8 +150,16 @@ const SoundAccordion = ({
                         setBroadcastOne(!broadcastOne);
                     }}
                 />
-                <p>{fx ? fx.speed : speed}</p>
+                <p className='labels-in-fx'>{fx ? fx.speed : speed}</p>
             </div>
+            <button 
+            className = "void-btn"
+            onClick={() => {
+                setSound(null);
+                setFx(null);
+                setVolume(50);
+                setSpeed(1);
+            }}>Void Sound</button>
          </section>
      </div>
     );

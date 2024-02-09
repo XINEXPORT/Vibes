@@ -24,6 +24,7 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
     const handleAudioUpload = (e)=>{
         const file = e.target.files[0];
         setAudio(file);
+        console.log(file)
     };
 
     const handleSaveClick = async () => {
@@ -33,16 +34,14 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
     formData.append('name', name);
     formData.append('type', type);
 
-    try {
+  
         let { data } = await axios.post(`/api/sounds`, formData);
         setSuccess(<></>);
         setName('');
         setType('');
         setAudio(null);
         console.log(data);
-    } catch (error) {
-        console.error("Error uploading audio:", error);
-    }
+
     };
 
     const handleDeleteClick = async () => {
@@ -62,9 +61,9 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
         <div className="modalContainer">
             <label className="title">User Settings</label>
             <div className='account-info'>
-                <label className="username">Username</label>
+                {/* <label className="username">Username</label> */}
                 <div className="form">{username}</div>
-                <label className="email">Email</label>
+                {/* <label className="email">Email</label> */}
                 <div className="form">{email}</div>
             </div>
            
@@ -114,7 +113,7 @@ const Settings = ({ userId, username, email, mySounds, toDelete, setToDelete, mo
             <div className='upload-soundscape'>
                 <Form method="POST" encType='multipart/form-data' className="upload" >
                 <Form.Group controlId="fileName" className="mb-3">
-                <Form.Label className="upload-sounds upload-text">Upload Sounds</Form.Label>
+                <Form.Label className="upload-sounds-label">Upload Sounds</Form.Label>
 
                 <Form.Group controlId="name" className="mb-3">
                     <Form.Label className ="upload-text"> Sound Name </Form.Label>

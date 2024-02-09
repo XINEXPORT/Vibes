@@ -26,9 +26,12 @@ import {
     deleteSoundscape,
     deleteFriend
  } from './controllers/controller.js';
+ import dotenv from 'dotenv';
+
+ dotenv.config()
 
 const app = express();
-const port = '8000';
+const port = process.env.PORT || '8000';
 
 //Socket
 import cors from 'cors';
@@ -42,7 +45,7 @@ app.get('/api', (req, res) => {
   });
 
 //Audio Files Folder
-app.use('../public/audio', express.static('.public/audio'));
+app.use(express.static('public'));
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));

@@ -4,17 +4,15 @@ import Room from './Room.jsx';
 import Editor from '../Editor/SoundEditor.jsx';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom';
 import SoundEditor from '../Editor/SoundEditor.jsx';
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 import { RxReset } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import socketIO from 'socket.io-client';
-
-const socket = socketIO.connect('http://localhost:8000');
 
 const RoomHeader = () => {
     const dispatch = useDispatch();
+    const { socket } = useOutletContext();
     const {sounds, params} = useLoaderData();
     const user = useSelector(state => state.login.user);
     const mySounds = useSelector(state => state.favorites.mySounds);
@@ -38,8 +36,21 @@ const RoomHeader = () => {
     const [broadcastOne, setBroadcastOne] = useState(false);
     const [broadcastTwo, setBroadcastTwo] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
+    const getSounds = async() => {
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'login-get', payload: favs});
+    };
+    
+    const getLoginStatus = async() =>{
+        const {data}= await axios.get('/api/auth/status');
+        await getSounds()
+        return dispatch({type: "loginstatus", payload:data})
+    }
+    useEffect(()=>{
+        getLoginStatus()
+    },[])
+    
     console.log(mySounds);
-
     useEffect(() => {
         if (params && user) {
             console.log(socket.id)
@@ -452,6 +463,7 @@ const RoomHeader = () => {
                     :
                     <></>
                     }
+                    <div className = "panel">
                     <div className='save-soundscape-div'>
                         <input className="save-soundscape-div" type="text" placeholder='Soundscape name' onChange={(e) => setSoundscapeName(e.target.value)} />
                         {/* <select className="save-soundscape-div"name="private-select" id="private-select" onChange={(e) => setIsPrivate(e.target.value)}>
@@ -469,6 +481,7 @@ const RoomHeader = () => {
                             saveSounds(false);
                         }}>{selectedId ? 'Save New' : 'Save Soundscape'}</button>
                     </div>
+                </div>
                 </div>
 
                 <div className = "btn-container">
@@ -514,10 +527,10 @@ const RoomHeader = () => {
                     </div>
                 </div>
                 <div>
-                    <audio ref={audio1} src={soundOne ? `../${soundOne.sound}` : null} loop />
-                    <audio ref={audio2} src={soundTwo ? `../${soundTwo.sound}` : null} loop />
-                    <audio ref={audio3} src={soundThree ? `../${soundThree.sound}` : null} loop />
-                    <audio ref={audio4} src={soundFour ? `../${soundFour.sound}` : null} loop />
+                    <audio ref={audio1} src={soundOne ? `${soundOne.sound}` : null} loop />
+                    <audio ref={audio2} src={soundTwo ? `${soundTwo.sound}` : null} loop />
+                    <audio ref={audio3} src={soundThree ? `${soundThree.sound}` : null} loop />
+                    <audio ref={audio4} src={soundFour ? `${soundFour.sound}` : null} loop />
                 </div>
             </div>
             <Room />

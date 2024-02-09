@@ -31,7 +31,7 @@ const SoundEditor = ({
     setActiveIndex
     }) => {
     const dispatch = useDispatch();
-    const modal = useSelector(state => state.editorOne.modal);
+    const modal = useSelector(state => state.login.modal);
 
     return (
         <section id="editor">

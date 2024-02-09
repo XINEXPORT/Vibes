@@ -233,7 +233,7 @@ const getSounds = async (req, res) => {
     res.status(200).json({
         success: true,
         sounds: sounds,
-        favs: favs
+        favs: favs ?? null
     });
 };
 
@@ -416,10 +416,9 @@ const deleteFriend = async(req,res)=>{
 
 //Upload Audio
 const addAudio = async (req,res) => {
-    console.log(req.body, "<--------------- this is req.body")
-
+console.log(req.file)
     const sound = {
-        sound: req.file.path,
+        sound: req.file.path ,
         userId:req.body.userId,
         name:req.body.name,
         type: req.body.type

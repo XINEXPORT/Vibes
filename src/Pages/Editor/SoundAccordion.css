@@ -23,10 +23,17 @@
     transition: .5s;
     max-height: 490px;
 }
+.sound-details{
+}
+.sound-name{
+    padding:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .sound-name:hover{
-    color: black;
-    box-shadow: 0 5px 15px rgba(246,210,88);
-    transition: 1s;
+    color: #f6d258;
+    transition: .8s;
 }
 .hide .sound-accordion{
     height: 0;
@@ -50,7 +57,8 @@
                 inset 0 -15px 10px -15px #000000;
 }
 .accordion-tab:hover{
-    background-color: #f6d258;
+    background-color: white;
+    color: #f6d258;
 }
 .hide .accordion-tab{
     opacity: 0;
@@ -81,18 +89,21 @@
     display: flex;
     font-size: 30px;
     padding: 5px;
+    margin-left: auto;
 }
 .close-accordion:hover{
     color: #f6d258;
+    transition: .8s;
 }
 .fx{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
     border-left: 10px solid black;
     border-right: 10px solid black;
     border-top: 10px solid black;
-    color: black;
-    /* width: 300px; */
+    color: white;
     padding-right: 20px;
-    color: #f6d258;
 }
 .void-btn{
     padding: 5px;
@@ -103,4 +114,12 @@
         #cccccc, #bbbbbb, #aaaaaa, #999999,
         #cccccc
         );
+}
+.labels-in-fx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-weight: bold;
+    font-size: large;
 }

@@ -2,8 +2,11 @@ import { DataTypes, Model } from "sequelize";
 import url from "url";
 import util from 'util';
 import connectToDB from "./db.js";
+import dotenv from 'dotenv';
 
-const db = await connectToDB(`postgresql:///vibes`);
+dotenv.config()
+let {DB_URI} = process.env
+const db = await connectToDB(DB_URI);
 
 // Table initializations:
 class User extends Model {

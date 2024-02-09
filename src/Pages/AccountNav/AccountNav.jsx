@@ -6,7 +6,8 @@ import Chatroom from './Chatroom.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { BsFillGearFill, BsThreeDots } from "react-icons/bs";
+import { BsFillGearFill} from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 import { useLoaderData, useNavigate } from "react-router";
 import { IoMdLogOut } from "react-icons/io";
 import axios from 'axios';
@@ -27,9 +28,23 @@ export default function AccountNav({socket}) {
     const [friendslist, setFriendslist] = useState([]);
     const [joinFailed, setJoinFailed] = useState(false);
 
-    if (!user) {
-        dispatch({type: 'modal-on'});
+    const getSounds = async() => {
+        const { data: { favs } } = await axios.get('/api/sounds');
+        dispatch({type: 'login-get', payload: favs});
     };
+    const getLoginStatus = async() =>{
+        const {data}= await axios.get('/api/auth/status');
+        if(!data.user){
+            dispatch({type: 'modal-on'});
+        }
+        await getSounds();
+        return dispatch({type: "loginstatus", payload:data})
+    }
+    useEffect(()=>{
+        getLoginStatus()
+    },[])
+
+
 
     const setFriendsListHandler = (newFriendsList) => {
         setFriendslist(newFriendsList);
@@ -48,11 +63,14 @@ export default function AccountNav({socket}) {
         let friendsListMapped = friendslist.map((friend) => {
             return <div key={friend.user.username} className='friendname'>{friend.user.username}
                         <button
+                            className = "join-btn"
                             onClick={() => {
                                 navigate(`/${friend.user.username}`);
                             }}
                         >Join</button>
-                        <button><BsThreeDots 
+                        <button
+                        className = "trash-btn"
+                        ><MdDelete 
                         onClick={async()=>{
                             let {data} = await axios.delete(`/api/deletefriend/${friend.user.userId}`)
                             setFriendslist(data.myFriends)
@@ -66,6 +84,7 @@ export default function AccountNav({socket}) {
             const { data } = await axios.post('/api/auth/logout');
             if (data.success) {
             dispatch({ type: 'logout' });
+            dispatch({type: 'modal-on'})
             navigate("/");
             };
         };
@@ -144,7 +163,7 @@ export default function AccountNav({socket}) {
                     }
                 </div>
                 <div className='friends-list'>
-                    <h4>Friends - {friendsListMapped.length}</h4>
+                    <h4 className = "friends-label">Friends - {friendsListMapped.length}</h4>
                     <div className="friends">
                         {friendsListMapped}
                     </div>
