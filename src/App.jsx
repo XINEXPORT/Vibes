@@ -7,7 +7,7 @@ import LoginPage from './Login/LoginPage.jsx';
 import socketIO from 'socket.io-client';
 import { useState } from 'react';
 
-const socket = socketIO.connect('https://dallas-ft3-vibes.onrender.com');
+const socket = socketIO.connect('http://localhost:8000');
 
 function App() {
   return (
