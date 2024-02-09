@@ -230,6 +230,7 @@ const RoomHeader = () => {
     const audio2 = useRef(null);
     const audio3 = useRef(null);
     const audio4 = useRef(null);
+    console.log(audio1);
 
     soundOne ? audio1.current.volume = fxOne ? fxOne.volume / 100 : .5 : null;
     soundOne ? audio1.current.playbackRate = fxOne ? fxOne.speed : 1 : null;
