@@ -26,6 +26,7 @@
 .sound-details{
 }
 .sound-name{
+    cursor: pointer;
     padding:5px;
     display: flex;
     justify-content: center;
@@ -92,6 +93,7 @@
     margin-left: auto;
 }
 .close-accordion:hover{
+    cursor: pointer;
     color: #f6d258;
     transition: .8s;
 }
@@ -106,6 +108,7 @@
     padding-right: 20px;
 }
 .void-btn{
+    cursor: pointer;
     padding: 5px;
     border-radius: .5em;
     background: linear-gradient(
