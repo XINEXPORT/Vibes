@@ -1,19 +1,18 @@
 # Vibes Component Hierarchy
 - Login/Register Modal
 - MainRoom
-    - RoomHeader
-        - MyFavoriteSoundscapesList
-            - DeleteBtn
-        - SaveSoundscape
-            - SaveSoundscapeName
-            - SaveSoundscapeBtn
-        - SoundEditor
-            - SoundAccordion
-                - FX
-        - PlayAll
+    - Login
+        - Login/Register Modal
     - AccountNav
-        - Logout
         - Settings
-            - UploadAudio
-        - FriendsList
+        - AddFriendModal
+        - FriendRequests
+        - Chatroom
+    - Editor
+        - SoundEditor
+        - SoundAccordion
+    - Room
+        - RoomHeader
+        - RoomBackground
+    
     
