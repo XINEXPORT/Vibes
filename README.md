@@ -1,4 +1,5 @@
-# Vibes is a create your own soundscape web application for networked, social engagement . It consist of 4 main parts:
+# Vibes is a create your own soundscape web application for networked, social engagement . 
+It consist of 4 main parts:
 - Sound Mixer
 - Navigation
 - Room
@@ -32,10 +33,10 @@ The navigation bar also contains User Settings and a Logout button.
 
 ## User Settings
 The User settings contains Account settings available to a logged in user. It displays a username and email account at the top of the panel. A drop down list of a person's saved soundscapes can be deleted from the user settings. As user can also retrieve a code for their soundscape, in which they can share to their friends. This soundscape code can be then loaded into the Sound mixer panel and retrieve all of their friend's sound data and settings. Other actions that can be perfrmed in the user settings include:
--uploading a sound file
--assigning a sound file with a filename
--assigning a sound category
--upload button
+- uploading a sound file
+- assigning a sound file with a filename
+- assigning a sound category
+- upload button
 
 
 ## Developer Instructions
