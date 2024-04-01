@@ -1,4 +1,4 @@
-![navigation](https://github.com/AdamSydnor/Vibes/assets/40744735/bbe750a0-6f13-4958-9ed6-441bc1ef198a)# Vibes is a create-your-own soundscape web application for networked, social engagement. 
+# Vibes is a create-your-own soundscape web application for networked, social engagement. 
 It consists of 4 main parts:
 - Sound Mixer
 - Navigation
